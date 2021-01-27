@@ -56,6 +56,7 @@ public class RobotContainer {
   private final HopperSubsystem m_Hopper = new HopperSubsystem();
   private final PatSajakSubsystem m_PatSajak = new PatSajakSubsystem();
   private final IntakeSubsystem m_Intake = new IntakeSubsystem();
+  private final VBeltSubsystem m_VBelt = new VBeltSubsystem();
 
   // Color Sensor
   private final ColorSensorV3 m_colorSensor = new ColorSensorV3(I2C.Port.kOnboard);
@@ -319,6 +320,8 @@ public class RobotContainer {
     m_Intake.setDefaultCommand(new DefaultIntakeCommand(m_Intake, m_secondaryController));
     // default thrower is to spin down to still
     m_Thrower.setDefaultCommand(new StartEndCommand( ()->{m_Thrower.stopThrower(); m_Thrower.turnOffLED();}, ()->{}, m_Thrower)); // Spin down thrower and turn off LED on startup, do nothing on end.
+    //defualt VBelt
+    m_VBelt.setDefaultCommand(new DefaultVBeltCommand(m_VBelt, m_secondaryController));
 
   }
 
