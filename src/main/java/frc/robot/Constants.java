@@ -109,7 +109,7 @@ public final class Constants {
    * Constants for the control panel
    */
   public static final class ControlPanelActuators {
-    public static final int victorID = 10;
+    public static final int victorID = 39;
     public static final int soleniodForward = 0;
     public static final int soleniodBackward = 1;
     public static final Port sensorPort = I2C.Port.kOnboard;
@@ -120,7 +120,7 @@ public final class Constants {
    * Constants for the climb
    */
   public static final class ClimbConstants {
-    public static final int climbVictorID = 8;
+    public static final int climbVictorID = 38;
     public static final int soleniodForward = 4;
     public static final int soleniodBackward = 5;
     public static final int extendSolenoidForward = 6;
@@ -180,8 +180,8 @@ public final class Constants {
 
   // Motor ID for the VBelt Subsystem
     public static final class VBeltMotors {
-    public static final int VBeltMotorRightID = 49;
-    public static final int VBeltMotorLeftID = 50;
+    public static final int VBeltMotorRightID = 8;
+    public static final int VBeltMotorLeftID = 10;
 
     // motor run characteristics
     public static final double forwardSpeed = 0.7;

@@ -45,7 +45,7 @@ public class DefaultVBeltCommand extends CommandBase {
   @Override
   public void execute() {
     double forward = m_stick.getY(Hand.kLeft);
-    double rotation = m_stick.getX(Hand.kRight);
+    double rotation = m_stick.getX(Hand.kLeft);
 
     forward *= deadband(forward);
     rotation *= deadband(rotation);
