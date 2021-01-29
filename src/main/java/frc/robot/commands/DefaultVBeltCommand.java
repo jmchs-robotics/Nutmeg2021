@@ -10,6 +10,7 @@ package frc.robot.commands;
 import frc.robot.subsystems.VBeltSubsystem;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
  
 /**
@@ -26,6 +27,7 @@ public class DefaultVBeltCommand extends CommandBase {
   public DefaultVBeltCommand (VBeltSubsystem subsystem, XboxController stick) {
     m_subsystem = subsystem;
     m_stick = stick;
+    SmartDashboard.putString("cheeeeee", "3");
  
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
@@ -44,13 +46,15 @@ public class DefaultVBeltCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    SmartDashboard.putString("cheeeeeeeck", "4");
     double forward = m_stick.getY(Hand.kLeft);
-    double rotation = m_stick.getX(Hand.kLeft);
+    double backward = m_stick.getY(Hand.kRight);
 
     forward *= deadband(forward);
-    rotation *= deadband(rotation);
+    //rotation *= deadband(rotation);
+    backward *= deadband(backward);
 
-    m_subsystem.arcadeDrive(forward, rotation);
+    m_subsystem.tankDrive(forward, backward);
   }
  
   // Called once the command ends or is interrupted.
