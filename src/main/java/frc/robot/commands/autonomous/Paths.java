@@ -41,17 +41,7 @@ public class Paths { // extends CommandBase {
      */
     public Command PathTestCommand() {
       return new SequentialCommandGroup(
-        new InstantCommand(m_Thrower::turnOnLED, m_Thrower), // Turn on green LED
-        new WaitCommand( 1), 
-        new BumpHopperCommand(m_Hopper),
-        new WaitCommand(.2),
-        new MoveHopperCommand(m_Hopper, 1), 
-        new WaitCommand( 1),// give the drivetrain a chance to respond to the SetWheelAngle command
-        new BumpHopperCommand(m_Hopper),
-        new WaitCommand(.2),
-        new MoveHopperCommand(m_Hopper, 1),
-        // very last thing
-        new InstantCommand(m_Thrower::turnOffLED, m_Thrower) // Turn off green LED
+        new DriveForTime2910Command(m_swerve, 0.15, .2, 0)
       );
     }
 
