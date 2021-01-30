@@ -94,7 +94,7 @@ public class RobotContainer {
 
   private final JoystickButton m_secondaryController_Back = new JoystickButton(m_secondaryController, XboxController.Button.kBack.value);
 
-  // private final JoystickButton m_secondaryController_StickLeft = new JoystickButton(m_secondaryController, XboxController.Button.kStickLeft.value); // runs sample color
+  //private final JoystickButton m_secondaryController_StickLeft = new JoystickButton(m_secondaryController, XboxController.Button.kStickLeft.value); // runs sample color
   // want b to start Pat Sajak rotation control
   private final JoystickButton m_secondaryController_B = new JoystickButton(m_secondaryController, 
       XboxController.Button.kB.value);

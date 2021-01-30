@@ -58,6 +58,7 @@ public class VBeltSubsystem extends SubsystemBase {
     SmartDashboard.putString("chee", "1");
 
     if (VBeltMotors.TUNE){
+      //arcadeDrive(0.1, 0.1);
       double fs, rs, rp;
       SmartDashboard.putNumber("VBelt Right Motor Output Percent", m_motor_right.getMotorOutputPercent());
       SmartDashboard.putNumber("VBelt Left Motor Output Percent", m_motor_left.getMotorOutputPercent());
@@ -114,14 +115,14 @@ public class VBeltSubsystem extends SubsystemBase {
     return m_reverseSpeed;
   }
 
-  /*
   public void arcadeDrive(double xSpeed, double zRotation) {
     m_drive.arcadeDrive(xSpeed, zRotation);
   }
-  */
 
+  /*
   public void tankDrive(double leftSpeed, double rightSpeed)
   {
     m_drive.tankDrive(leftSpeed, rightSpeed);
   }
+  */
 }

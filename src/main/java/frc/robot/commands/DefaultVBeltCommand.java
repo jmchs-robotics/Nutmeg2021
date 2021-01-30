@@ -27,7 +27,7 @@ public class DefaultVBeltCommand extends CommandBase {
   public DefaultVBeltCommand (VBeltSubsystem subsystem, XboxController stick) {
     m_subsystem = subsystem;
     m_stick = stick;
-    SmartDashboard.putString("cheeeeee", "3");
+    //SmartDashboard.putString("cheeeeee", "6");
  
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
@@ -35,7 +35,7 @@ public class DefaultVBeltCommand extends CommandBase {
 
   private double deadband (double input){
     if(Math.abs(input) < 0.05) return 0;
-    return 0;
+    return input;
   }
  
   // Called when the command is initially scheduled.
@@ -46,15 +46,17 @@ public class DefaultVBeltCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    SmartDashboard.putString("cheeeeeeeck", "4");
+    
     double forward = m_stick.getY(Hand.kLeft);
-    double backward = m_stick.getY(Hand.kRight);
+    double rotation = m_stick.getX(Hand.kLeft);
+    
+    //SmartDashboard.putNumber("Check",forward);
 
     forward *= deadband(forward);
-    //rotation *= deadband(rotation);
-    backward *= deadband(backward);
+    rotation *= deadband(rotation);
+    //backward *= deadband(backward);
 
-    m_subsystem.tankDrive(forward, backward);
+    m_subsystem.arcadeDrive(forward, rotation);
   }
  
   // Called once the command ends or is interrupted.
