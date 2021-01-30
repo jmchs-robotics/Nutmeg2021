@@ -264,22 +264,23 @@ public class Paths { // extends CommandBase {
         new SetWheelAngleCommand( m_swerve, Math.atan2( 57-28, -(86-12-(34+6.5)/2))),  // point the wheels in the direction we want to go
         new InstantCommand( m_swerve::setDrivePIDToSlow, m_swerve), 
         
+        //Update 1/29 cut distance in half to test
         //On the image in the manual referencing the path, north means up, south means down, east means right/foward, and west means left/backward
         //DriveforDist2910Command(Subsystem drivetrain, distRight, distFoward)
         //Going around Nav Point D5
-        new DriveForDist2910Command(m_swerve, 0, 135), //Move east 135"
-        new DriveForDist2910Command(m_swerve, 36, 0), //Move south 36"
-        new DriveForDist2910Command(m_swerve, 0, -45), //Move west 45"
-        new DriveForDist2910Command(m_swerve, -66, 0), //Move north 66"
+        new DriveForDist2910Command(m_swerve, 0, 67), //Move east 135"
+        new DriveForDist2910Command(m_swerve, 18, 0), //Move south 36"
+        new DriveForDist2910Command(m_swerve, 0, -22), //Move west 45"
+        new DriveForDist2910Command(m_swerve, -33, 0), //Move north 66"
         //Going around Nav Point B8
-        new DriveForDist2910Command(m_swerve, 0, 174), //Move east 174"
-        new DriveForDist2910Command(m_swerve, -60, 0), //Move north 60"
-        new DriveForDist2910Command(m_swerve, 0, -45), //Move west 45"
-        new DriveForDist2910Command(m_swerve, 150, 0), //Move south 150"
+        new DriveForDist2910Command(m_swerve, 0, 87), //Move east 174"
+        new DriveForDist2910Command(m_swerve, -30, 0), //Move north 60"
+        new DriveForDist2910Command(m_swerve, 0, -22), //Move west 45"
+        new DriveForDist2910Command(m_swerve, 75, 0), //Move south 150"
         //Going around Nav Point D10 and to Finish Zone
-        new DriveForDist2910Command(m_swerve, 0, 120), //Move east 120"
-        new DriveForDist2910Command(m_swerve, -60, 0), //Move north 60"
-        new DriveForDist2910Command(m_swerve, 0, -294)); //Move west 294"
+        new DriveForDist2910Command(m_swerve, 0, 60), //Move east 120"
+        new DriveForDist2910Command(m_swerve, -30, 0), //Move north 60"
+        new DriveForDist2910Command(m_swerve, 0, -147)); //Move west 294"
     }
 
     public Command PathBounceCommand() {
