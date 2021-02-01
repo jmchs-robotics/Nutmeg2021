@@ -41,6 +41,7 @@ public class Robot extends TimedRobot {
 
     startPosChooser.setDefaultOption("Path1 back 12, left 57", "1");
     startPosChooser.addOption("Path2 fwd 12, left 57", "2");
+    startPosChooser.addOption ("Path Test Command", "test");
     startPosChooser.addOption("Barrel", "barrel");
     startPosChooser.addOption("Bounce", "bounce");
     startPosChooser.addOption("Slalom", "slalom");

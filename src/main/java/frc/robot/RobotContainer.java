@@ -94,7 +94,7 @@ public class RobotContainer {
 
   private final JoystickButton m_secondaryController_Back = new JoystickButton(m_secondaryController, XboxController.Button.kBack.value);
 
-  // private final JoystickButton m_secondaryController_StickLeft = new JoystickButton(m_secondaryController, XboxController.Button.kStickLeft.value); // runs sample color
+  //private final JoystickButton m_secondaryController_StickLeft = new JoystickButton(m_secondaryController, XboxController.Button.kStickLeft.value); // runs sample color
   // want b to start Pat Sajak rotation control
   private final JoystickButton m_secondaryController_B = new JoystickButton(m_secondaryController, 
       XboxController.Button.kB.value);
@@ -379,6 +379,10 @@ public class RobotContainer {
         autoCommand = new SequentialCommandGroup(
           new InstantCommand( m_Hopper::setBallCountTo3, m_Hopper),
           p.Path2Command()
+        );
+      case "test":
+        autoCommand = new SequentialCommandGroup(
+          p.PathTestCommand()
         );
       case "barrel":
         autoCommand = new SequentialCommandGroup( 
