@@ -55,15 +55,17 @@ public class VBeltSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    
+    SmartDashboard.putString("chee", "1");
+
     if (VBeltMotors.TUNE){
+      //arcadeDrive(0.1, 0.1);
       double fs, rs, rp;
       SmartDashboard.putNumber("VBelt Right Motor Output Percent", m_motor_right.getMotorOutputPercent());
       SmartDashboard.putNumber("VBelt Left Motor Output Percent", m_motor_left.getMotorOutputPercent());
       fs = SmartDashboard.getNumber("Intake Motor Forward Speed", 0);
       rs = SmartDashboard.getNumber("Intake Motor Reverse Speed", 0);
       rp = SmartDashboard.getNumber("Intake Motor Reverse Pulse Time", 0);
-
+/*
       if( fs != m_forwardSpeed) {
         m_forwardSpeed = fs;
           setMotor(fs, fs);
@@ -75,6 +77,7 @@ public class VBeltSubsystem extends SubsystemBase {
       if( rp != m_reversePulse) {
         m_reversePulse = rp;
       }
+      */
       
     } 
   }
@@ -115,4 +118,11 @@ public class VBeltSubsystem extends SubsystemBase {
   public void arcadeDrive(double xSpeed, double zRotation) {
     m_drive.arcadeDrive(xSpeed, zRotation);
   }
+
+  /*
+  public void tankDrive(double leftSpeed, double rightSpeed)
+  {
+    m_drive.tankDrive(leftSpeed, rightSpeed);
+  }
+  */
 }
