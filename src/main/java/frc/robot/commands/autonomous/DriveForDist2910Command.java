@@ -41,6 +41,8 @@ public class DriveForDist2910Command extends CommandBase {
     private BufferedWriter[] encVelLoggers = new BufferedWriter[4];
     private int iterCount;
 
+    private String fileID;
+
     /**
      * Move the robot forward/backwards this many inches. 
      * Field oriented.
@@ -48,7 +50,7 @@ public class DriveForDist2910Command extends CommandBase {
      * @param distance inches; positive if forwards, negative is backwards.
      */
     public DriveForDist2910Command(SwerveDriveSubsystem drivetrain, double distance) {
-        this(drivetrain, 0, distance);
+        this(drivetrain, 0, distance, "0");
     }
 
     /**
@@ -58,18 +60,20 @@ public class DriveForDist2910Command extends CommandBase {
      * @param distRight inches positive is to the right; negative is to the left.
      * @param distForward inches positive is forward; negaitve is backwards.
      */
-    public DriveForDist2910Command(SwerveDriveSubsystem drivetrain, double distRight, double distForward) {
+    public DriveForDist2910Command(SwerveDriveSubsystem drivetrain, double distRight, double distForward, String fileID) {
         this.drivetrain = drivetrain;
         this.angle = Math.toDegrees(Math.atan2(distRight, distForward));
-
+        
         this.distRight = distRight; // -distRight;  // 191206 seems like this should not get inverted
         this.distForward = distForward;
-
+        
         this.distance = Math.sqrt(distRight * distRight + distForward * distForward);
         // 191206 this PID isn't working... probably needs more P.  Original is 0.02, 0, 0
         angleErrorController = new PIDController(DrivetrainConstants.DFD_ROTATION_kP, DrivetrainConstants.DFD_ROTATION_kI, DrivetrainConstants.DFD_ROTATION_kD);
         angleErrorController.enableContinuousInput(0, 360);
         angleErrorController.reset();
+
+        this.fileID = fileID;
         /*
          new PIDController(0.02, 0, 0, new PIDSource() {
             @Override
@@ -116,9 +120,9 @@ public class DriveForDist2910Command extends CommandBase {
         for (int i = 0; i < 4; i++) {
             try {
                 // 191206 take space out of filename
-                encPosLoggers[i] = Files.newBufferedWriter(Paths.get(String.format("/home/lvuser/encPos%d.csv", i)));
+                encPosLoggers[i] = Files.newBufferedWriter(Paths.get(String.format("/home/lvuser/encPos%d_%s.csv", i, fileID)));
                 encPosLoggers[i].write( "count, millisecs, encoderPos, driveDist, gyroAngle, rotation, moduleAngle\n");
-                encVelLoggers[i] = Files.newBufferedWriter(Paths.get(String.format("/home/lvuser/encVel%d.csv", i)));
+                encVelLoggers[i] = Files.newBufferedWriter(Paths.get(String.format("/home/lvuser/encVel%d_%s.csv", i, fileID)));
             } catch (IOException e) {
                 encPosLoggers[i] = null;
                 encVelLoggers[i] = null;
