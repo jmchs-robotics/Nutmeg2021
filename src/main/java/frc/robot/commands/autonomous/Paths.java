@@ -288,6 +288,7 @@ public class Paths { // extends CommandBase {
         new InstantCommand(m_swerve::setBrakeOn, m_swerve), // Brake mode on!
         new SetWheelAngleCommand( m_swerve, Math.atan2( 57-28, -(86-12-(34+6.5)/2))),  // point the wheels in the direction we want to go
         new InstantCommand( m_swerve::setDrivePIDToSlow, m_swerve), 
+        //Starting in the middle with bumper against the most left line of the Start Zone
         //x, y (inches) ( + == right, + == up )
         new DriveForDist2910Command(m_swerve, 45, 10.5),
         new DriveForDist2910Command(m_swerve, 0, 35.5),
@@ -311,15 +312,21 @@ public class Paths { // extends CommandBase {
         new InstantCommand( m_swerve::setDrivePIDToSlow, m_swerve), 
         //On the image in the manual referencing the path, north means up, south means down, east means right/foward, and west means left/backward
         //DriveforDist2910Command(Subsystem drivetrain, distRight, distFoward)
+        //Start on top left corner of the Start zone
+        // Go to above Nav Point D4
         new DriveForDist2910Command(m_swerve, 0, 60), //Move east 60"
         new DriveForDist2910Command(m_swerve, -37, 0), //Move north 37"
+        //Across Nav Points D4 through D8
         new DriveForDist2910Command(m_swerve, 0, 180), //Move east 180"
+        // Around Nav Point D10
         new DriveForDist2910Command(m_swerve, 37, 60), //Move south 37"         ??? 60 --> and east 60"?
         new DriveForDist2910Command(m_swerve, 0, 45), //Move east 45"
         new DriveForDist2910Command(m_swerve, -37, 0), //Move north 37"         
         new DriveForDist2910Command(m_swerve, 0, -60), //Move west 60"
         new DriveForDist2910Command(m_swerve, 37, 60), //Move south 37"         ??? 60 --> and east 60"?
+        // Back across Nav Points D8 to D4
         new DriveForDist2910Command(m_swerve, 0, -120), //Move west 120"
+        //Into Finish Zone
         new DriveForDist2910Command(m_swerve, -37, 0), //Move north 37"
         new DriveForDist2910Command(m_swerve, 0, -60)); //Move west 60"
     }
