@@ -265,15 +265,16 @@ public class Paths { // extends CommandBase {
         new InstantCommand( m_swerve::setDrivePIDToSlow, m_swerve), 
         
         //Update 1/29 cut distance in half to test
+        // 2/1 Follows Course.... but rotates strangely
         //On the image in the manual referencing the path, north means up, south means down, east means right/foward, and west means left/backward
         //DriveforDist2910Command(Subsystem drivetrain, distRight, distFoward)
         //Going around Nav Point D5
         new DriveForDist2910Command(m_swerve, 0, 67), //Move east 135"
         new DriveForDist2910Command(m_swerve, 18, 0), //Move south 36"
-        new DriveForDist2910Command(m_swerve, 0, -22), //Move west 45"
+        new DriveForDist2910Command(m_swerve, 0, -22), //Move west 45" 
         new DriveForDist2910Command(m_swerve, -33, 0), //Move north 66"
         //Going around Nav Point B8
-        new DriveForDist2910Command(m_swerve, 0, 87), //Move east 174"
+        new DriveForDist2910Command(m_swerve, 0, 87), //Move east 174" 
         new DriveForDist2910Command(m_swerve, -30, 0), //Move north 60"
         new DriveForDist2910Command(m_swerve, 0, -22), //Move west 45"
         new DriveForDist2910Command(m_swerve, 75, 0), //Move south 150"
