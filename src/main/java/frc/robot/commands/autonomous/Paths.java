@@ -187,18 +187,18 @@ public class Paths { // extends CommandBase {
         new InstantCommand(m_swerve::setBrakeOn, m_swerve), // Brake mode on!
         new SetWheelAngleCommand( m_swerve, Math.atan2( 57-28, -(86-12-(34+6.5)/2))),  // point the wheels in the direction we want to go
         new InstantCommand( m_swerve::setDrivePIDToSlow, m_swerve), 
-        new DriveForDist2910Command( m_swerve, 57-28, -(86-12-(34+6.5)/2)), // go to front side of trench, aligned with balls
+        new DriveForDist2910Command( m_swerve, 57-28, -(86-12-(34+6.5)/2), "0"), // go to front side of trench, aligned with balls
         new InstantCommand( m_swerve::setDrivePIDToFast, m_swerve), // put DriveForDist at regular speed
         new SetPoseAngle2910Command(m_swerve, -90), // point intake at the balls by turning left 90 degrees
         new InstantCommand( m_swerve::setDrivePIDToSlow, m_swerve), 
         new InstantCommand(m_Intake::lowerIntake, m_Intake),
         new ParallelRaceGroup( 
           new IntakeAdvDaisyCommand(m_Intake, m_Hopper), // intake and auto-advance the Daisy
-          new DriveForDist2910Command( m_swerve, 0, -(108+12)) // drive through 3 balls
+          new DriveForDist2910Command( m_swerve, 0, -(108+12), "0") // drive through 3 balls
         ),
         new InstantCommand(m_Intake::raiseIntake, m_Intake),
         new SetWheelAngleCommand( m_swerve, Math.atan2( -(57-28), 86-12-(34+6.5)/2 + 108+12)),  // point the wheels in the direction we want to go
-        new DriveForDist2910Command( m_swerve, -(57-28), 86-12-(34+6.5)/2 + 108+12),
+        new DriveForDist2910Command( m_swerve, -(57-28), 86-12-(34+6.5)/2 + 108+12, "0"),
         new InstantCommand(m_Thrower::turnOnLED, m_Thrower), // Turn on green LED
         new SendVisionCommand(sender_, "R"), // tell vision coprocessor to track the RFT
         new InstantCommand( m_swerve::setDrivePIDToFast, m_swerve), // put DriveForDist at regular speed
@@ -259,6 +259,7 @@ public class Paths { // extends CommandBase {
      */
 
     public Command PathBarrelCommand() {
+      int cmd_idx = 0;
       return new SequentialCommandGroup(
         new InstantCommand(m_swerve::setBrakeOn, m_swerve), // Brake mode on!
         new SetWheelAngleCommand( m_swerve, Math.atan2( 57-28, -(86-12-(34+6.5)/2))),  // point the wheels in the direction we want to go
@@ -269,66 +270,69 @@ public class Paths { // extends CommandBase {
         //On the image in the manual referencing the path, north means up, south means down, east means right/foward, and west means left/backward
         //DriveforDist2910Command(Subsystem drivetrain, distRight, distFoward)
         //Going around Nav Point D5
-        new DriveForDist2910Command(m_swerve, 0, 67), //Move east 135"
-        new DriveForDist2910Command(m_swerve, 18, 0), //Move south 36"
-        new DriveForDist2910Command(m_swerve, 0, -22), //Move west 45" 
-        new DriveForDist2910Command(m_swerve, -33, 0), //Move north 66"
+        new DriveForDist2910Command(m_swerve, 0, 67, Integer.toString( cmd_idx++ )), //Move east 135"
+        new DriveForDist2910Command(m_swerve, 18, 0, Integer.toString( cmd_idx++ )), //Move south 36"
+        new DriveForDist2910Command(m_swerve, 0, -22, Integer.toString( cmd_idx++ )), //Move west 45" 
+        new DriveForDist2910Command(m_swerve, -33, 0, Integer.toString( cmd_idx++ )), //Move north 66"
         //Going around Nav Point B8
-        new DriveForDist2910Command(m_swerve, 0, 87), //Move east 174" 
-        new DriveForDist2910Command(m_swerve, -30, 0), //Move north 60"
-        new DriveForDist2910Command(m_swerve, 0, -22), //Move west 45"
-        new DriveForDist2910Command(m_swerve, 75, 0), //Move south 150"
+        new DriveForDist2910Command(m_swerve, 0, 87, Integer.toString( cmd_idx++ )), //Move east 174" 
+        new DriveForDist2910Command(m_swerve, -30, 0, Integer.toString( cmd_idx++ )), //Move north 60"
+        new DriveForDist2910Command(m_swerve, 0, -22, Integer.toString( cmd_idx++ )), //Move west 45"
+        new DriveForDist2910Command(m_swerve, 75, 0, Integer.toString( cmd_idx++ )), //Move south 150"
         //Going around Nav Point D10 and to Finish Zone
-        new DriveForDist2910Command(m_swerve, 0, 60), //Move east 120"
-        new DriveForDist2910Command(m_swerve, -30, 0), //Move north 60"
-        new DriveForDist2910Command(m_swerve, 0, -147)); //Move west 294"
+        new DriveForDist2910Command(m_swerve, 0, 60, Integer.toString( cmd_idx++ )), //Move east 120"
+        new DriveForDist2910Command(m_swerve, -30, 0, Integer.toString( cmd_idx++ )), //Move north 60"
+        new DriveForDist2910Command(m_swerve, 0, -147, Integer.toString( cmd_idx++ ))); //Move west 294"
     }
 
     public Command PathBounceCommand() {
+      int cmd_idx = 0;
+
       return new SequentialCommandGroup(
         new InstantCommand(m_swerve::setBrakeOn, m_swerve), // Brake mode on!
         new SetWheelAngleCommand( m_swerve, Math.atan2( 57-28, -(86-12-(34+6.5)/2))),  // point the wheels in the direction we want to go
         new InstantCommand( m_swerve::setDrivePIDToSlow, m_swerve), 
         //Starting in the middle with bumper against the most left line of the Start Zone
         //x, y (inches) ( + == right, + == up )
-        new DriveForDist2910Command(m_swerve, 45, 10.5),
-        new DriveForDist2910Command(m_swerve, 0, 35.5),
-        new DriveForDist2910Command(m_swerve, 0, -35.5),
+        new DriveForDist2910Command(m_swerve, 45, 10.5, Integer.toString( cmd_idx++ )),
+        new DriveForDist2910Command(m_swerve, 0, 35.5, Integer.toString( cmd_idx++ )),
+        new DriveForDist2910Command(m_swerve, 0, -35.5, Integer.toString( cmd_idx++ )),
         //First Bounce ("bounces"over points B4, B5, and D5??)
-        new DriveForDist2910Command(m_swerve, 30, -20),
-        new DriveForDist2910Command(m_swerve, 0, -50),
-        new DriveForDist2910Command(m_swerve, 60, 0),
-        new DriveForDist2910Command(m_swerve, 0,  .5),
-        new DriveForDist2910Command(m_swerve, 0, -100.5),
-        new DriveForDist2910Command(m_swerve, 90, 0),
-        new DriveForDist2910Command(m_swerve, 0, 100.5),
-        new DriveForDist2910Command(m_swerve, 0, -40.5),
-        new DriveForDist2910Command(m_swerve, 30, 0));
+        new DriveForDist2910Command(m_swerve, 30, -20, Integer.toString( cmd_idx++ )),
+        new DriveForDist2910Command(m_swerve, 0, -50, Integer.toString( cmd_idx++ )),
+        new DriveForDist2910Command(m_swerve, 60, 0, Integer.toString( cmd_idx++ )),
+        new DriveForDist2910Command(m_swerve, 0,  .5, Integer.toString( cmd_idx++ )),
+        new DriveForDist2910Command(m_swerve, 0, -100.5, Integer.toString( cmd_idx++ )),
+        new DriveForDist2910Command(m_swerve, 90, 0, Integer.toString( cmd_idx++ )),
+        new DriveForDist2910Command(m_swerve, 0, 100.5, Integer.toString( cmd_idx++ )),
+        new DriveForDist2910Command(m_swerve, 0, -40.5, Integer.toString( cmd_idx++ )),
+        new DriveForDist2910Command(m_swerve, 30, 0, Integer.toString( cmd_idx++ )));
     }
 
     public Command PathSlalomCommand() {
+      int cmd_idx = 0;
       return new SequentialCommandGroup(
         new InstantCommand(m_swerve::setBrakeOn, m_swerve), // Brake mode on!
         new SetWheelAngleCommand( m_swerve, Math.atan2( 57-28, -(86-12-(34+6.5)/2))),  // point the wheels in the direction we want to go
         new InstantCommand( m_swerve::setDrivePIDToSlow, m_swerve), 
         //On the image in the manual referencing the path, north means up, south means down, east means right/foward, and west means left/backward
-        //DriveforDist2910Command(Subsystem drivetrain, distRight, distFoward)
+        //DriveforDist2910Command(Subsystem drivetrain, distRight,, Integer.toString( cmd_idx++ ) distFoward)
         //Start on top left corner of the Start zone
         // Go to above Nav Point D4
-        new DriveForDist2910Command(m_swerve, 0, 60), //Move east 60"
-        new DriveForDist2910Command(m_swerve, -37, 0), //Move north 37"
+        new DriveForDist2910Command(m_swerve, 0, 60, Integer.toString( cmd_idx++ )), //Move east 60"
+        new DriveForDist2910Command(m_swerve, -37, 0, Integer.toString( cmd_idx++ )), //Move north 37"
         //Across Nav Points D4 through D8
-        new DriveForDist2910Command(m_swerve, 0, 180), //Move east 180"
+        new DriveForDist2910Command(m_swerve, 0, 180, Integer.toString( cmd_idx++ )), //Move east 180"
         // Around Nav Point D10
-        new DriveForDist2910Command(m_swerve, 37, 60), //Move south 37"         ??? 60 --> and east 60"?
-        new DriveForDist2910Command(m_swerve, 0, 45), //Move east 45"
-        new DriveForDist2910Command(m_swerve, -37, 0), //Move north 37"         
-        new DriveForDist2910Command(m_swerve, 0, -60), //Move west 60"
-        new DriveForDist2910Command(m_swerve, 37, 60), //Move south 37"         ??? 60 --> and east 60"?
+        new DriveForDist2910Command(m_swerve, 37, 60, Integer.toString( cmd_idx++ )), //Move south 37"         ??? 60 --> and east 60"?
+        new DriveForDist2910Command(m_swerve, 0, 45, Integer.toString( cmd_idx++ )), //Move east 45"
+        new DriveForDist2910Command(m_swerve, -37, 0, Integer.toString( cmd_idx++ )), //Move north 37"         
+        new DriveForDist2910Command(m_swerve, 0, -60, Integer.toString( cmd_idx++ )), //Move west 60"
+        new DriveForDist2910Command(m_swerve, 37, 60, Integer.toString( cmd_idx++ )), //Move south 37"         ??? 60 --> and east 60"?
         // Back across Nav Points D8 to D4
-        new DriveForDist2910Command(m_swerve, 0, -120), //Move west 120"
+        new DriveForDist2910Command(m_swerve, 0, -120, Integer.toString( cmd_idx++ )), //Move west 120"
         //Into Finish Zone
-        new DriveForDist2910Command(m_swerve, -37, 0), //Move north 37"
-        new DriveForDist2910Command(m_swerve, 0, -60)); //Move west 60"
+        new DriveForDist2910Command(m_swerve, -37, 0, Integer.toString( cmd_idx++ )), //Move north 37"
+        new DriveForDist2910Command(m_swerve, 0, -60, Integer.toString( cmd_idx++ ))); //Move west 60"
     }
 }
