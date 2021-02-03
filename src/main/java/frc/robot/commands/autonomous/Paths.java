@@ -270,7 +270,7 @@ public class Paths { // extends CommandBase {
         //On the image in the manual referencing the path, north means up, south means down, east means right/foward, and west means left/backward
         //DriveforDist2910Command(Subsystem drivetrain, distRight, distFoward)
         //Going around Nav Point D5
-        new DriveForDist2910Command(m_swerve, 0, 67, Integer.toString( cmd_idx++ )), //Move east 135"
+        new DriveForDist2910Command(m_swerve, 0, 67, Integer.toString( cmd_idx++ )), //Move east 135" // cmd_idx = 0
         new DriveForDist2910Command(m_swerve, 18, 0, Integer.toString( cmd_idx++ )), //Move south 36"
         new DriveForDist2910Command(m_swerve, 0, -22, Integer.toString( cmd_idx++ )), //Move west 45" 
         new DriveForDist2910Command(m_swerve, -33, 0, Integer.toString( cmd_idx++ )), //Move north 66"
@@ -282,7 +282,7 @@ public class Paths { // extends CommandBase {
         //Going around Nav Point D10 and to Finish Zone
         new DriveForDist2910Command(m_swerve, 0, 60, Integer.toString( cmd_idx++ )), //Move east 120"
         new DriveForDist2910Command(m_swerve, -30, 0, Integer.toString( cmd_idx++ )), //Move north 60"
-        new DriveForDist2910Command(m_swerve, 0, -147, Integer.toString( cmd_idx++ ))); //Move west 294"
+        new DriveForDist2910Command(m_swerve, 0, -147, Integer.toString( cmd_idx++ ))); //Move west 294" // cmd_idx = 10
     }
 
     public Command PathBounceCommand() {
