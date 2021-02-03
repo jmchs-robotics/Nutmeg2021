@@ -121,7 +121,7 @@ public class DriveForDist2910Command extends CommandBase {
             try {
                 // 191206 take space out of filename
                 encPosLoggers[i] = Files.newBufferedWriter(Paths.get(String.format("/home/lvuser/encPos%d_%s.csv", i, fileID)));
-                encPosLoggers[i].write( "count, millisecs, encoderPos, driveDist, gyroAngle, rotation, moduleAngle\n");
+                encPosLoggers[i].write( "count, millisecs, encoderPos, driveDist, gyroAngle, rotation, newModuleAngle, oldModuleAngle\n");
                 encVelLoggers[i] = Files.newBufferedWriter(Paths.get(String.format("/home/lvuser/encVel%d_%s.csv", i, fileID)));
             } catch (IOException e) {
                 encPosLoggers[i] = null;
@@ -150,14 +150,15 @@ public class DriveForDist2910Command extends CommandBase {
             
             try {
                 // 191206 also save the time in milliseconds, and the driveDistance
-                encPosLoggers[i].write( String.format("%d, %d, %f, %f, %f, %f, %f\n",
+                encPosLoggers[i].write( String.format("%d, %d, %f, %f, %f, %f, %f, %f\n",
                         iterCount, 
                         (int) System.currentTimeMillis(),
                         Math.abs(drivetrain.getSwerveModule(i).getDrivePosition()), 
                         drivetrain.getSwerveModule(i).getDriveDistance(),
                         drivetrain.getGyroAngle(),
                         rotation,
-                        moduleAngles[i]));
+                        moduleAngles[i],
+                        drivetrain.getSwerveModule(i).getCurrentAngle()));
                 encVelLoggers[i].write(String.format("%d,%f\n",
                         iterCount,
                         Math.abs(drivetrain.getSwerveModule(i).getDriveVelocity())));
