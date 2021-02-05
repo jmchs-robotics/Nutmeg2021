@@ -156,19 +156,21 @@ public class DriveForDist2910Command extends CommandBase {
             {
                 try {
                     // 191206 also save the time in milliseconds, and the driveDistance
+                    //Has Andrew's Update for the getSetPoint
                     
-                    encPosLoggers[i].write( String.format("%d, %d, %f, %f, %f, %f, %f, %f\n",
-                            iterCount, 
-                            (int) System.currentTimeMillis(),
-                            Math.abs(drivetrain.getSwerveModule(i).getDrivePosition()), 
-                            drivetrain.getSwerveModule(i).getDriveDistance(),
-                            g, // drivetrain.getGyroAngle()
-                            rotation,
-                            moduleAngles[i],
-                            drivetrain.getSwerveModule(i).getCurrentAngle()));
+                    encPosLoggers[i].write( String.format("%d, %d, %f, %f, %f, %f, %f, %f, %f\n",
+                        iterCount, 
+                        (int) System.currentTimeMillis(),
+                        Math.abs(drivetrain.getSwerveModule(i).getDrivePosition()), 
+                        drivetrain.getSwerveModule(i).getDriveDistance(),
+                        drivetrain.getGyroAngle(),
+                        rotation,
+                        moduleAngles[i],
+                        drivetrain.getSwerveModule(i).getCurrentAngle(),
+                        angleErrorController.getSetpoint()));
                     encVelLoggers[i].write(String.format("%d,%f\n",
-                            iterCount,
-                            Math.abs(drivetrain.getSwerveModule(i).getDriveVelocity())));
+                        iterCount,
+                        Math.abs(drivetrain.getSwerveModule(i).getDriveVelocity())));
     
                 } catch (IOException e) { }
             }
