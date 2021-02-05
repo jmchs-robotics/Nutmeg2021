@@ -90,7 +90,7 @@ public class SwerveDriveModule extends SubsystemBase {
         angleMotor.setMotorType(MotorType.kBrushless);
         m_pidControllerAngle.setP( angle_kP); // 0.5);
         m_pidControllerAngle.setI( angle_kI); // 0.0); 
-        m_pidControllerAngle.setD( angle_kD); // 0.0001);  
+        m_pidControllerAngle.setD( angle_kD); // 0.0001);
         angleMotor.setIdleMode(IdleMode.kBrake);
         // prevent more than this many amps to the motor
         // default is 80, which Rev "thinks is a pretty good number for a drivetrain" per Chief Delphi
