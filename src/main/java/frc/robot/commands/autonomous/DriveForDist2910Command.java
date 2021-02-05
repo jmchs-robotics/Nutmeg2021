@@ -117,17 +117,20 @@ public class DriveForDist2910Command extends CommandBase {
         }
 
         iterCount = 0;
-        for (int i = 0; i < 4; i++) {
-            try {
-                // 191206 take space out of filename
-                encPosLoggers[i] = Files.newBufferedWriter(Paths.get(String.format("/home/lvuser/encPos%d_%s.csv", i, fileID)));
-                encPosLoggers[i].write( "count, millisecs, encoderPos, driveDist, gyroAngle, rotation, newModuleAngle, oldModuleAngle, setpoint\n");
-                encVelLoggers[i] = Files.newBufferedWriter(Paths.get(String.format("/home/lvuser/encVel%d_%s.csv", i, fileID)));
-            } catch (IOException e) {
-                encPosLoggers[i] = null;
-                encVelLoggers[i] = null;
+        if(AUTO.LOG) {
+            for (int i = 0; i < 4; i++) {
+                try {
+                    // 191206 take space out of filename
+                    encPosLoggers[i] = Files.newBufferedWriter(Paths.get(String.format("/home/lvuser/encPos%d_%s.csv", i, fileID)));
+                    encPosLoggers[i].write( "count, millisecs, encoderPos, driveDist, gyroAngle, rotation, newModuleAngle, oldModuleAngle\n");
+                    encVelLoggers[i] = Files.newBufferedWriter(Paths.get(String.format("/home/lvuser/encVel%d_%s.csv", i, fileID)));
+                } catch (IOException e) {
+                    encPosLoggers[i] = null;
+                    encVelLoggers[i] = null;
+                }
             }
-        }
+    
+        }        
 
         if( AUTO.TUNE) {
             SmartDashboard.putNumber("Drive Distance Forward", distForward);
@@ -139,7 +142,8 @@ public class DriveForDist2910Command extends CommandBase {
     public void execute() {
         double forwardFactor = distForward / distance;
         double strafeFactor = -distRight / distance;
-        double rotation = angleErrorController.calculate(drivetrain.getGyroAngle());
+        double g = drivetrain.getGyroAngle();
+        double rotation = angleErrorController.calculate(g);
        
         // rotation = Math.min( -0.5, Math.max( 0.5, rotation));  // clamp
 
@@ -165,6 +169,27 @@ public class DriveForDist2910Command extends CommandBase {
                         Math.abs(drivetrain.getSwerveModule(i).getDriveVelocity())));
 
             } catch (IOException e) { }
+
+            if(AUTO.LOG)
+            {
+                try {
+                    // 191206 also save the time in milliseconds, and the driveDistance
+                    
+                    encPosLoggers[i].write( String.format("%d, %d, %f, %f, %f, %f, %f, %f\n",
+                            iterCount, 
+                            (int) System.currentTimeMillis(),
+                            Math.abs(drivetrain.getSwerveModule(i).getDrivePosition()), 
+                            drivetrain.getSwerveModule(i).getDriveDistance(),
+                            g, // drivetrain.getGyroAngle()
+                            rotation,
+                            moduleAngles[i],
+                            drivetrain.getSwerveModule(i).getCurrentAngle()));
+                    encVelLoggers[i].write(String.format("%d,%f\n",
+                            iterCount,
+                            Math.abs(drivetrain.getSwerveModule(i).getDriveVelocity())));
+    
+                } catch (IOException e) { }
+            }
             
         }
         iterCount++;
@@ -202,16 +227,18 @@ public class DriveForDist2910Command extends CommandBase {
         drivetrain.holonomicDrive(0, 0, 0);
 
         // angleErrorController.disable();
-
-        for (int i = 0; i < 4; i++) {
-            try {
-                if (encPosLoggers[i] != null)
-                    encPosLoggers[i].close();
-                if (encVelLoggers[i] != null)
-                    encVelLoggers[i].close();
-            } catch (IOException e) { }
-            encPosLoggers[i] = null;
-            encVelLoggers[i] = null;
+        if (AUTO.LOG)
+        {
+            for (int i = 0; i < 4; i++) {
+                try {
+                    if (encPosLoggers[i] != null)
+                        encPosLoggers[i].close();
+                    if (encVelLoggers[i] != null)
+                        encVelLoggers[i].close();
+                } catch (IOException e) { }
+                encPosLoggers[i] = null;
+                encVelLoggers[i] = null;
+            }
         }
     }
 

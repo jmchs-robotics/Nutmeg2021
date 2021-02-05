@@ -31,7 +31,7 @@ public final class Constants {
     public static final boolean SHOW_DEBUG = false;
     public static final long RFT_X_OFFSET = 45; // offset in pixels of vision output vs where we want to point/move the robot
     public static final double RFT_PIXELS_TO_DEGREES = .110755; 
-    public static final boolean TUNE = true;
+    public static final boolean TUNE = false;
     public static final double RFT_X_OFFSET_LL = 0;  // limelight offset, degrees, 3/9
   }
   
@@ -91,7 +91,7 @@ public final class Constants {
     public static final double POSE_ANGLE_kI = 0.0;
     public static final double POSE_ANGLE_kD = 0.0;
 
-    public static final boolean TUNE = true;
+    public static final boolean TUNE = false;
   }
 
   /**
@@ -113,7 +113,7 @@ public final class Constants {
     public static final int soleniodForward = 0;
     public static final int soleniodBackward = 1;
     public static final Port sensorPort = I2C.Port.kOnboard;
-    public static final boolean TUNE = true;
+    public static final boolean TUNE = false;
   }
 
   /**
@@ -131,7 +131,7 @@ public final class Constants {
     public static final double reverseSpeed = -0.7;
 
     // set to true to put motor speed and other data on the smart dashboard
-    public static final boolean TUNE = true;
+    public static final boolean TUNE = false;
   }
 
   // vision coprocessor computes distance as inverse of width of target
@@ -161,7 +161,7 @@ public final class Constants {
     public static final double GEAR_RATIO_MOTOR_TO_WHEEL = 35.0 / 35.0; // 40T pinion, 48T wheel gear
     public static final int UPDATE_RATE = 5; // msecs  200 Ht update rate leader -> folloer. Default 10ms
     public static final boolean TIME = false;
-    public static final boolean TUNE = true;
+    public static final boolean TUNE = false;
   }
 
   public static final class IntakeActuators {
@@ -175,7 +175,7 @@ public final class Constants {
     public static final double reversePulse = 0.5; 
 
     // set to true to put motor speed and other data on the smart dashboard
-    public static final boolean TUNE = true;
+    public static final boolean TUNE = false;
   }
 
   // Motor ID for the VBelt Subsystem
@@ -189,7 +189,7 @@ public final class Constants {
     public static final double reversePulse = 0.5;
 
     // set to true to put motor speed and other data on the smart dashboard
-    public static final boolean TUNE = true;
+    public static final boolean TUNE = false;
   }
 
 
@@ -245,7 +245,7 @@ public final class Constants {
 	  public static boolean kMotorInvert = false;
 
     // set to true to put PID and other data on the smart dashboard
-    public static final boolean TUNE = true;
+    public static final boolean TUNE = false;
     
   }
 
@@ -262,7 +262,8 @@ public final class Constants {
    */
   public static final class AUTO {
     public static final double DISTANCE_CHECK_TIME = 0.25;
-    public static final boolean TUNE = true;
+    public static final boolean TUNE = false;
+    public static final boolean LOG = true;
   }
 
 }

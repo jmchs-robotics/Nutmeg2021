@@ -55,7 +55,6 @@ public class VBeltSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    SmartDashboard.putString("chee", "1");
 
     if (VBeltMotors.TUNE){
       //arcadeDrive(0.1, 0.1);
