@@ -148,7 +148,11 @@ public class DriveForDist2910Command extends CommandBase {
         double strafeFactor = -distRight / distance;
         double g = drivetrain.getGyroAngle(); // measurement
         // setting the inital drive angle minus the gyro angle
-        double rotation =  ((initialDrivetrainAngle - g) % 360) * (DrivetrainConstants.DFD_ROTATION_kP); // angleErrorController.calculate(g);
+        double x = (initialDrivetrainAngle - g);
+        if( x > 180) {
+            x -= 360;
+        }
+        double rotation =  ((x) % 360) * (DrivetrainConstants.DFD_ROTATION_kP); // angleErrorController.calculate(g);
        
         // rotation = Math.min( -0.5, Math.max( 0.5, rotation));  // clamp
 
