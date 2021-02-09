@@ -416,6 +416,7 @@ public class Paths { // extends CommandBase {
         new DriveForDist2910Command(m_swerve, 30, 0, Integer.toString( cmd_idx++ )));
     }
     
+    /**
     public Command SlalomSpeedCommand(){
       int cmd_idx = 0;
 
@@ -423,4 +424,5 @@ public class Paths { // extends CommandBase {
         new InstantCommand(m_swerve::setBrakeOn, m_swerve),
       );
     }
+    */
 }
