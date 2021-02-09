@@ -152,6 +152,9 @@ public class DriveForDist2910Command extends CommandBase {
         if( x > 180) {
             x -= 360;
         }
+        else if (x <-180){
+            x += 360;
+        }
         double rotation =  x * (DrivetrainConstants.DFD_ROTATION_kP); // angleErrorController.calculate(g);
        
         // rotation = Math.min( -0.5, Math.max( 0.5, rotation));  // clamp
@@ -170,7 +173,7 @@ public class DriveForDist2910Command extends CommandBase {
                         (int) System.currentTimeMillis(),
                         Math.abs(drivetrain.getSwerveModule(i).getDrivePosition()), 
                         drivetrain.getSwerveModule(i).getDriveDistance(),
-                        drivetrain.getGyroAngle(),
+                        g,//drivetrain.getGyroAngle(),
                         rotation,
                         moduleAngles[i],
                         drivetrain.getSwerveModule(i).getCurrentAngle(),
