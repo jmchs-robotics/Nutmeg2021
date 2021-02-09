@@ -335,4 +335,92 @@ public class Paths { // extends CommandBase {
         new DriveForDist2910Command(m_swerve, -37, 0, Integer.toString( cmd_idx++ )), //Move north 37"
         new DriveForDist2910Command(m_swerve, 0, -60, Integer.toString( cmd_idx++ ))); //Move west 60"
     }
+    
+    /**
+     * Barrel Race Path, but with the change of Drive PID from Fast to Slow in the longer stretches.
+     * Still half distances
+     * @return Command
+     */
+    public Command SpeedBarrelCommand()
+    {
+      int cmd_idx = 0;
+
+      return new SequentialCommandGroup(
+        new InstantCommand(m_swerve::setBrakeOn, m_swerve), // Brake mode on!
+        new SetWheelAngleCommand( m_swerve, Math.atan2( 57-28, -(86-12-(34+6.5)/2))),  // point the wheels in the direction we want to go
+        new InstantCommand( m_swerve::setDrivePIDToSlow, m_swerve), 
+
+        //Move East 135"
+        new DriveForDist2910Command(m_swerve, 0, 5, Integer.toString( cmd_idx++)), // cmd_idx = 0
+        new InstantCommand (m_swerve :: setDrivePIDToFast, m_swerve),
+        new DriveForDist2910Command(m_swerve, 0, 57, Integer.toString( cmd_idx)), //Fast for 57" --> give 5" bumber on each side
+        new InstantCommand (m_swerve :: setDrivePIDToSlow, m_swerve),
+        new DriveForDist2910Command(m_swerve, 0, 5, Integer.toString( cmd_idx)), //Since it is moving in the same direction, don't need a new cmd_idx
+        new DriveForDist2910Command(m_swerve, 18, 0, Integer.toString( cmd_idx++ )), //Move south 36"
+        new DriveForDist2910Command(m_swerve, 0, -22, Integer.toString( cmd_idx++ )), //Move west 45" 
+        new DriveForDist2910Command(m_swerve, -33, 0, Integer.toString( cmd_idx++ )), //Move north 66"
+        //Going around Nav Point B8
+        //new DriveForDist2910Command(m_swerve, 0, 87, Integer.toString( cmd_idx++ )), //Move east 174"
+        new DriveForDist2910Command(m_swerve, 0, 5, Integer.toString( cmd_idx++)),
+        new InstantCommand (m_swerve :: setDrivePIDToFast, m_swerve),
+        new DriveForDist2910Command(m_swerve, 0, 77, Integer.toString( cmd_idx)), //Fast for 77" --> give 5" bumber on each side
+        new InstantCommand (m_swerve :: setDrivePIDToSlow, m_swerve),
+        new DriveForDist2910Command(m_swerve, 0, 5, Integer.toString( cmd_idx)), 
+        new DriveForDist2910Command(m_swerve, -30, 0, Integer.toString( cmd_idx++ )), //Move north 60"
+        new DriveForDist2910Command(m_swerve, 0, -22, Integer.toString( cmd_idx++ )), //Move west 45"
+        //new DriveForDist2910Command(m_swerve, 75, 0, Integer.toString( cmd_idx++ )), //Move south 150"
+        new DriveForDist2910Command(m_swerve, 0, 5, Integer.toString( cmd_idx++)),
+        new InstantCommand (m_swerve :: setDrivePIDToFast, m_swerve),
+        new DriveForDist2910Command(m_swerve, 0, 65, Integer.toString( cmd_idx)), //Fast for 65" --> give 5" bumber on each side
+        new InstantCommand (m_swerve :: setDrivePIDToSlow, m_swerve),
+        new DriveForDist2910Command(m_swerve, 0, 5, Integer.toString( cmd_idx)), 
+        //Going around Nav Point D10 and to Finish Zone
+        //new DriveForDist2910Command(m_swerve, 0, 60, Integer.toString( cmd_idx++ )), //Move east 120"
+        new DriveForDist2910Command(m_swerve, 0, 5, Integer.toString( cmd_idx++)),
+        new InstantCommand (m_swerve :: setDrivePIDToFast, m_swerve),
+        new DriveForDist2910Command(m_swerve, 0, 50, Integer.toString( cmd_idx)), //Fast for 50" --> give 5" bumber on each side
+        new InstantCommand (m_swerve :: setDrivePIDToSlow, m_swerve),
+        new DriveForDist2910Command(m_swerve, -30, 0, Integer.toString( cmd_idx++ )), //Move north 60"
+        //new DriveForDist2910Command(m_swerve, 0, -147, Integer.toString( cmd_idx++ ))); //Move west 294" // cmd_idx = 10
+        new DriveForDist2910Command(m_swerve, 0, 5, Integer.toString( cmd_idx++)),
+        new InstantCommand (m_swerve :: setDrivePIDToFast, m_swerve),
+        new DriveForDist2910Command(m_swerve, 0, -137, Integer.toString( cmd_idx)), //Fast for 137" --> give 5" bumber on each side
+        new InstantCommand (m_swerve :: setDrivePIDToSlow, m_swerve));
+    }
+
+    public Command SpeedBounceCommand() {
+      int cmd_idx = 0;
+
+      return new SequentialCommandGroup(
+        new InstantCommand(m_swerve::setBrakeOn, m_swerve), // Brake mode on!
+        new SetWheelAngleCommand( m_swerve, Math.atan2( 57-28, -(86-12-(34+6.5)/2))),  // point the wheels in the direction we want to go
+        new InstantCommand( m_swerve::setDrivePIDToFast, m_swerve), 
+        //Starting in the middle with bumper against the most left line of the Start Zone
+        //x, y (inches) ( + == right, + == up )
+        new DriveForDist2910Command(m_swerve, 45, 10.5, Integer.toString( cmd_idx++ )),
+        new InstantCommand( m_swerve::setDrivePIDToFast, m_swerve), 
+        new DriveForDist2910Command(m_swerve, 0, 35.5, Integer.toString( cmd_idx++ )),
+        new InstantCommand( m_swerve::setDrivePIDToFast, m_swerve), 
+        new DriveForDist2910Command(m_swerve, 0, -35.5, Integer.toString( cmd_idx++ )),
+        //First Bounce ("bounces"over points B4, B5, and D5??)
+        new InstantCommand( m_swerve::setDrivePIDToSlow, m_swerve), 
+        new DriveForDist2910Command(m_swerve, 30, -20, Integer.toString( cmd_idx++ )),
+        new InstantCommand( m_swerve::setDrivePIDToFast, m_swerve), 
+        new DriveForDist2910Command(m_swerve, 0, -50, Integer.toString( cmd_idx++ )),
+        new DriveForDist2910Command(m_swerve, 60, 0, Integer.toString( cmd_idx++ )),
+        new DriveForDist2910Command(m_swerve, 0,  .5, Integer.toString( cmd_idx++ )),
+        new DriveForDist2910Command(m_swerve, 0, -100.5, Integer.toString( cmd_idx++ )),
+        new DriveForDist2910Command(m_swerve, 90, 0, Integer.toString( cmd_idx++ )),
+        new DriveForDist2910Command(m_swerve, 0, 100.5, Integer.toString( cmd_idx++ )),
+        new DriveForDist2910Command(m_swerve, 0, -40.5, Integer.toString( cmd_idx++ )),
+        new DriveForDist2910Command(m_swerve, 30, 0, Integer.toString( cmd_idx++ )));
+    }
+    
+    public Command SlalomSpeedCommand(){
+      int cmd_idx = 0;
+
+      return new SequentialCommandGroup(
+        new InstantCommand(m_swerve::setBrakeOn, m_swerve),
+      );
+    }
 }

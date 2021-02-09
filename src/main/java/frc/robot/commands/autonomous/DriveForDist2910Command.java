@@ -164,7 +164,6 @@ public class DriveForDist2910Command extends CommandBase {
             {
                 try {
                     // 191206 also save the time in milliseconds, and the driveDistance
-                    //Has Andrew's Update for the getSetPoint
                     
                     encPosLoggers[i].write( String.format("%d, %d, %f, %f, %f, %f, %f, %f, %f\n",
                         iterCount, 
