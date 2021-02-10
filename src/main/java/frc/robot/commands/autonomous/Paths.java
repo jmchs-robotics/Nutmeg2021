@@ -425,4 +425,24 @@ public class Paths { // extends CommandBase {
       );
     }
     */
+    /**
+    public Command SlalomAngleSpeedCommand() {
+      int cmd_idx = 0;
+
+      return new SequentialCommandGroup(
+        new InstantCommand(m_swerve::setBrakeOn, m_swerve), // Brake mode on!
+        new SetWheelAngleCommand( m_swerve, Math.atan2( 57-28, -(86-12-(34+6.5)/2))),  // point the wheels in the direction we want to go
+        new InstantCommand( m_swerve::setDrivePIDToFast, m_swerve), 
+        new DriveForDist2910Command(m_swerve, 58, 34, Integer.toString( cmd_idx++ )),
+        new DriveForDist2910Command(m_swerve, 165, 0, Integer.toString( cmd_idx++ )),
+        new InstantCommand( m_swerve::setDrivePIDToSlow, m_swerve),  
+        new DriveForDist2910Command(m_swerve, 18, 36, Integer.toString( cmd_idx++ )),
+        new DriveForDist2910Command(m_swerve, 42, 0, Integer.toString( cmd_idx++ )),
+        new DriveForDist2910Command(m_swerve, 0, 36, Integer.toString( cmd_idx++ )),
+        new DriveForDist2910Command(m_swerve, 45, 0, Integer.toString( cmd_idx++ )),
+        new DriveForDist2910Command(m_swerve, 18, 36, Integer.toString( cmd_idx++ )),
+        new DriveForDist2910Command(m_swerve, 162, 0, Integer.toString( cmd_idx++ )),
+        new DriveForDist2910Command(m_swerve, 58, 34, Integer.toString( cmd_idx++ )));
+    }
+    */
 }
