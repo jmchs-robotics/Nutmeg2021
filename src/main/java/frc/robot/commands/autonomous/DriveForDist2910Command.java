@@ -41,6 +41,8 @@ public class DriveForDist2910Command extends CommandBase {
     private BufferedWriter[] encVelLoggers = new BufferedWriter[4];
     private int iterCount;
 
+    private boolean isGyroSet = false;
+
     private String fileID;
 
     /**
@@ -100,6 +102,26 @@ public class DriveForDist2910Command extends CommandBase {
         addRequirements(drivetrain);
     }
 
+    public DriveForDist2910Command(SwerveDriveSubsystem drivetrain, double distRight, double distForward, double poseAngle, String fileID) {
+        this.drivetrain = drivetrain;
+        this.angle = poseAngle;
+        
+        this.distRight = distRight; // -distRight;  // 191206 seems like this should not get inverted
+        this.distForward = distForward;
+        
+        this.distance = Math.sqrt(distRight * distRight + distForward * distForward);
+        // Calculations done by AngleErrorController are invalid, will be applying in about line 145:
+        // // 191206 this PID isn't working... probably needs more P.  Original is 0.02, 0, 0
+        // angleErrorController = new PIDController(DrivetrainConstants.DFD_ROTATION_kP, DrivetrainConstants.DFD_ROTATION_kI, DrivetrainConstants.DFD_ROTATION_kD);
+        // angleErrorController.enableContinuousInput(0, 360);
+        // angleErrorController.reset();
+
+        isGyroSet = true;
+
+        this.fileID = fileID;
+        addRequirements(drivetrain);
+    }
+
     @Override
     public void initialize() {
         resetPID();
@@ -107,8 +129,13 @@ public class DriveForDist2910Command extends CommandBase {
         finishTimer.reset();
         isTimerStarted = false;
 
-        initialDrivetrainAngle = drivetrain.getGyroAngle();
-        
+        if (isGyroSet) {
+            initialDrivetrainAngle = poseAngle;
+        }
+        else {
+            initialDrivetrainAngle = drivetrain.getGyroAngle();
+        }
+
         //Calculations done by AngleErrorController are invalid, will be applying in about line 145:
         // angleErrorController.setSetpoint(initialDrivetrainAngle);
         // angleErrorController.enable();
