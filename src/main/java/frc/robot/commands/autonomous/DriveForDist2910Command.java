@@ -130,7 +130,7 @@ public class DriveForDist2910Command extends CommandBase {
         isTimerStarted = false;
 
         if (isGyroSet) {
-            initialDrivetrainAngle = poseAngle;
+            initialDrivetrainAngle = angle;
         }
         else {
             initialDrivetrainAngle = drivetrain.getGyroAngle();
