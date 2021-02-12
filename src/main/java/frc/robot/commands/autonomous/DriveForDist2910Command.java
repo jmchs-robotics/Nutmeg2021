@@ -43,6 +43,8 @@ public class DriveForDist2910Command extends CommandBase {
 
     private String fileID;
 
+    private boolean endDrive;
+
     /**
      * Move the robot forward/backwards this many inches. 
      * Field oriented.
@@ -50,7 +52,7 @@ public class DriveForDist2910Command extends CommandBase {
      * @param distance inches; positive if forwards, negative is backwards.
      */
     public DriveForDist2910Command(SwerveDriveSubsystem drivetrain, double distance) {
-        this(drivetrain, 0, distance, "0");
+        this(drivetrain, 0, distance, "0", true);
     }
 
     /**
@@ -60,7 +62,7 @@ public class DriveForDist2910Command extends CommandBase {
      * @param distRight inches positive is to the right; negative is to the left.
      * @param distForward inches positive is forward; negaitve is backwards.
      */
-    public DriveForDist2910Command(SwerveDriveSubsystem drivetrain, double distRight, double distForward, String fileID) {
+    public DriveForDist2910Command(SwerveDriveSubsystem drivetrain, double distRight, double distForward, String fileID, boolean endDrive) {
         this.drivetrain = drivetrain;
         this.angle = Math.toDegrees(Math.atan2(distRight, distForward));
         
@@ -75,6 +77,8 @@ public class DriveForDist2910Command extends CommandBase {
         // angleErrorController.reset();
 
         this.fileID = fileID;
+
+        this.endDrive = endDrive;
         /*
          new PIDController(0.02, 0, 0, new PIDSource() {
             @Override
@@ -218,6 +222,7 @@ public class DriveForDist2910Command extends CommandBase {
 
     @Override
     public void end( boolean isInterrupted) {
+        
         drivetrain.holonomicDrive(0, 0, 0);
 
         // angleErrorController.disable();
@@ -234,6 +239,7 @@ public class DriveForDist2910Command extends CommandBase {
                 encVelLoggers[i] = null;
             }
         }
+        
     }
 
     public void resetPID() {

@@ -398,22 +398,34 @@ public class Paths { // extends CommandBase {
         //Starting in the middle with bumper against the most left line of the Start Zone
         //x, y (inches) ( + == right, + == up )
         new DriveForDist2910Command(m_swerve, 45, 10.5, Integer.toString( cmd_idx++ )),
+        SmartDashboard.putNumber("Command Index", cmd_idx);
         new InstantCommand( m_swerve::setDrivePIDToFast, m_swerve), 
         new DriveForDist2910Command(m_swerve, 0, 35.5, Integer.toString( cmd_idx++ )),
+        SmartDashboard.putNumber("Command Index", cmd_idx);
         new InstantCommand( m_swerve::setDrivePIDToFast, m_swerve), 
         new DriveForDist2910Command(m_swerve, 0, -35.5, Integer.toString( cmd_idx++ )),
+        SmartDashboard.putNumber("Command Index", cmd_idx);
         //First Bounce ("bounces"over points B4, B5, and D5??)
         new InstantCommand( m_swerve::setDrivePIDToSlow, m_swerve), 
         new DriveForDist2910Command(m_swerve, 30, -20, Integer.toString( cmd_idx++ )),
+        SmartDashboard.putNumber("Command Index", cmd_idx);
         new InstantCommand( m_swerve::setDrivePIDToFast, m_swerve), 
         new DriveForDist2910Command(m_swerve, 0, -50, Integer.toString( cmd_idx++ )),
+        SmartDashboard.putNumber("Command Index", cmd_idx);
         new DriveForDist2910Command(m_swerve, 60, 0, Integer.toString( cmd_idx++ )),
+        SmartDashboard.putNumber("Command Index", cmd_idx);
         new DriveForDist2910Command(m_swerve, 0,  .5, Integer.toString( cmd_idx++ )),
+        SmartDashboard.putNumber("Command Index", cmd_idx);
         new DriveForDist2910Command(m_swerve, 0, -100.5, Integer.toString( cmd_idx++ )),
+        SmartDashboard.putNumber("Command Index", cmd_idx);
         new DriveForDist2910Command(m_swerve, 90, 0, Integer.toString( cmd_idx++ )),
+        SmartDashboard.putNumber("Command Index", cmd_idx);
         new DriveForDist2910Command(m_swerve, 0, 100.5, Integer.toString( cmd_idx++ )),
+        SmartDashboard.putNumber("Command Index", cmd_idx);
         new DriveForDist2910Command(m_swerve, 0, -40.5, Integer.toString( cmd_idx++ )),
-        new DriveForDist2910Command(m_swerve, 30, 0, Integer.toString( cmd_idx++ )));
+        SmartDashboard.putNumber("Command Index", cmd_idx);
+        new DriveForDist2910Command(m_swerve, 30, 0, Integer.toString( cmd_idx++ )),
+        SmartDashboard.putNumber("Command Index", cmd_idx););
     }
     
     /**
