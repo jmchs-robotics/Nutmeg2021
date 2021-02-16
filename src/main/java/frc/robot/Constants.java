@@ -60,7 +60,7 @@ public final class Constants {
     public static final double LENGTH = 28;
 
     // PID constants for swerve modules
-    public static final double ANGLE_kP = 3.0;
+    public static final double ANGLE_kP = 1.0; //3.0;
     public static final double ANGLE_kI = 0.0;
     public static final double ANGLE_kD = 0.0;    
 
