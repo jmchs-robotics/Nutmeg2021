@@ -273,39 +273,39 @@ public class Paths { // extends CommandBase {
         //Going around Nav Point D5
         new SetWheelAngleCommand(m_swerve, 0),
         new WaitCommand(w),
-        new DriveForDist2910Command(m_swerve, 0, 67, Integer.toString( cmd_idx++ )), //Move east 135" // cmd_idx = 0
+        new DriveForDist2910Command(m_swerve, 0, 135, Integer.toString( cmd_idx++ )), //Move east 135" // cmd_idx = 0
         new SetWheelAngleCommand(m_swerve, 90),
         new WaitCommand(w),
-        new DriveForDist2910Command(m_swerve, 18, 0, Integer.toString( cmd_idx++ )), //Move south 36"
+        new DriveForDist2910Command(m_swerve, 36, 0, Integer.toString( cmd_idx++ )), //Move south 36"
         new SetWheelAngleCommand(m_swerve, 0),
         new WaitCommand(w),
-        new DriveForDist2910Command(m_swerve, 0, -22, Integer.toString( cmd_idx++ )), //Move west 45" 
+        new DriveForDist2910Command(m_swerve, 0, -45, Integer.toString( cmd_idx++ )), //Move west 45" 
         new SetWheelAngleCommand(m_swerve, 90),
         new WaitCommand(w),
-        new DriveForDist2910Command(m_swerve, -33, 0, Integer.toString( cmd_idx++ )), //Move north 66"
+        new DriveForDist2910Command(m_swerve, -66, 0, Integer.toString( cmd_idx++ )), //Move north 66"
         new SetWheelAngleCommand(m_swerve, 0),
         new WaitCommand(w),
         //Going around Nav Point B8
-        new DriveForDist2910Command(m_swerve, 0, 87, Integer.toString( cmd_idx++ )), //Move east 174" 
+        new DriveForDist2910Command(m_swerve, 0, 174, Integer.toString( cmd_idx++ )), //Move east 174" 
         new SetWheelAngleCommand(m_swerve, 90),
         new WaitCommand(w),
-        new DriveForDist2910Command(m_swerve, -30, 0, Integer.toString( cmd_idx++ )), //Move north 60"
+        new DriveForDist2910Command(m_swerve, -60, 0, Integer.toString( cmd_idx++ )), //Move north 60"
         new SetWheelAngleCommand(m_swerve, 0),
         new WaitCommand(w),
-        new DriveForDist2910Command(m_swerve, 0, -22, Integer.toString( cmd_idx++ )), //Move west 45"
+        new DriveForDist2910Command(m_swerve, 0, -45, Integer.toString( cmd_idx++ )), //Move west 45"
         new SetWheelAngleCommand(m_swerve, 90),
         new WaitCommand(w),
-        new DriveForDist2910Command(m_swerve, 75, 0, Integer.toString( cmd_idx++ )), //Move south 150"
+        new DriveForDist2910Command(m_swerve, 150, 0, Integer.toString( cmd_idx++ )), //Move south 150"
         //Going around Nav Point D10 and to Finish Zone
         new SetWheelAngleCommand(m_swerve, 0),
         new WaitCommand(w),
-        new DriveForDist2910Command(m_swerve, 0, 60, Integer.toString( cmd_idx++ )), //Move east 120"
+        new DriveForDist2910Command(m_swerve, 0, 120, Integer.toString( cmd_idx++ )), //Move east 120"
         new SetWheelAngleCommand(m_swerve, 90),
         new WaitCommand(w),
-        new DriveForDist2910Command(m_swerve, -30, 0, Integer.toString( cmd_idx++ )), //Move north 60"
+        new DriveForDist2910Command(m_swerve, -60, 0, Integer.toString( cmd_idx++ )), //Move north 60"
         new SetWheelAngleCommand(m_swerve, 0),
         new WaitCommand(w),
-        new DriveForDist2910Command(m_swerve, 0, -147, Integer.toString( cmd_idx++ ))); //Move west 294" // cmd_idx = 10
+        new DriveForDist2910Command(m_swerve, 0, -294, Integer.toString( cmd_idx++ ))); //Move west 294" // cmd_idx = 10
     }
 
     public Command PathBounceCommand() {
