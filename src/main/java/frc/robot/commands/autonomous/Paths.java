@@ -266,7 +266,6 @@ public class Paths { // extends CommandBase {
         //new SetWheelAngleCommand( m_swerve, Math.atan2( 57-28, -(86-12-(34+6.5)/2))),  // point the wheels in the direction we want to go
         new InstantCommand( m_swerve::setDrivePIDToSlow, m_swerve), 
         
-        //Update 1/29 cut distance in half to test
         // Update 2/16 The Wheels need to be set to a specific angle before the go and by adding the wait command, we have busted the ghost
         // The 2/16 Update needs to be added to the other autoPaths
         //On the image in the manual referencing the path, north means up, south means down, east means right/foward, and west means left/backward
@@ -280,14 +279,14 @@ public class Paths { // extends CommandBase {
         new DriveForDist2910Command(m_swerve, 36, 0, Integer.toString( cmd_idx++ )), //Move south 36"
         new SetWheelAngleCommand(m_swerve, 0),
         new WaitCommand(w),
-        new DriveForDist2910Command(m_swerve, 0, -45, Integer.toString( cmd_idx++ )), //Move west 45" 
+        new DriveForDist2910Command(m_swerve, 0, -50, Integer.toString( cmd_idx++ )), //Move west 45" //2_18 change to 50"
         new SetWheelAngleCommand(m_swerve, 90),
         new WaitCommand(w),
         new DriveForDist2910Command(m_swerve, -66, 0, Integer.toString( cmd_idx++ )), //Move north 66"
         new SetWheelAngleCommand(m_swerve, 0),
         new WaitCommand(w),
         //Going around Nav Point B8
-        new DriveForDist2910Command(m_swerve, 0, 174, Integer.toString( cmd_idx++ )), //Move east 174" 
+        new DriveForDist2910Command(m_swerve, 0,126, Integer.toString( cmd_idx++ )), //Move east 174" //2_18 change to 126"
         new SetWheelAngleCommand(m_swerve, 90),
         new WaitCommand(w),
         new DriveForDist2910Command(m_swerve, -60, 0, Integer.toString( cmd_idx++ )), //Move north 60"
@@ -296,11 +295,11 @@ public class Paths { // extends CommandBase {
         new DriveForDist2910Command(m_swerve, 0, -45, Integer.toString( cmd_idx++ )), //Move west 45"
         new SetWheelAngleCommand(m_swerve, 90),
         new WaitCommand(w),
-        new DriveForDist2910Command(m_swerve, 150, 0, Integer.toString( cmd_idx++ )), //Move south 150"
+        new DriveForDist2910Command(m_swerve, 125, 0, Integer.toString( cmd_idx++ )), //Move south 150" //2_18 change to 125"
         //Going around Nav Point D10 and to Finish Zone
         new SetWheelAngleCommand(m_swerve, 0),
         new WaitCommand(w),
-        new DriveForDist2910Command(m_swerve, 0, 120, Integer.toString( cmd_idx++ )), //Move east 120"
+        new DriveForDist2910Command(m_swerve, 0, 110, Integer.toString( cmd_idx++ )), //Move east 120" //2_18 change to 110"
         new SetWheelAngleCommand(m_swerve, 90),
         new WaitCommand(w),
         new DriveForDist2910Command(m_swerve, -60, 0, Integer.toString( cmd_idx++ )), //Move north 60"

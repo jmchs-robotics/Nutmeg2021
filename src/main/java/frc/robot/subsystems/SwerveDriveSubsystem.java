@@ -285,7 +285,7 @@ public class SwerveDriveSubsystem extends HolonomicDrivetrain {
      * So can set the PID output range from an InstantCommand
      */
     public void setDrivePIDToSlow() {
-      double x = 0.3;
+      double x = 0.5; //0.3;
       setDrivePIDOutputRange(-1 * x, x);
     }
 
