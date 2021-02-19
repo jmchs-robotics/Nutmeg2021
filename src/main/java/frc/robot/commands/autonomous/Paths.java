@@ -414,7 +414,6 @@ public class Paths { // extends CommandBase {
         new WaitCommand(w),
         new DriveForDist2910Command(m_swerve, 0, -60, Integer.toString( cmd_idx++ ))); //Move west 60"
     }
-
     public Command AngledSlalomCommand() {
       
       int cmd_idx = 0;
@@ -425,78 +424,82 @@ public class Paths { // extends CommandBase {
         //Change in x ==> Set angle to 0
         //Change in y ==> Set angle to 90
         new InstantCommand( m_swerve::setDrivePIDToSlow, m_swerve), 
-        new SetWheelAngleCommand(m_swerve, Math.toDegrees(Math.atan2(34, 58))),
+        new SetWheelAngleCommand(m_swerve, Math.toDegrees(Math.atan2(58, -34))),
         new WaitCommand(w),
-        new DriveForDist2910Command(m_swerve, 34, 58, Integer.toString( cmd_idx++ )),
-        new SetWheelAngleCommand(m_swerve, Math.toDegrees(Math.atan2(0, 165))),
+        new DriveForDist2910Command(m_swerve, -34, 58, Integer.toString( cmd_idx++ )),
+        new SetWheelAngleCommand(m_swerve, Math.toDegrees(Math.atan2(165, 0))),
         new WaitCommand(w),
         new DriveForDist2910Command(m_swerve, 0, 165, Integer.toString( cmd_idx++ )),
-        new SetWheelAngleCommand(m_swerve, Math.toDegrees(Math.atan2(-36, 18))),
+        new SetWheelAngleCommand(m_swerve, Math.toDegrees(Math.atan2(18, 36))),
         new WaitCommand(w),
-        new DriveForDist2910Command(m_swerve, -36, 18, Integer.toString( cmd_idx++ )),
-        new SetWheelAngleCommand(m_swerve, Math.toDegrees(Math.atan2(0, 42))),
+        new DriveForDist2910Command(m_swerve, 36, 18, Integer.toString( cmd_idx++ )),
+        new SetWheelAngleCommand(m_swerve, Math.toDegrees(Math.atan2(42, 0))),
         new WaitCommand(w),
         new DriveForDist2910Command(m_swerve, 0, 42, Integer.toString( cmd_idx++ )), 
-        new SetWheelAngleCommand(m_swerve, Math.toDegrees(Math.atan2(36, 0))),
+        new SetWheelAngleCommand(m_swerve, Math.toDegrees(Math.atan2(0, -36))),
         new WaitCommand(w),
-        new DriveForDist2910Command(m_swerve, 36, 0, Integer.toString( cmd_idx++ )), 
-        new SetWheelAngleCommand(m_swerve, Math.toDegrees(Math.atan2(0, -45))),
+        new DriveForDist2910Command(m_swerve, -36, 0, Integer.toString( cmd_idx++ )), 
+        new SetWheelAngleCommand(m_swerve, Math.toDegrees(Math.atan2(-45, 0))),
         new WaitCommand(w),
         new DriveForDist2910Command(m_swerve, 0, -45, Integer.toString( cmd_idx++ )),   
-        new SetWheelAngleCommand(m_swerve, Math.toDegrees(Math.atan2(-36, -18))),
+        new SetWheelAngleCommand(m_swerve, Math.toDegrees(Math.atan2(-18, 36))),
         new WaitCommand(w),      
-        new DriveForDist2910Command(m_swerve, -36, -18, Integer.toString( cmd_idx++ )), 
-        new SetWheelAngleCommand(m_swerve, Math.toDegrees(Math.atan2(0, -162))),
+        new DriveForDist2910Command(m_swerve, 36, -18, Integer.toString( cmd_idx++ )), 
+        new SetWheelAngleCommand(m_swerve, Math.toDegrees(Math.atan2(-162, 0))),
         new WaitCommand(w),
         new DriveForDist2910Command(m_swerve, 0, -162, Integer.toString( cmd_idx++ )), 
-        new SetWheelAngleCommand(m_swerve, Math.toDegrees(Math.atan2(34, -58))),
+        new SetWheelAngleCommand(m_swerve, Math.toDegrees(Math.atan2(-58, -34))),
         new WaitCommand(w),
-        new DriveForDist2910Command(m_swerve, 34, -58, Integer.toString( cmd_idx++ )));
+        new DriveForDist2910Command(m_swerve, -34, -58, Integer.toString( cmd_idx++ )));
     }
+    
     
     public Command AngledBarrelCommand() {
       
       int cmd_idx = 0;
       double w = 0.25;
 
+      //new DriveForDist2910Command(m_swerve, x, y, Integer.toString( cmd_idx++ ))
+      //new SetWheelAngleCommand(m_swerve, Math.toDegrees(Math.atan2(y, x)))
+
       return new SequentialCommandGroup(
         new InstantCommand(m_swerve::setBrakeOn, m_swerve), // Brake mode on!
         new InstantCommand( m_swerve::setDrivePIDToSlow, m_swerve), 
         new SetWheelAngleCommand(m_swerve,0),
-        //new SetWheelAngleCommand(m_swerve, Math.toDegrees(Math.atan2(0, 133))),
+        new SetWheelAngleCommand(m_swerve, Math.toDegrees(Math.atan2(133, 0))),
         new WaitCommand(w),
-        new DriveForDist2910Command(m_swerve, 135, 0, Integer.toString( cmd_idx++ )),
-        new SetWheelAngleCommand(m_swerve, Math.toDegrees(Math.atan2(-36, 0))),
-        new WaitCommand(w),
-        new DriveForDist2910Command(m_swerve, -36, 0, Integer.toString( cmd_idx++ )),
-        new SetWheelAngleCommand(m_swerve, Math.toDegrees(Math.atan2(0, -45))),
-        new WaitCommand(w),
-        new DriveForDist2910Command(m_swerve, 0, -45, Integer.toString( cmd_idx++ )),
-        new SetWheelAngleCommand(m_swerve, Math.toDegrees(Math.atan2(36, 0))),
-        new WaitCommand(w),
-        new DriveForDist2910Command(m_swerve, 36, 0, Integer.toString( cmd_idx++ )), 
-        new SetWheelAngleCommand(m_swerve, Math.toDegrees(Math.atan2(24, 135))),
-        new WaitCommand(w),
-        new DriveForDist2910Command(m_swerve, 24, 135, Integer.toString( cmd_idx++ )), 
-        new SetWheelAngleCommand(m_swerve, Math.toDegrees(Math.atan2(36, 0))),
-        new WaitCommand(w),
-        new DriveForDist2910Command(m_swerve, 36, 0, Integer.toString( cmd_idx++ )),   
-        new SetWheelAngleCommand(m_swerve, Math.toDegrees(Math.atan2(0, -45))),
-        new WaitCommand(w),
-        new DriveForDist2910Command(m_swerve, 0, -45, Integer.toString( cmd_idx++ )),
-        new SetWheelAngleCommand(m_swerve, Math.toDegrees(Math.atan2(-36, 0))),
-        new WaitCommand(w),
-        new DriveForDist2910Command(m_swerve, -36, 0, Integer.toString( cmd_idx++ )),
-        new SetWheelAngleCommand(m_swerve, Math.toDegrees(Math.atan2(-60, 60))),
-        new WaitCommand(w),
-        new DriveForDist2910Command(m_swerve, -60, 60, Integer.toString( cmd_idx++ )),
-        new SetWheelAngleCommand(m_swerve, Math.toDegrees(Math.atan2(0, 45))),
-        new WaitCommand(w),
-        new DriveForDist2910Command(m_swerve, 0, 45, Integer.toString( cmd_idx++ )),
-        new SetWheelAngleCommand(m_swerve, Math.toDegrees(Math.atan2(36, 0))),
+        new DriveForDist2910Command(m_swerve, 0, 133, Integer.toString( cmd_idx++ )),
+        new SetWheelAngleCommand(m_swerve, Math.toDegrees(Math.atan2(0, 36))),
         new WaitCommand(w),
         new DriveForDist2910Command(m_swerve, 36, 0, Integer.toString( cmd_idx++ )),
-        new SetWheelAngleCommand(m_swerve, Math.toDegrees(Math.atan2(0, -283))),
+        new SetWheelAngleCommand(m_swerve, Math.toDegrees(Math.atan2(-45, 0))),
+        new WaitCommand(w),
+        new DriveForDist2910Command(m_swerve, 0, -45, Integer.toString( cmd_idx++ )),
+        new SetWheelAngleCommand(m_swerve, Math.toDegrees(Math.atan2(0, -36))),
+        new WaitCommand(w),
+        new DriveForDist2910Command(m_swerve, -36, 0, Integer.toString( cmd_idx++ )), 
+        new SetWheelAngleCommand(m_swerve, Math.toDegrees(Math.atan2(135, -24))),
+        new WaitCommand(w),
+        new DriveForDist2910Command(m_swerve, -24, 135, Integer.toString( cmd_idx++ )), 
+        new SetWheelAngleCommand(m_swerve, Math.toDegrees(Math.atan2(0, -36))),
+        new WaitCommand(w),
+        new DriveForDist2910Command(m_swerve, -36, 0, Integer.toString( cmd_idx++ )),   
+        new SetWheelAngleCommand(m_swerve, Math.toDegrees(Math.atan2(-45, 0))),
+        new WaitCommand(w),
+        new DriveForDist2910Command(m_swerve, 0, -45, Integer.toString( cmd_idx++ )),
+        new SetWheelAngleCommand(m_swerve, Math.toDegrees(Math.atan2(0, 36))),
+        new WaitCommand(w),
+        new DriveForDist2910Command(m_swerve, 36, 0, Integer.toString( cmd_idx++ )),
+        new SetWheelAngleCommand(m_swerve, Math.toDegrees(Math.atan2(60, 60))),
+        new WaitCommand(w),
+        new DriveForDist2910Command(m_swerve, 60, 60, Integer.toString( cmd_idx++ )),
+        new SetWheelAngleCommand(m_swerve, Math.toDegrees(Math.atan2(45, 0))),
+        new WaitCommand(w),
+        new DriveForDist2910Command(m_swerve, 0, 45, Integer.toString( cmd_idx++ )),
+        new SetWheelAngleCommand(m_swerve, Math.toDegrees(Math.atan2(0, -36))),
+        new WaitCommand(w),
+        new DriveForDist2910Command(m_swerve, -36, 0, Integer.toString( cmd_idx++ )),
+        new SetWheelAngleCommand(m_swerve, Math.toDegrees(Math.atan2(-283, 0))),
         new WaitCommand(w),
         new DriveForDist2910Command(m_swerve, 0, -283, Integer.toString( cmd_idx++ )));
         
