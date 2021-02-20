@@ -404,13 +404,13 @@ public class RobotContainer {
           p.PathBounceCommand()
         );
         break;
-      case "angledbarrel":
+      case "angled barrel":
         autoCommand = new SequentialCommandGroup(
           new InstantCommand(m_Hopper::setBallCountTo3, m_Hopper),
           p.AngledBarrelCommand()
         );
         break;
-      case "angledslalmon":
+      case "angled slalmon":
         autoCommand = new SequentialCommandGroup(
           new InstantCommand(m_Hopper::setBallCountTo3, m_Hopper),
           p.AngledSlalomCommand()
