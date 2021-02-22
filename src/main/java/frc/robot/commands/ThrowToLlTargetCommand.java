@@ -16,7 +16,7 @@ import frc.robot.util.ThrowerLUT;
 import edu.wpi.first.wpilibj.smartdashboard.*;
 import frc.robot.Constants;
 
-public class ThrowToTargetCommand extends CommandBase {
+public class ThrowToLlTargetCommand extends CommandBase {
   private ThrowerSubsystem m_subsystem;
   private SocketVisionWrapper m_vision;
   private SwerveDriveSubsystem m_swerve;
@@ -31,7 +31,7 @@ public class ThrowToTargetCommand extends CommandBase {
    * Assumes the green LED has already been turned on 
    *   and that the Vision Coprocessor has already been commanded to track the RFT.
    */
-  public ThrowToTargetCommand(ThrowerSubsystem thrower, SwerveDriveSubsystem swerve, SocketVisionWrapper vision) {
+  public ThrowToLlTargetCommand(ThrowerSubsystem thrower, SwerveDriveSubsystem swerve, SocketVisionWrapper vision) {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(thrower);
 
