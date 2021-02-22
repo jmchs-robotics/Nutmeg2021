@@ -17,7 +17,7 @@ import frc.robot.util.SocketVisionWrapper;
 import frc.robot.util.ThrowerLUT;
 import edu.wpi.first.wpilibj.smartdashboard.*;
 import frc.robot.Constants;
-
+import frc.robot.Constants.ThrowerMotor;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
@@ -30,7 +30,7 @@ public class DriveShootCommand extends CommandBase
     we need:
     a thrower
     a drivetrain
-    a controller - joystick(drive) and button (ThrowToLlTargetCommand)
+    a controller - joystick(drive) and left/right trigger (ThrowToLlTargetCommand)
     */
     private ThrowerSubsystem m_subsystem;
     private SwerveDriveSubsystem m_swerve;
@@ -47,5 +47,32 @@ public class DriveShootCommand extends CommandBase
     //drive to red zone
     //aim itself to shoot
     //end
+    public DriveShootCommand(ThrowerSubsystem subsystem)
+    {
+        m_subsystem = subsystem;
+    }
+
+    @Override
+    public void initialize() 
+    {
+    }
+
+    @Override
+    public void execute()
+    {
+
+    }
+
+    @Override
+    public void end(boolean interrupted)
+    {
+
+    }
+
+    @Override
+    public boolean isFinished()
+    {
+        return false;
+    }
 
 }
