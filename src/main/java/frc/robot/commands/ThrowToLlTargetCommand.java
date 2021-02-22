@@ -16,12 +16,25 @@ import frc.robot.util.ThrowerLUT;
 import edu.wpi.first.wpilibj.smartdashboard.*;
 import frc.robot.Constants;
 
+// switching to Limelight 3/9
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.networktables.NetworkTableInstance;
+
+
 public class ThrowToLlTargetCommand extends CommandBase {
   private ThrowerSubsystem m_subsystem;
   private SocketVisionWrapper m_vision;
   private SwerveDriveSubsystem m_swerve;
 
   private double setpoint = 0;
+
+  // switching to Limelight 2/22/21
+  private NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
+  private NetworkTableEntry tx = table.getEntry("tx");
+  private NetworkTableEntry ty = table.getEntry("ty");
+  private NetworkTableEntry tv = table.getEntry("tv");
+  
 
   /**
    * Creates a new ThrowToTarget.
@@ -38,6 +51,9 @@ public class ThrowToLlTargetCommand extends CommandBase {
     m_subsystem = thrower;
     m_vision = vision;
     m_swerve = swerve;
+
+
+
   }
 
   // Called when the command is initially scheduled.
@@ -48,8 +64,10 @@ public class ThrowToLlTargetCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    double ll_dist = tx.getDouble(0); // switching to Limelight 3/9
+
     if( Constants.ThrowerPIDs.TUNE) {
-      SmartDashboard.putNumber("ThrowToTargetCommand distance from Vision", m_vision.get().get_distance());
+      SmartDashboard.putNumber("ThrowToTargetCommand distance from Vision", ll_dist);
     }
     // Make sure that the vision data is valid
     if(m_vision.get().get_direction() != SocketVision.NADA){
