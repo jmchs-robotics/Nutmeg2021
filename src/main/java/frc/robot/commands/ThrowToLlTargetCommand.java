@@ -16,20 +16,10 @@ import frc.robot.util.ThrowerLUT;
 import edu.wpi.first.wpilibj.smartdashboard.*;
 import frc.robot.Constants;
 
-import edu.wpi.first.networktables.NetworkTable;
-import edu.wpi.first.networktables.NetworkTableEntry;
-import edu.wpi.first.networktables.NetworkTableInstance;
-
-public class ThrowToLlTargetCommand extends CommandBase {
+public class ThrowToTargetCommand extends CommandBase {
   private ThrowerSubsystem m_subsystem;
   private SocketVisionWrapper m_vision;
   private SwerveDriveSubsystem m_swerve;
-
-  // switching to Limelight 3/9
-  private NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
-  private NetworkTableEntry tx = table.getEntry("tx");
-  private NetworkTableEntry ty = table.getEntry("ty");
-  private NetworkTableEntry tv = table.getEntry("tv");
 
   private double setpoint = 0;
 
@@ -41,11 +31,12 @@ public class ThrowToLlTargetCommand extends CommandBase {
    * Assumes the green LED has already been turned on 
    *   and that the Vision Coprocessor has already been commanded to track the RFT.
    */
-  public ThrowToLlTargetCommand(ThrowerSubsystem thrower, SwerveDriveSubsystem swerve) {
+  public ThrowToTargetCommand(ThrowerSubsystem thrower, SwerveDriveSubsystem swerve, SocketVisionWrapper vision) {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(thrower);
 
-    m_subsystem = thrower;    
+    m_subsystem = thrower;
+    m_vision = vision;
     m_swerve = swerve;
   }
 
@@ -58,10 +49,22 @@ public class ThrowToLlTargetCommand extends CommandBase {
   @Override
   public void execute() {
     if( Constants.ThrowerPIDs.TUNE) {
-      SmartDashboard.putNumber("ThrowToLlTargetCommand y", ty.getDouble(0));
+      SmartDashboard.putNumber("ThrowToTargetCommand distance from Vision", m_vision.get().get_distance());
     }
-      
-    setpoint = -ThrowerLUT.llAngleToRPMs( ty.getDouble(0));
+    // Make sure that the vision data is valid
+    if(m_vision.get().get_direction() != SocketVision.NADA){
+      double x = 1;
+      if( Constants.ThrowerVision.ADAPT_SPEED_TO_POSE_ANGLE) {
+        // coprocessor computes distance as inverse of width of target
+        // if robot is at an angle (i.e. not straight on) it will think it's farther than it is
+        // by a factor of the cos(angle from straight on), i.e. the projection of the target
+        x = Math.cos( Math.toRadians(m_swerve.getGyroAngle())); 
+      }
+      setpoint = -ThrowerLUT.distanceToRPMs( m_vision.get().get_distance() * x);
+    }
+    else {
+        setpoint = -ThrowerLUT.DEFAULT_RPM;
+    }
     
     m_subsystem.setThrowerSpeed(setpoint);
   }
