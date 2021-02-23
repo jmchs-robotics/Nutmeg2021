@@ -323,6 +323,46 @@ public class Paths { // extends CommandBase {
         //DriveForDist2910Command(m_swerve, x,y, Interger.toString (cmd_indx++))
         //forward/backward ==> Set angle to 0
         //Left/Right ==> Set angle to 90
+        
+        //To NavPoint A3
+        new SetWheelAngleCommand(m_swerve, -Math.toDegrees(Math.atan2(30, 45))),
+        new WaitCommand(w),
+        new DriveForDist2910Command(m_swerve, 45, 30, Integer.toString( cmd_idx++ )),
+
+        //Under D5
+        new SetWheelAngleCommand(m_swerve, -Math.toDegrees(Math.atan2(95, 40))),
+        new WaitCommand(w),
+        new DriveForDist2910Command(m_swerve, 40, 95, Integer.toString( cmd_idx++ )),
+
+        new SetWheelAngleCommand(m_swerve, 90),
+        new WaitCommand(w),
+        new DriveForDist2910Command(m_swerve, 50, 0, Integer.toString( cmd_idx++ )),
+
+        //Touch A6
+        new SetWheelAngleCommand(m_swerve, 0),
+        new WaitCommand(w),
+        new DriveForDist2910Command(m_swerve, 0, 95, Integer.toString( cmd_idx++ )),
+        
+        new SetWheelAngleCommand(m_swerve, 0),
+        new WaitCommand(w),
+        new DriveForDist2910Command(m_swerve, 0, -95, Integer.toString( cmd_idx++ )),
+
+        //Under D7 and D8
+        new SetWheelAngleCommand(m_swerve, 90),
+        new WaitCommand(w),
+        new DriveForDist2910Command(m_swerve, 90, 0, Integer.toString( cmd_idx++ )),
+
+        //Touch A9
+        new SetWheelAngleCommand(m_swerve, 0),
+        new WaitCommand(w),
+        new DriveForDist2910Command(m_swerve, 0, 95, Integer.toString( cmd_idx++ )),
+
+        //To End Zone
+        new SetWheelAngleCommand(m_swerve, -Math.toDegrees(Math.atan2(30, 45))),
+        new WaitCommand(w),
+        new DriveForDist2910Command(m_swerve, 30, 45, Integer.toString( cmd_idx++ )));
+
+        /**
         new SetWheelAngleCommand(m_swerve, -Math.toDegrees(Math.atan2(-10.5, 45))),
         new WaitCommand(w),
         new DriveForDist2910Command(m_swerve, 45, 10.5, Integer.toString( cmd_idx++ )),
@@ -377,6 +417,7 @@ public class Paths { // extends CommandBase {
         new SetWheelAngleCommand(m_swerve, 0),
         new WaitCommand(w),
         new DriveForDist2910Command(m_swerve, 0, 30, Integer.toString( cmd_idx++ )));
+        **/
     }
 
     public Command PathSlalomCommand() {
