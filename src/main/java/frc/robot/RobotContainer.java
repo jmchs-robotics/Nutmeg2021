@@ -180,12 +180,12 @@ public class RobotContainer {
        // new WaitCommand(2),
         //new VisionAimGyroCommand( m_swerve, rft_) // aim the robot
         //)
-        new InstantCommand(m_Thrower::turnOnLED, m_Thrower), // Turn on green LED
-        new SendVisionCommand(sender_, "R"), // Can't be a lambda because Sender's aren't subsystems
-        new WaitCommand(0.5), // give the vision processor a chance to find the RFT
-        
-        new VisionAimGyroCommand( m_swerve, rft_), // aim the robot
-        new ThrowToLlTargetCommand(m_Thrower, m_swerve, rft_)
+          //new InstantCommand(m_Thrower::turnOnLED, m_Thrower), // Turn on green LED
+          //new SendVisionCommand(sender_, "R"), // Can't be a lambda because Sender's aren't subsystems
+          //new WaitCommand(0.5), // give the vision processor a chance to find the RFT
+          
+         // new VisionAimGyroCommand( m_swerve, rft_), // aim the robot
+          new ThrowToLlTargetCommand(m_Thrower, m_swerve, rft_)
         /*      
         new SequentialCommandGroup(
         //new InstantCommand(m_Thrower::turnOnLED, m_Thrower),
