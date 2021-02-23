@@ -59,6 +59,7 @@ public class ThrowToLlTargetCommand extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    SmartDashboard.putNumber("ThrowToLlTargetCommand distance from Limelight", -111);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
