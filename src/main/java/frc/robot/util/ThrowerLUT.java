@@ -73,7 +73,7 @@ public class ThrowerLUT {
     public static double distanceToRPMs(double inches){
 
         int index = LUT.length - 2; // Start at the highest meaningful index for a right-handed discrete derivative
-        while(inches < LUT[index][0]){ index--; } // iterate down. Safe if the lowest index contains {0, DEFAULT_RPM}
+        while(inches < LUT[index][0] && index > 0){ index--; } // iterate down. Safe if the lowest index contains {0, DEFAULT_RPM}
         // No need to check if we're off the deep end, because the worst that could happen
         // is the motor gets set to full forward. This would replace the loop & following if-statement.
         
