@@ -67,10 +67,10 @@ public class ThrowToLlTargetCommand extends CommandBase {
     double ll_dist = tx.getDouble(0); // switching to Limelight 3/9
 
     if( Constants.ThrowerPIDs.TUNE) {
-      SmartDashboard.putNumber("ThrowToTargetCommand distance from Vision", ll_dist);
+      SmartDashboard.putNumber("ThrowToLlTargetCommand distance from Limelight", ll_dist);
     }
     // Make sure that the vision data is valid
-    if(m_vision.get().get_direction() != SocketVision.NADA){
+    //if(m_vision.get().get_direction() != SocketVision.NADA){
       double x = 1;
       if( Constants.ThrowerVision.ADAPT_SPEED_TO_POSE_ANGLE) {
         // coprocessor computes distance as inverse of width of target
@@ -78,13 +78,16 @@ public class ThrowToLlTargetCommand extends CommandBase {
         // by a factor of the cos(angle from straight on), i.e. the projection of the target
         x = Math.cos( Math.toRadians(m_swerve.getGyroAngle())); 
       }
-      setpoint = -ThrowerLUT.distanceToRPMs( m_vision.get().get_distance() * x);
-    }
-    else {
-        setpoint = -ThrowerLUT.DEFAULT_RPM;
-    }
+      setpoint = -ThrowerLUT.distanceToRPMs( ll_dist * x);
+      if( Constants.ThrowerPIDs.TUNE) {
+        SmartDashboard.putNumber("ThrowToLlTargetCommand setpoint from Limelight", setpoint);
+      }
+  //  }
+   // else {
+      //  setpoint = -ThrowerLUT.DEFAULT_RPM;
+   // }
     
-    m_subsystem.setThrowerSpeed(setpoint);
+    m_subsystem.setThrowerSpeed(0); // setpoint);
   }
 
   // Called once the command ends or is interrupted.

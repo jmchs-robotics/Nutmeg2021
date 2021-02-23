@@ -35,6 +35,7 @@ public class UnloadCommand extends SequentialCommandGroup {
         // ConditionalCommand superconstructor was called in IntakeAdvDaisyCommand) here.
         // In short, making the subsystems private variables is moot, as nothing gets done beyond the constructor here.
         addCommands( // super(
+            /*
             new InstantCommand(thrower::turnOnLED, thrower), // Turn on green LED
             new SendVisionCommand(sender, "R"), // Can't be a lambda because Sender's aren't subsystems
             new WaitCommand( waitATick), // give the vision processor a chance to find the RFT
@@ -49,6 +50,13 @@ public class UnloadCommand extends SequentialCommandGroup {
             new SetThrowerSpeedCommand(thrower, 0),
             new SendVisionCommand(sender, "_"),
             new InstantCommand(thrower::turnOffLED, thrower) // Turn on green LED
+            */
+            new ParallelCommandGroup( // waits for both to end
+                new SpinUpThrowerCommand(thrower, swerve, rft),  // set thrower speed to vision distance, end when it's there
+                new VisionAimGyroCommand( swerve, rft) // aim the robot
+            ),
+            new ThrowToLlTargetCommand(thrower, swerve, rft)  // never ends  
+            
         );
     }
 }

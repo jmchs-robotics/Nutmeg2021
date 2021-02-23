@@ -185,7 +185,7 @@ public class RobotContainer {
         new WaitCommand(0.5), // give the vision processor a chance to find the RFT
         
         new VisionAimGyroCommand( m_swerve, rft_), // aim the robot
-        new ThrowToTargetCommand(m_Thrower, m_swerve, rft_)
+        new ThrowToLlTargetCommand(m_Thrower, m_swerve, rft_)
         /*      
         new SequentialCommandGroup(
         //new InstantCommand(m_Thrower::turnOnLED, m_Thrower),
