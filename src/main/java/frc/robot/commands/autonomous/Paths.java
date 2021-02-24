@@ -323,6 +323,8 @@ public class Paths { // extends CommandBase {
         //DriveForDist2910Command(m_swerve, x,y, Interger.toString (cmd_indx++))
         //forward/backward ==> Set angle to 0
         //Left/Right ==> Set angle to 90
+        new SetWheelAngleCommand (m_swerve, 0),
+        new WaitCommand(w),
         
         //To NavPoint A3
         new SetWheelAngleCommand(m_swerve, -Math.toDegrees(Math.atan2(30, 45))),
