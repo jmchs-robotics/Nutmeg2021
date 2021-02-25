@@ -154,7 +154,7 @@ public class DriveForDist2910Command extends CommandBase {
                 try {
                     // 191206 take space out of filename
                     encPosLoggers[i] = Files.newBufferedWriter(Paths.get(String.format("/home/lvuser/encPos%d_%s.csv", i, fileID)));
-                    encPosLoggers[i].write( "count, millisecs, encoderPos, driveDist, gyroAngle, rotation, newModuleAngle, oldModuleAngle, navx x, navx y\n");
+                    encPosLoggers[i].write( "count, millisecs, encoderPos, driveDist, gyroAngle, rotation, newModuleAngle, oldModuleAngle, x\n");
                     //encVelLoggers[i] = Files.newBufferedWriter(Paths.get(String.format("/home/lvuser/encVel%d_%s.csv", i, fileID)));
                 } catch (IOException e) {
                     encPosLoggers[i] = null;
@@ -180,10 +180,10 @@ public class DriveForDist2910Command extends CommandBase {
         if( x > 180) {
             x -= 360;
         }
-        else if (x <-180){
+        else if (x < -180){
             x += 360;
         }
-        double rotation =  angleErrorController.calculate(g); //x * (DrivetrainConstants.DFD_ROTATION_kP); 
+        double rotation =  angleErrorController.calculate(x); //x * (DrivetrainConstants.DFD_ROTATION_kP); 
         
         // rotation = Math.min( -0.5, Math.max( 0.5, rotation));  // clamp
 
@@ -196,7 +196,7 @@ public class DriveForDist2910Command extends CommandBase {
                 try {
                     // 191206 also save the time in milliseconds, and the driveDistance
                     
-                    encPosLoggers[i].write( String.format("%d, %d, %f, %f, %f, %f, %f, %f, %f, %f\n",
+                    encPosLoggers[i].write( String.format("%d, %d, %f, %f, %f, %f, %f, %f, %f, %f, %f\n",
                         iterCount, 
                         (int) System.currentTimeMillis(),
                         //Math.abs(drivetrain.getSwerveModule(i).getDrivePosition()),
@@ -208,7 +208,9 @@ public class DriveForDist2910Command extends CommandBase {
                         drivetrain.getSwerveModule(i).getCurrentAngle(),
                         drivetrain.getNavX().getDisplacementX(),
                         drivetrain.getNavX().getDisplacementY(),
-                        angleErrorController.getSetpoint()));
+                        angleErrorController.getSetpoint(),
+                        x)
+                        );
                     /*encVelLoggers[i].write(String.format("%d,%f\n",
                         iterCount,
                         Math.abs(drivetrain.getSwerveModule(i).getDriveVelocity()))); */
