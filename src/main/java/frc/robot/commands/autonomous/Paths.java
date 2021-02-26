@@ -490,9 +490,10 @@ public class Paths { // extends CommandBase {
       return new SequentialCommandGroup(
         //Rotate Left ==> positive angle
         //Rotate Right ==> negative angle
-        
+        //For rotation, set atan( distanceLeft, distanceForward)
         new InstantCommand(m_swerve::setBrakeOn, m_swerve), // Brake mode on!
         new InstantCommand( m_swerve::setDrivePIDToSlow, m_swerve), 
+
         new SetWheelAngleCommand(m_swerve,0),
         //new SetWheelAngleCommand(m_swerve, Math.toDegrees(Math.atan2(0, 133))),//133, 0))), 
         new WaitCommand(w),

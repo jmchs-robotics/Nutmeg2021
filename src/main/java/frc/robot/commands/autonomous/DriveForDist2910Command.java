@@ -183,7 +183,7 @@ public class DriveForDist2910Command extends CommandBase {
         else if (x < -180){
             x += 360;
         }
-        double rotation =  angleErrorController.calculate(x); //x * (DrivetrainConstants.DFD_ROTATION_kP); 
+        double rotation =  x  * (DrivetrainConstants.DFD_ROTATION_kP); //angleErrorController.calculate(x); //x * (DrivetrainConstants.DFD_ROTATION_kP); 
         
         // rotation = Math.min( -0.5, Math.max( 0.5, rotation));  // clamp
 
@@ -196,9 +196,9 @@ public class DriveForDist2910Command extends CommandBase {
                 try {
                     // 191206 also save the time in milliseconds, and the driveDistance
                     
-                    encPosLoggers[i].write( String.format("%d, %d, %f, %f, %f, %f, %f, %f, %f, %f, %f\n",
+                    encPosLoggers[i].write( String.format("%d, %d, %f, %f, %f, %f, %f, %f, %f\n",
                         iterCount, 
-                        (int) System.currentTimeMillis(),
+                        System.currentTimeMillis(),
                         //Math.abs(drivetrain.getSwerveModule(i).getDrivePosition()),
                         drivetrain.getSwerveModule(i).getDrivePosition(), 
                         drivetrain.getSwerveModule(i).getDriveDistance(),
@@ -206,9 +206,6 @@ public class DriveForDist2910Command extends CommandBase {
                         rotation,
                         moduleAngles[i],
                         drivetrain.getSwerveModule(i).getCurrentAngle(),
-                        drivetrain.getNavX().getDisplacementX(),
-                        drivetrain.getNavX().getDisplacementY(),
-                        angleErrorController.getSetpoint(),
                         x)
                         );
                     /*encVelLoggers[i].write(String.format("%d,%f\n",
