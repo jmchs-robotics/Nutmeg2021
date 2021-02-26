@@ -332,9 +332,9 @@ public class Paths { // extends CommandBase {
         new DriveForDist2910Command(m_swerve, 45, 30, Integer.toString( cmd_idx++ )),
 
         //Under D5, segments 2 and 3
-        new SetWheelAngleCommand(m_swerve, Math.toDegrees(Math.atan2(95, 40))),
+        new SetWheelAngleCommand(m_swerve, Math.toDegrees(Math.atan2(-35, -105))),
         new WaitCommand(w),
-        new DriveForDist2910Command(m_swerve, 40, -100, Integer.toString( cmd_idx++ )), // -95
+        new DriveForDist2910Command(m_swerve, 35, -105, Integer.toString( cmd_idx++ )), // 40, -95
 
         new SetWheelAngleCommand(m_swerve, 90),
         new WaitCommand(w),
@@ -343,11 +343,11 @@ public class Paths { // extends CommandBase {
         //Touch A6, segments 4 and 5
         new SetWheelAngleCommand(m_swerve, 0),
         new WaitCommand(w),
-        new DriveForDist2910Command(m_swerve, 0, 98, Integer.toString( cmd_idx++ )), // 95
+        new DriveForDist2910Command(m_swerve, 0, 103, Integer.toString( cmd_idx++ )), // 95
         
         new SetWheelAngleCommand(m_swerve, 0),
         new WaitCommand(w),
-        new DriveForDist2910Command(m_swerve, 0, -100, Integer.toString( cmd_idx++ )), // 95
+        new DriveForDist2910Command(m_swerve, 0, -105, Integer.toString( cmd_idx++ )), // 95
 
         //Under D7 and D8, segment 6
         new SetWheelAngleCommand(m_swerve, 90),
@@ -357,10 +357,10 @@ public class Paths { // extends CommandBase {
         //Touch A9
         new SetWheelAngleCommand(m_swerve, 0),
         new WaitCommand(w),
-        new DriveForDist2910Command(m_swerve, 0, 100, Integer.toString( cmd_idx++ )), // 95
+        new DriveForDist2910Command(m_swerve, 0, 105, Integer.toString( cmd_idx++ )), // 95
 
         //To End Zone
-        new SetWheelAngleCommand(m_swerve, Math.toDegrees(Math.atan2(30, 45))),
+        new SetWheelAngleCommand(m_swerve, Math.toDegrees(Math.atan2(-45, -30))),
         new WaitCommand(w),
         new DriveForDist2910Command(m_swerve, 45, -30, Integer.toString( cmd_idx++ )));
     }
