@@ -327,14 +327,14 @@ public class Paths { // extends CommandBase {
         new WaitCommand(w),
         
         //To NavPoint A3
-        new SetWheelAngleCommand(m_swerve, Math.toDegrees(Math.atan2(30, -45))),
+        new SetWheelAngleCommand(m_swerve, Math.toDegrees(Math.atan2(-45, 33))),
         new WaitCommand(w),
-        new DriveForDist2910Command(m_swerve, 45, 30, Integer.toString( cmd_idx++ )),
+        new DriveForDist2910Command(m_swerve, 45, 33, Integer.toString( cmd_idx++ )), // 45, 30
 
         //Under D5, segments 2 and 3
-        new SetWheelAngleCommand(m_swerve, Math.toDegrees(Math.atan2(-35, -105))),
+        new SetWheelAngleCommand(m_swerve, Math.toDegrees(Math.atan2(-35, -100))),
         new WaitCommand(w),
-        new DriveForDist2910Command(m_swerve, 35, -105, Integer.toString( cmd_idx++ )), // 40, -95
+        new DriveForDist2910Command(m_swerve, 35, -100, Integer.toString( cmd_idx++ )), // 40, -95
 
         new SetWheelAngleCommand(m_swerve, 90),
         new WaitCommand(w),
