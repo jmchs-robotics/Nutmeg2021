@@ -444,6 +444,7 @@ public class Paths { // extends CommandBase {
         
         new SetWheelAngleCommand(m_swerve, Math.toDegrees(Math.atan2(34, 58))), // 58, 34))),
         new WaitCommand(w),
+        // testing 2/25/21 this segment went 37.5, 55.5
         new DriveForDist2910Command(m_swerve, -34, 58, Integer.toString( cmd_idx++ )), //step 1
         
         new SetWheelAngleCommand(m_swerve, 0),
