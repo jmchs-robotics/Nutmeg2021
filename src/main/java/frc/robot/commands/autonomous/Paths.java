@@ -445,23 +445,23 @@ public class Paths { // extends CommandBase {
         new SetWheelAngleCommand(m_swerve, Math.toDegrees(Math.atan2(38, 58))), // 58, 34))),
         new WaitCommand(w),
         // testing 2/25/21 this segment went 37.5, 55.5
-        new DriveForDist2910Command(m_swerve, -38, 58, Integer.toString( cmd_idx++ )), //step 1 -34, 58
+        new DriveForDist2910Command(m_swerve, -42, 58, Integer.toString( cmd_idx++ )), //step 1 -34, 58
         
         new SetWheelAngleCommand(m_swerve, 0),
         new WaitCommand(w),
-        new DriveForDist2910Command(m_swerve, 0, 160, Integer.toString( cmd_idx++ )), //step 2 0, 165
+        new DriveForDist2910Command(m_swerve, 0, 158, Integer.toString( cmd_idx++ )), //step 2 0, 165
         
         new SetWheelAngleCommand(m_swerve, Math.toDegrees(Math.atan2(-40, 18))), // -18, 36))),
         new WaitCommand(w),
-        new DriveForDist2910Command(m_swerve, 48, 18, Integer.toString( cmd_idx++ )), //step 3 40, 18
+        new DriveForDist2910Command(m_swerve, 48, 16, Integer.toString( cmd_idx++ )), //step 3 40, 18
         
         new SetWheelAngleCommand(m_swerve, 0),
         new WaitCommand(w),
-        new DriveForDist2910Command(m_swerve, 0, 42, Integer.toString( cmd_idx++ )), //step 4
+        new DriveForDist2910Command(m_swerve, 0, 46, Integer.toString( cmd_idx++ )), //step 4 0, 42
 
         new SetWheelAngleCommand(m_swerve, 90),
         new WaitCommand(w),
-        new DriveForDist2910Command(m_swerve, -40, 0, Integer.toString( cmd_idx++ )), //step 5 -36, 0
+        new DriveForDist2910Command(m_swerve, -52, 0, Integer.toString( cmd_idx++ )), //step 5 -36, 0
         
         new SetWheelAngleCommand(m_swerve, 0),
         new WaitCommand(w),
