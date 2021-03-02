@@ -174,6 +174,7 @@ public final class Constants {
 
     // motor run characteristics
     public static final double forwardSpeed = 0.7;
+    public static final double forwardPulse = 0.5;
     public static final double reverseSpeed = -0.7;
     public static final double reversePulse = 0.5; 
 

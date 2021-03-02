@@ -27,6 +27,7 @@ public class MeterSubsystem extends SubsystemBase {
 
   private boolean m_lowered;
   private double m_forwardSpeed;
+  private double m_ForwardPulse;
   private double m_reverseSpeed;
   private double m_reversePulse;
   private XboxController m_secondaryController = new XboxController(2);
@@ -39,6 +40,7 @@ public class MeterSubsystem extends SubsystemBase {
     m_solenoid = new DoubleSolenoid(MeterActuators.meterSoleniodForward, MeterActuators.meterSoleniodBackward);
     m_motor = new VictorSPX(MeterActuators.meterVictorID);
     m_forwardSpeed = MeterActuators.forwardSpeed;
+    m_ForwardPulse = MeterActuators.forwardPulse;
     m_reverseSpeed = MeterActuators.reverseSpeed;
     m_reversePulse = MeterActuators.reversePulse;
     SmartDashboard.putNumber("class created", m_int);
@@ -124,6 +126,14 @@ public class MeterSubsystem extends SubsystemBase {
 
   public void motorForward() {
     setMotor(m_forwardSpeed);
+  }
+
+  public double getForwardPulse() {
+    return m_ForwardPulse;
+  }
+
+  public double getForwardSpeed(){
+    return m_forwardSpeed;
   }
 
   public void motorReverse() {

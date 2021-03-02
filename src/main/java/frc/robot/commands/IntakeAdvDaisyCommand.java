@@ -36,7 +36,7 @@ public class IntakeAdvDaisyCommand extends ConditionalCommand {
           new InstantCommand( hopper::incBallCount, hopper),
           new ConditionalCommand( // if not full, advance Daisy; if full, reverse intake
               new SequentialCommandGroup(
-                new IntakeReversePulseCommand(meter),
+                new MeterReversePulseCommand(meter),
                 new BumpHopperCommand(hopper),
                 new MoveHopperCommand(hopper, 1),
                 new InstantCommand( hopper::incBallCount, hopper)

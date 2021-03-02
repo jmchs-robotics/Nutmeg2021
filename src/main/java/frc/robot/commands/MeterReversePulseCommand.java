@@ -11,10 +11,10 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.MeterSubsystem;
 import edu.wpi.first.wpilibj.Timer;
 
-public class IntakeReversePulseCommand extends CommandBase {
+public class MeterReversePulseCommand extends CommandBase {
   //private final ColorMatch m_colorMatcher = new ColorMatch();
 
-  private MeterSubsystem m_intake;
+  private MeterSubsystem m_meter;
   private final Timer m_timer;
   private double m_time;
 
@@ -22,12 +22,12 @@ public class IntakeReversePulseCommand extends CommandBase {
    * Runs the intake motor in reverse for a specific duration.
    * Motor speed and duration are read from the intake subsystem.
    */
-  public IntakeReversePulseCommand(MeterSubsystem intake) {
+  public MeterReversePulseCommand(MeterSubsystem meter) {
     // Use addRequirements() here to declare subsystem dependencies.
     // Requires the ControlPanel Subsystem
-    addRequirements(intake);
+    addRequirements(meter);
 
-    m_intake = intake;
+    m_meter = meter;
     m_timer = new Timer();
   }
 
@@ -36,7 +36,7 @@ public class IntakeReversePulseCommand extends CommandBase {
   public void initialize() {
     m_timer.reset();
     m_timer.start();
-    m_time = m_intake.getReversePulse();
+    m_time = m_meter.getReversePulse();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -45,14 +45,14 @@ public class IntakeReversePulseCommand extends CommandBase {
     /**
      * Run the intake motor
      */
-    m_intake.setMotor(m_intake.getReverseSpeed());
+    m_meter.setMotor(m_meter.getReverseSpeed());
   }
 
   // Called once the command ends or is interrupted.
   // stop the motor
   @Override
   public void end(boolean interrupted) {
-    m_intake.setMotor(0.0); 
+    m_meter.setMotor(0.0); 
   }
 
   // Returns true when the command should end.
