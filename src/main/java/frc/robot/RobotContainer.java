@@ -55,7 +55,7 @@ public class RobotContainer {
   private final ThrowerSubsystem m_Thrower = new ThrowerSubsystem();
   private final HopperSubsystem m_Hopper = new HopperSubsystem();
   private final PatSajakSubsystem m_PatSajak = new PatSajakSubsystem();
-  private final IntakeSubsystem m_Intake = new IntakeSubsystem();
+  private final MeterSubsystem m_Meter = new MeterSubsystem();
 
   // Color Sensor
   private final ColorSensorV3 m_colorSensor = new ColorSensorV3(I2C.Port.kOnboard);
@@ -242,10 +242,10 @@ public class RobotContainer {
     // Intake
     // Intake forward/reverse are on 2nd game controller, left joystick, Y axis
     m_secondaryController_RightBumper.whenPressed(
-      new InstantCommand(m_Intake :: lowerIntake, m_Intake)
+      new InstantCommand(m_Meter :: lowerIntake, m_Meter)
     );
     m_secondaryController_LeftBumper.whenPressed(
-      new InstantCommand(m_Intake :: raiseIntake, m_Intake)
+      new InstantCommand(m_Meter :: raiseIntake, m_Meter)
     );
 
     //
@@ -259,12 +259,12 @@ public class RobotContainer {
     // if Daisy is full, run intake beater bar in reverse
     //
     m_secondaryController_RightTrigger.whileHeld( 
-      new IntakeAdvDaisyCommand( m_Intake, m_Hopper)
+      new IntakeAdvDaisyCommand( m_Meter, m_Hopper)
     ).whenReleased( // On release lift the intake, then outtake at 0.7 power for 1.5 seconds. Note that beforeStarting is a decorator that is written after the command body...
       new ParallelRaceGroup(
-        new RunCommand(()->{m_Intake.setMotor(-0.7);}, m_Intake),
+        new RunCommand(()->{m_Meter.setMotor(-0.7);}, m_Meter),
         new WaitCommand(1.5)
-      ).beforeStarting(m_Intake::raiseIntake, m_Intake)
+      ).beforeStarting(m_Meter::raiseIntake, m_Meter)
     ) ;
 
 
@@ -316,7 +316,7 @@ public class RobotContainer {
     m_Climb.setDefaultCommand(new DefaultWinchCommand(m_Climb, m_primaryController));
     
     // intake on secondary controller, Y axis of Left joystick
-    m_Intake.setDefaultCommand(new DefaultIntakeCommand(m_Intake, m_secondaryController));
+    m_Meter.setDefaultCommand(new DefaultIntakeCommand(m_Meter, m_secondaryController));
     // default thrower is to spin down to still
     m_Thrower.setDefaultCommand(new StartEndCommand( ()->{m_Thrower.stopThrower(); m_Thrower.turnOffLED();}, ()->{}, m_Thrower)); // Spin down thrower and turn off LED on startup, do nothing on end.
 
@@ -364,7 +364,7 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand( String a) {
     
-    Paths p = new Paths( m_swerve,m_Thrower, m_Hopper, m_Intake, sender_, rft_);
+    Paths p = new Paths( m_swerve,m_Thrower, m_Hopper, m_Meter, sender_, rft_);
     Command autoCommand = new SequentialCommandGroup(
       new InstantCommand( m_Hopper::setBallCountTo3, m_Hopper),
       p.Path1Command()

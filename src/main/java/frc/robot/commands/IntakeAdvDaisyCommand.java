@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.*;
 import frc.robot.subsystems.HopperSubsystem;
-import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.MeterSubsystem;
 
 public class IntakeAdvDaisyCommand extends ConditionalCommand {
 
@@ -20,7 +20,7 @@ public class IntakeAdvDaisyCommand extends ConditionalCommand {
    * @param intake The intake subystem
    * @param hopper The hopper subsystem
    */
-  public IntakeAdvDaisyCommand(IntakeSubsystem intake, HopperSubsystem hopper) {
+  public IntakeAdvDaisyCommand(MeterSubsystem meter, HopperSubsystem hopper) {
     // Use addRequirements() here to declare subsystem dependencies.
     // Requires the ControlPanel Subsystem
 
@@ -30,22 +30,22 @@ public class IntakeAdvDaisyCommand extends ConditionalCommand {
       new SequentialCommandGroup(
           //new InstantCommand(intake :: lowerIntake, intake),
           new ParallelRaceGroup(
-            new IntakeRecieveCommand(intake),
+            new IntakeRecieveCommand(meter),
             new WaitUntilCommand(()->{ return hopper.ballLoaded();}) 
           ),
           new InstantCommand( hopper::incBallCount, hopper),
           new ConditionalCommand( // if not full, advance Daisy; if full, reverse intake
               new SequentialCommandGroup(
-                new IntakeReversePulseCommand( intake),
+                new IntakeReversePulseCommand(meter),
                 new BumpHopperCommand(hopper),
                 new MoveHopperCommand(hopper, 1),
                 new InstantCommand( hopper::incBallCount, hopper)
               ),
-              new IntakeReverseCommand( intake),
+              new IntakeReverseCommand(meter),
               () -> {return hopper.daisyIsFull();} 
           )
         ),
-      new IntakeReverseCommand( intake),
+      new IntakeReverseCommand(meter),
       () -> {return hopper.daisyIsFull();} // The conditional: if there are less than 5 balls, intake; else, backdrive
     );
   }

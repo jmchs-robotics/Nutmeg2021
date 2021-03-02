@@ -10,18 +10,18 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.MeterSubsystem;
 
 public class IntakeReverseCommand extends CommandBase {
   //private final ColorMatch m_colorMatcher = new ColorMatch();
 
-  private IntakeSubsystem m_intake;
+  private MeterSubsystem m_intake;
  
 
   /**
    * Run the intake beater bar 'reverse,' for ejecting game pices (balls)
    */
-  public IntakeReverseCommand(IntakeSubsystem intake) {
+  public IntakeReverseCommand(MeterSubsystem intake) {
     // Use addRequirements() here to declare subsystem dependencies.
     // Requires the ControlPanel Subsystem
     addRequirements(intake);

@@ -31,9 +31,9 @@ public class ThrowToLlTargetCommand extends CommandBase {
 
   // switching to Limelight 2/22/21
   private NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
-  private NetworkTableEntry tx = table.getEntry("tx");
-  private NetworkTableEntry ty = table.getEntry("ty");
-  private NetworkTableEntry tv = table.getEntry("tv");
+  private NetworkTableEntry tx = table.getEntry("tx"); //Horizontal Offset From Crosshair to Target
+  private NetworkTableEntry ty = table.getEntry("ty"); //Vertical Offset From Crosshair to Target
+  private NetworkTableEntry tv = table.getEntry("tv"); //Whether the limelight has any vailid Targets
   
 
   /**

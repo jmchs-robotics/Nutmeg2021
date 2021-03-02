@@ -164,10 +164,13 @@ public final class Constants {
     public static final boolean TUNE = true;
   }
 
-  public static final class IntakeActuators {
-    public static final int intakeVictorID = 9;
-    public static final int intakeSoleniodForward = 2;
-    public static final int intakeSoleniodBackward = 3;
+  public static final class MeterActuators {
+    public static final int meterVictorID = 9;
+    public static final int meterSoleniodForward = 2;
+    public static final int meterSoleniodBackward = 3;
+
+    public static final double ONE_ROTATION = 21.9; //The circumference of one power cell in inches
+    public static final int ALLOWABLE_ERROR = 0;
 
     // motor run characteristics
     public static final double forwardSpeed = 0.7;

@@ -8,13 +8,13 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.MeterSubsystem;
 import edu.wpi.first.wpilibj.Timer;
 
 public class IntakeReversePulseCommand extends CommandBase {
   //private final ColorMatch m_colorMatcher = new ColorMatch();
 
-  private IntakeSubsystem m_intake;
+  private MeterSubsystem m_intake;
   private final Timer m_timer;
   private double m_time;
 
@@ -22,7 +22,7 @@ public class IntakeReversePulseCommand extends CommandBase {
    * Runs the intake motor in reverse for a specific duration.
    * Motor speed and duration are read from the intake subsystem.
    */
-  public IntakeReversePulseCommand(IntakeSubsystem intake) {
+  public IntakeReversePulseCommand(MeterSubsystem intake) {
     // Use addRequirements() here to declare subsystem dependencies.
     // Requires the ControlPanel Subsystem
     addRequirements(intake);

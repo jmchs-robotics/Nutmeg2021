@@ -16,18 +16,18 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.MeterSubsystem;
 import edu.wpi.first.wpilibj2.command.CommandBase;
  
 public class DefaultIntakeCommand extends CommandBase {
  
   private XboxController m_controller = new XboxController(1);
-  private final IntakeSubsystem m_intake;
+  private final MeterSubsystem m_intake;
   
   /**
    * Creates a new DefaultIntakeCommand.
    */
-  public DefaultIntakeCommand( IntakeSubsystem subsystem, XboxController stick) {
+  public DefaultIntakeCommand( MeterSubsystem subsystem, XboxController stick) {
     m_intake = subsystem;
     m_controller = stick;
  

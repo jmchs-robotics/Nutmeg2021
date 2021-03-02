@@ -7,6 +7,9 @@
 
 package frc.robot.subsystems;
 
+import java.sql.Time;
+import java.util.Timer;
+
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
@@ -15,10 +18,10 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants.IntakeActuators;
+import frc.robot.Constants.MeterActuators;
 import frc.robot.commands.DefaultIntakeCommand;
 
-public class IntakeSubsystem extends SubsystemBase {
+public class MeterSubsystem extends SubsystemBase {
   private DoubleSolenoid m_solenoid;
   private VictorSPX m_motor;
 
@@ -30,17 +33,17 @@ public class IntakeSubsystem extends SubsystemBase {
   public static int m_int = 0;
 
   /**
-   * Creates a new IntakeSubsystem.
+   * Creates a new MeterSubsystem.
    */
-  public IntakeSubsystem() {
-    m_solenoid = new DoubleSolenoid(IntakeActuators.intakeSoleniodForward, IntakeActuators.intakeSoleniodBackward);
-    m_motor = new VictorSPX(IntakeActuators.intakeVictorID);
-    m_forwardSpeed = IntakeActuators.forwardSpeed;
-    m_reverseSpeed = IntakeActuators.reverseSpeed;
-    m_reversePulse = IntakeActuators.reversePulse;
+  public MeterSubsystem() {
+    m_solenoid = new DoubleSolenoid(MeterActuators.meterSoleniodForward, MeterActuators.meterSoleniodBackward);
+    m_motor = new VictorSPX(MeterActuators.meterVictorID);
+    m_forwardSpeed = MeterActuators.forwardSpeed;
+    m_reverseSpeed = MeterActuators.reverseSpeed;
+    m_reversePulse = MeterActuators.reversePulse;
     SmartDashboard.putNumber("class created", m_int);
 
-    if (IntakeActuators.TUNE){
+    if (MeterActuators.TUNE){
       SmartDashboard.putNumber("Intake Motor Output Percent", m_motor.getMotorOutputPercent());
       SmartDashboard.putBoolean("Intake Lowered????", isLowered());
       SmartDashboard.putNumber("Intake Motor Forward Speed", m_forwardSpeed);
@@ -53,7 +56,7 @@ public class IntakeSubsystem extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
     
-    if (IntakeActuators.TUNE){
+    if (MeterActuators.TUNE){
       double fs, rs, rp;
       SmartDashboard.putNumber("Intake Motor Output Percent", m_motor.getMotorOutputPercent());
       SmartDashboard.putBoolean("Intake Lowered????", isLowered());
@@ -133,5 +136,14 @@ public class IntakeSubsystem extends SubsystemBase {
 
   public double getReverseSpeed() {
     return m_reverseSpeed;
+  }
+
+  /**
+   * This should move the meter to allow one power cell into thrower Subsystem
+   * I have no clue if the thinking is right here but, the position is the diameter of one PowerCell...
+   * Will probably need to change that to 1/4 or 1/2 the diameter depending on the length of the meter
+   */
+  public void bumpMeter() {
+    m_motor.set(ControlMode.Position, MeterActuators.ONE_ROTATION);
   }
 }
