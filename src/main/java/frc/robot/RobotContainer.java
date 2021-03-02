@@ -370,10 +370,14 @@ public class RobotContainer {
     Paths p = new Paths( m_swerve,m_Thrower, m_Hopper, m_Intake, sender_, rft_);
     Command autoCommand = new SequentialCommandGroup(
       new InstantCommand( m_Hopper::setBallCountTo3, m_Hopper),
-      p.Path1Command()
+      p.PathBarrelCommand()
     );
     switch( a) {
-      case "1": 
+      case "1":
+      autoCommand = new SequentialCommandGroup( 
+        new InstantCommand( m_Hopper::setBallCountTo3, m_Hopper),
+        p.Path1Command()
+        );
         break;
       case "2":
         autoCommand = new SequentialCommandGroup(
@@ -387,10 +391,6 @@ public class RobotContainer {
         );
         break;
       case "barrel":
-        autoCommand = new SequentialCommandGroup( 
-          new InstantCommand( m_Hopper::setBallCountTo3, m_Hopper),
-          p.PathBarrelCommand()
-        );
         break;
       case "slalom":
         autoCommand = new SequentialCommandGroup(
@@ -400,20 +400,20 @@ public class RobotContainer {
         break;
       case "bounce":
         autoCommand = new SequentialCommandGroup( 
-          new InstantCommand( m_Hopper::setBallCountTo3, m_Hopper),
+          new InstantCommand(m_Hopper::setBallCountTo3, m_Hopper),
           p.PathBounceCommand()
         );
         break;
-      case "speedBarrel":
+      case "angled barrel":
         autoCommand = new SequentialCommandGroup(
           new InstantCommand(m_Hopper::setBallCountTo3, m_Hopper),
-          p.SpeedBarrelCommand()
+          p.AngledBarrelCommand()
         );
         break;
-        case "speedBounce":
+      case "angled slalom":
         autoCommand = new SequentialCommandGroup(
           new InstantCommand(m_Hopper::setBallCountTo3, m_Hopper),
-          p.SpeedBounceCommand()
+          p.AngledSlalomCommand()
         );
         break;
     }   

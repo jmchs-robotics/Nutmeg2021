@@ -25,7 +25,7 @@ public class DriveForDist2910Command extends CommandBase {
     private final double angle;
     private final double distance;
     private final double distRight, distForward;
-    // private final PIDController angleErrorController;
+    private final PIDController angleErrorController;
     private final Timer finishTimer = new Timer();
     private boolean isTimerStarted = false;
 
@@ -71,11 +71,11 @@ public class DriveForDist2910Command extends CommandBase {
         
         this.distance = Math.sqrt(distRight * distRight + distForward * distForward);
         // Calculations done by AngleErrorController are invalid, will be applying in about line 145:
-        // // 191206 this PID isn't working... probably needs more P.  Original is 0.02, 0, 0
-        // angleErrorController = new PIDController(DrivetrainConstants.DFD_ROTATION_kP, DrivetrainConstants.DFD_ROTATION_kI, DrivetrainConstants.DFD_ROTATION_kD);
-        // angleErrorController.enableContinuousInput(0, 360);
-        // angleErrorController.reset();
-
+        // 191206 this PID isn't working... probably needs more P.  Original is 0.02, 0, 0
+        angleErrorController = new PIDController(DrivetrainConstants.DFD_ROTATION_kP, DrivetrainConstants.DFD_ROTATION_kI, DrivetrainConstants.DFD_ROTATION_kD);
+        angleErrorController.enableContinuousInput(0, 360);
+        angleErrorController.reset();
+        
         this.fileID = fileID;
         /*
          new PIDController(0.02, 0, 0, new PIDSource() {
@@ -112,9 +112,9 @@ public class DriveForDist2910Command extends CommandBase {
         this.distance = Math.sqrt(distRight * distRight + distForward * distForward);
         // Calculations done by AngleErrorController are invalid, will be applying in about line 145:
         // // 191206 this PID isn't working... probably needs more P.  Original is 0.02, 0, 0
-        // angleErrorController = new PIDController(DrivetrainConstants.DFD_ROTATION_kP, DrivetrainConstants.DFD_ROTATION_kI, DrivetrainConstants.DFD_ROTATION_kD);
-        // angleErrorController.enableContinuousInput(0, 360);
-        // angleErrorController.reset();
+        angleErrorController = new PIDController(DrivetrainConstants.DFD_ROTATION_kP, DrivetrainConstants.DFD_ROTATION_kI, DrivetrainConstants.DFD_ROTATION_kD);
+        angleErrorController.enableContinuousInput(0, 360);
+        angleErrorController.reset();
 
         isGyroSet = true;
 
@@ -135,9 +135,10 @@ public class DriveForDist2910Command extends CommandBase {
         else {
             initialDrivetrainAngle = drivetrain.getGyroAngle();
         }
+        
+        angleErrorController.setSetpoint(initialDrivetrainAngle);
 
         //Calculations done by AngleErrorController are invalid, will be applying in about line 145:
-        // angleErrorController.setSetpoint(initialDrivetrainAngle);
         // angleErrorController.enable();
 
         for (int i = 0; i < 4; i++) {
@@ -153,7 +154,7 @@ public class DriveForDist2910Command extends CommandBase {
                 try {
                     // 191206 take space out of filename
                     encPosLoggers[i] = Files.newBufferedWriter(Paths.get(String.format("/home/lvuser/encPos%d_%s.csv", i, fileID)));
-                    encPosLoggers[i].write( "count, millisecs, encoderPos, driveDist, gyroAngle, rotation, newModuleAngle, oldModuleAngle, navx x, navx y\n");
+                    encPosLoggers[i].write( "count, millisecs, encoderPos, driveDist, gyroAngle, rotation, newModuleAngle, oldModuleAngle, x\n");
                     //encVelLoggers[i] = Files.newBufferedWriter(Paths.get(String.format("/home/lvuser/encVel%d_%s.csv", i, fileID)));
                 } catch (IOException e) {
                     encPosLoggers[i] = null;
@@ -179,11 +180,11 @@ public class DriveForDist2910Command extends CommandBase {
         if( x > 180) {
             x -= 360;
         }
-        else if (x <-180){
+        else if (x < -180){
             x += 360;
         }
-        double rotation =  x * (DrivetrainConstants.DFD_ROTATION_kP); // angleErrorController.calculate(g);
-       
+        double rotation =  x  * (DrivetrainConstants.DFD_ROTATION_kP); //angleErrorController.calculate(x); //x * (DrivetrainConstants.DFD_ROTATION_kP); 
+        
         // rotation = Math.min( -0.5, Math.max( 0.5, rotation));  // clamp
 
         double[] moduleAngles = drivetrain.calculateSwerveModuleAngles(forwardFactor, strafeFactor, rotation);  // -rotationFactor); // 191206
@@ -195,9 +196,9 @@ public class DriveForDist2910Command extends CommandBase {
                 try {
                     // 191206 also save the time in milliseconds, and the driveDistance
                     
-                    encPosLoggers[i].write( String.format("%d, %d, %f, %f, %f, %f, %f, %f, %f, %f\n",
+                    encPosLoggers[i].write( String.format("%d, %d, %f, %f, %f, %f, %f, %f, %f\n",
                         iterCount, 
-                        (int) System.currentTimeMillis(),
+                        System.currentTimeMillis(),
                         //Math.abs(drivetrain.getSwerveModule(i).getDrivePosition()),
                         drivetrain.getSwerveModule(i).getDrivePosition(), 
                         drivetrain.getSwerveModule(i).getDriveDistance(),
@@ -205,8 +206,8 @@ public class DriveForDist2910Command extends CommandBase {
                         rotation,
                         moduleAngles[i],
                         drivetrain.getSwerveModule(i).getCurrentAngle(),
-                        drivetrain.getNavX().getDisplacementX(),
-                        drivetrain.getNavX().getDisplacementY() ));
+                        x)
+                        );
                     /*encVelLoggers[i].write(String.format("%d,%f\n",
                         iterCount,
                         Math.abs(drivetrain.getSwerveModule(i).getDriveVelocity()))); */
@@ -266,12 +267,12 @@ public class DriveForDist2910Command extends CommandBase {
     }
 
     public void resetPID() {
-        // angleErrorController.reset();
-        // angleErrorController.disableContinuousInput();
-        // angleErrorController.setSetpoint(0);
-        // angleErrorController.setIntegratorRange(-1.0, 1.0);
-        // angleErrorController.setTolerance(0.05, Double.POSITIVE_INFINITY);
-        initialDrivetrainAngle = 0;
+        angleErrorController.reset();
+        angleErrorController.disableContinuousInput();
+        angleErrorController.setSetpoint(0);
+        angleErrorController.setIntegratorRange(-1.0, 1.0);
+        angleErrorController.setTolerance(0.05, Double.POSITIVE_INFINITY);
+        // initialDrivetrainAngle = 0;
 
         rotationMinOutput = -1;
         forwardMaxOutput = 1;
