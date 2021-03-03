@@ -549,6 +549,44 @@ public class Paths { // extends CommandBase {
         new SetWheelAngleCommand(m_swerve, 0),//Math.toDegrees(Math.atan2(-283, 0))),
         new WaitCommand(w),
         new DriveForDist2910Command(m_swerve, 0, -283, Integer.toString( cmd_idx++ ))); //step 12
+    }
+    public Command InterstellarPathCommand() {
+      
+      int cmd_idx = 0;
+      double w = 0.25;
+      double wBall = 0.5;
+
+      //new DriveForDist2910Command(m_swerve, x, y, Integer.toString( cmd_idx++ ))
+      //new SetWheelAngleCommand(m_swerve, Math.toDegrees(Math.atan2(y, x)))
+    
+      return new SequentialCommandGroup(
+        //Rotate Left ==> positive angle
+        //Rotate Right ==> negative angle
+        //For rotation, set atan( distanceLeft, distanceForward)
+        //Start with the bumpbers on the Green/Orange line
+        new InstantCommand(m_swerve::setBrakeOn, m_swerve), // Brake mode on!
+        new InstantCommand( m_swerve::setDrivePIDToSlow, m_swerve),
+        new SetWheelAngleCommand(m_swerve, 0),
+
+        //Shoot in Green Zone
+        //aim with LimeLight
+        new VisionAimCommand(m_swerve, rft_),
+        //Shoot with LimeLight
+          //Move the Thrower the right speed
+          new ThrowToLlTargetCommand(m_Thrower, m_swerve),
+          //Move the VBelt to move PowerCell to thrower
+          //Turn VBelt on
+          new SequentialCommandGroup(
+            //Have the meter accept 3 powerCells to the thrower
+          )
+          //Turn VBelt off
+          
+        //Move Robot to re-introduction zone
+
+        //Move to Orange Zone
+
         
+
+      );
     }
 }
