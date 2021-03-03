@@ -201,12 +201,10 @@ public class Paths { // extends CommandBase {
         new InstantCommand( m_swerve::setDrivePIDToFast, m_swerve), // put DriveForDist at regular speed
         new SetPoseAngle2910Command(m_swerve, -90), // point intake at the balls by turning left 90 degrees
         new InstantCommand( m_swerve::setDrivePIDToSlow, m_swerve), 
-        new InstantCommand(m_Meter::lowerIntake, m_Meter),
         new ParallelRaceGroup( 
           new IntakeAdvDaisyCommand(m_Meter, m_Hopper), // intake and auto-advance the Daisy
           new DriveForDist2910Command( m_swerve, 0, -(108+12)) // drive through 3 balls
         ),
-        new InstantCommand(m_Meter::raiseIntake, m_Meter),
         new SetWheelAngleCommand( m_swerve, Math.atan2( -(57-28), 86-12-(34+6.5)/2 + 108+12)),  // point the wheels in the direction we want to go
         new DriveForDist2910Command( m_swerve, -(57-28), 86-12-(34+6.5)/2 + 108+12),
         new InstantCommand(m_Thrower::turnOnLED, m_Thrower), // Turn on green LED

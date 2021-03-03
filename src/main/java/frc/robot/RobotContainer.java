@@ -242,10 +242,10 @@ public class RobotContainer {
     // Intake
     // Intake forward/reverse are on 2nd game controller, left joystick, Y axis
     m_secondaryController_RightBumper.whenPressed(
-      new InstantCommand(m_Meter :: lowerIntake, m_Meter)
+      new MeterForwardPulseCommand(m_Meter)
     );
     m_secondaryController_LeftBumper.whenPressed(
-      new InstantCommand(m_Meter :: raiseIntake, m_Meter)
+      new MeterReversePulseCommand(m_Meter)
     );
 
     //
@@ -264,7 +264,7 @@ public class RobotContainer {
       new ParallelRaceGroup(
         new RunCommand(()->{m_Meter.setMotor(-0.7);}, m_Meter),
         new WaitCommand(1.5)
-      ).beforeStarting(m_Meter::raiseIntake, m_Meter)
+      )
     ) ;
 
 

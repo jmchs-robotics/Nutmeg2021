@@ -166,8 +166,6 @@ public final class Constants {
 
   public static final class MeterActuators {
     public static final int meterVictorID = 9;
-    public static final int meterSoleniodForward = 2;
-    public static final int meterSoleniodBackward = 3;
 
     public static final double ONE_ROTATION = 21.9; //The circumference of one power cell in inches
     public static final int ALLOWABLE_ERROR = 0;
