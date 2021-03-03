@@ -19,16 +19,16 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.MeterSubsystem;
 import edu.wpi.first.wpilibj2.command.CommandBase;
  
-public class DefaultIntakeCommand extends CommandBase {
+public class DefaultMeterCommand extends CommandBase {
  
   private XboxController m_controller = new XboxController(1);
-  private final MeterSubsystem m_intake;
+  private final MeterSubsystem m_meter;
   
   /**
    * Creates a new DefaultIntakeCommand.
    */
-  public DefaultIntakeCommand( MeterSubsystem subsystem, XboxController stick) {
-    m_intake = subsystem;
+  public DefaultMeterCommand( MeterSubsystem subsystem, XboxController stick) {
+    m_meter = subsystem;
     m_controller = stick;
  
     // Use addRequirements() here to declare subsystem dependencies.
@@ -55,15 +55,15 @@ public class DefaultIntakeCommand extends CommandBase {
     // run the motor, if the joystick is past a deadband
     if(yAxis >= 0.2){
     //     new IntakeRecieveCommand(m_intake);
-    m_intake.setMotor( yAxis);
+    m_meter.setMotor( yAxis);
     // System.out.println("2");
     } else if(yAxis < -0.2){
-      m_intake.setMotor( yAxis);
+      m_meter.setMotor( yAxis);
       //new IntakeReversePulseCommand(m_intake);
       // System.out.println("3");
      }
      else {
-       m_intake.stopMotor();
+       m_meter.stopMotor();
      }
  
   }
@@ -71,7 +71,7 @@ public class DefaultIntakeCommand extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_intake.stopMotor();
+    m_meter.stopMotor();
   }
  
   // Returns true when the command should end.

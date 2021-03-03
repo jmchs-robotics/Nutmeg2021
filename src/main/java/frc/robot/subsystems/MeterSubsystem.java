@@ -19,7 +19,6 @@ import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.MeterActuators;
-import frc.robot.commands.DefaultIntakeCommand;
 
 public class MeterSubsystem extends SubsystemBase {
   private DoubleSolenoid m_solenoid;

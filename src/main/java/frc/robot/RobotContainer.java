@@ -316,7 +316,7 @@ public class RobotContainer {
     m_Climb.setDefaultCommand(new DefaultWinchCommand(m_Climb, m_primaryController));
     
     // intake on secondary controller, Y axis of Left joystick
-    m_Meter.setDefaultCommand(new DefaultIntakeCommand(m_Meter, m_secondaryController));
+    m_Meter.setDefaultCommand(new DefaultMeterCommand(m_Meter, m_secondaryController));
     // default thrower is to spin down to still
     m_Thrower.setDefaultCommand(new StartEndCommand( ()->{m_Thrower.stopThrower(); m_Thrower.turnOffLED();}, ()->{}, m_Thrower)); // Spin down thrower and turn off LED on startup, do nothing on end.
 
