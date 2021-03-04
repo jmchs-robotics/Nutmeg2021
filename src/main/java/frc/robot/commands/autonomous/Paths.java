@@ -590,6 +590,7 @@ public class Paths { // extends CommandBase {
         //Have the meter accept 3 powerCells to the thrower
         //Turn VBelt off
         //Move Robot to re-introduction zone
+
         //Move to Blue Zone
         //Shoot with LimeLight
         //Move the VBelt to move PowerCell to thrower
@@ -597,7 +598,8 @@ public class Paths { // extends CommandBase {
         //Have the meter accept 3 powerCells to the thrower
         //Turn VBelt off
         //Move Robot to re-introduction zone
-        //Move to Orange Zone
+
+        //Move to Yellow Zone
         //Shoot with LimeLight
         //Move the VBelt to move PowerCell to thrower
         //Turn VBelt on
