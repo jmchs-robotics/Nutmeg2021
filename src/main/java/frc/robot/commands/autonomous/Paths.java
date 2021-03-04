@@ -583,10 +583,27 @@ public class Paths { // extends CommandBase {
           
         //Move Robot to re-introduction zone
 
+        //Move to Red Zone
+        //Shoot with LimeLight
+        //Move the VBelt to move PowerCell to thrower
+        //Turn VBelt on
+        //Have the meter accept 3 powerCells to the thrower
+        //Turn VBelt off
+        //Move Robot to re-introduction zone
+        //Move to Blue Zone
+        //Shoot with LimeLight
+        //Move the VBelt to move PowerCell to thrower
+        //Turn VBelt on
+        //Have the meter accept 3 powerCells to the thrower
+        //Turn VBelt off
+        //Move Robot to re-introduction zone
         //Move to Orange Zone
-
-        
-
-      );
+        //Shoot with LimeLight
+        //Move the VBelt to move PowerCell to thrower
+        //Turn VBelt on
+        //Have the meter accept 3 powerCells to the thrower
+        //Turn VBelt off
+        //Move Robot to re-introduction zone  
+        );
     }
 }
