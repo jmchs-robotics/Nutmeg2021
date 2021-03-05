@@ -21,17 +21,19 @@ public class Paths { // extends CommandBase {
     SwerveDriveSubsystem m_swerve;
     ThrowerSubsystem m_Thrower;
     HopperSubsystem m_Hopper;
+    VBeltSubsystem m_Vbelt;
     IntakeSubsystem m_Intake;
     SocketVisionSendWrapper sender_;
     SocketVisionWrapper rft_;
 
-    public Paths( SwerveDriveSubsystem swerve, ThrowerSubsystem thrower, HopperSubsystem hopper, IntakeSubsystem intake, SocketVisionSendWrapper sender, SocketVisionWrapper rft) {
+    public Paths(VBeltSubsystem Vbelt, SwerveDriveSubsystem swerve, ThrowerSubsystem thrower, HopperSubsystem hopper, IntakeSubsystem intake, SocketVisionSendWrapper sender, SocketVisionWrapper rft) {
         m_swerve = swerve;
         m_Thrower = thrower;
         sender_ = sender;   
         rft_ = rft;     
         m_Hopper = hopper;   
         m_Intake = intake;
+        m_Vbelt = Vbelt;
     }
 
 
@@ -574,12 +576,15 @@ public class Paths { // extends CommandBase {
         //Shoot with LimeLight
           //Move the Thrower the right speed
           new ThrowToLlTargetCommand(m_Thrower, m_swerve),
-          //Move the VBelt to move PowerCell to thrower
-          //Turn VBelt on
+          //Move the VBelt to move PowerCell to thrower (as below)
+          new SetVBeltCommand(m_Vbelt, 0.7, 0.9),
           new SequentialCommandGroup(
             //Have the meter accept 3 powerCells to the thrower
-          )
+            
+          ),
           //Turn VBelt off
+          new SetVBeltCommand(m_Vbelt, 0, 0)
+
           
         //Move Robot to re-introduction zone
 

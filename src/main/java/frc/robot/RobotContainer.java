@@ -367,7 +367,7 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand( String a) {
     
-    Paths p = new Paths( m_swerve,m_Thrower, m_Hopper, m_Intake, sender_, rft_);
+    Paths p = new Paths(m_VBelt, m_swerve,m_Thrower, m_Hopper, m_Intake, sender_, rft_);
     Command autoCommand = new SequentialCommandGroup(
       new InstantCommand( m_Hopper::setBallCountTo3, m_Hopper),
       p.PathBarrelCommand()
