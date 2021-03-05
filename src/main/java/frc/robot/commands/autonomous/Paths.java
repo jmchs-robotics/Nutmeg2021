@@ -587,8 +587,15 @@ public class Paths { // extends CommandBase {
 
           
         //Move Robot to re-introduction zone
+        new SetWheelAngleCommand(m_swerve, 0),
+        new WaitCommand(w),
+        new DriveForDist2910Command(m_swerve, 0, -230, Integer.toString( cmd_idx++ ))); //step 0
 
-        //Move to Red Zone
+        //Move to Yellow Zone
+        new SetWheelAngleCommand(m_swerve, 0),
+        new WaitCommand(w),
+        new DriveForDist2910Command(m_swerve, 0, 180, Integer.toString( cmd_idx++ ))); //step 1
+
         //Shoot with LimeLight
         //Move the VBelt to move PowerCell to thrower
         //Turn VBelt on
@@ -597,20 +604,37 @@ public class Paths { // extends CommandBase {
         //Move Robot to re-introduction zone
 
         //Move to Blue Zone
-        //Shoot with LimeLight
-        //Move the VBelt to move PowerCell to thrower
-        //Turn VBelt on
-        //Have the meter accept 3 powerCells to the thrower
-        //Turn VBelt off
-        //Move Robot to re-introduction zone
+        new SetWheelAngleCommand(m_swerve, 0),
+        new WaitCommand(w),
+        new DriveForDist2910Command(m_swerve, 0, -180, Integer.toString( cmd_idx++ ))); //step 2
 
-        //Move to Yellow Zone
         //Shoot with LimeLight
         //Move the VBelt to move PowerCell to thrower
         //Turn VBelt on
         //Have the meter accept 3 powerCells to the thrower
         //Turn VBelt off
+
+        //Move Robot to re-introduction zone
+        new SetWheelAngleCommand(m_swerve, 0),
+        new WaitCommand(w),
+        new DriveForDist2910Command(m_swerve, 0, 120, Integer.toString( cmd_idx++ ))); //step 3
+
+        //Move to Red Zone
+        new SetWheelAngleCommand(m_swerve, 0),
+        new WaitCommand(w),
+        new DriveForDist2910Command(m_swerve, 0, -120, Integer.toString( cmd_idx++ ))); //step 4
+
+        //Shoot with LimeLight
+        //Move the VBelt to move PowerCell to thrower
+        //Turn VBelt on
+        //Have the meter accept 3 powerCells to the thrower
+        //Turn VBelt off
+        
         //Move Robot to re-introduction zone  
+        new SetWheelAngleCommand(m_swerve, 0),
+        new WaitCommand(w),
+        new DriveForDist2910Command(m_swerve, 0, 60, Integer.toString( cmd_idx++ ))); //step 5
+
         );
     }
 }
