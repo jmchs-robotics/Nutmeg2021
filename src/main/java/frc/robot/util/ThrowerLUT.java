@@ -23,6 +23,8 @@ public class ThrowerLUT {
       {214, 4825},
       {239, 5065},
       {300, 5480} // from testing 2/8. Go for it!
+
+      //distance for accuracy challenge: 45, 120, 180, 240
       
       /* testing 2/29 with 53 degrees hood angle = 37 degrees departure angle from horizontal
       // from 
