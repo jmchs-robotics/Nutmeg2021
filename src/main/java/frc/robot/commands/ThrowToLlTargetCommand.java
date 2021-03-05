@@ -53,6 +53,9 @@ public class ThrowToLlTargetCommand extends CommandBase {
     m_swerve = swerve;
 
     SmartDashboard.putNumber("ThrowToLlTargetCommand distance from Limelight", -111);
+    SmartDashboard.putNumber("LimelightTX", tx.getDouble(0.000));
+    SmartDashboard.putNumber("LimelightTY", ty.getDouble(0.000));
+    SmartDashboard.putNumber("LimelightTV", tv.getDouble(0.000));
 
   }
 
@@ -69,6 +72,9 @@ public class ThrowToLlTargetCommand extends CommandBase {
 
     if( Constants.ThrowerPIDs.TUNE) {
       SmartDashboard.putNumber("ThrowToLlTargetCommand distance from Limelight", ll_dist);
+      SmartDashboard.putNumber("LimelightTX", tx.getDouble(0.000));
+      SmartDashboard.putNumber("LimelightTY", ty.getDouble(0.000));
+      SmartDashboard.putNumber("LimelightTV", tv.getDouble(0.000));
     }
     // Make sure that the vision data is valid
     //if(m_vision.get().get_direction() != SocketVision.NADA){
@@ -82,6 +88,9 @@ public class ThrowToLlTargetCommand extends CommandBase {
       setpoint = -ThrowerLUT.distanceToRPMs( ll_dist * x);
       if( Constants.ThrowerPIDs.TUNE) {
         SmartDashboard.putNumber("ThrowToLlTargetCommand setpoint from Limelight", setpoint);
+        SmartDashboard.putNumber("LimelightTX", tx.getDouble(0.000));
+        SmartDashboard.putNumber("LimelightTY", ty.getDouble(0.000));
+        SmartDashboard.putNumber("LimelightTV", tv.getDouble(0.000));
       }
   //  }
    // else {
