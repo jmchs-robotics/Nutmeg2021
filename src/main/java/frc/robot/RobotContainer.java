@@ -171,6 +171,13 @@ public class RobotContainer {
         )
       );
 
+      //Thrower without vision. Runs backwards to get the jammed powercells out of the thrower
+      m_primaryController_DPad_Down.whenHeld(
+        new SequentialCommandGroup(
+          new SetThrowerSpeedCommand(m_Thrower, ThrowerLUT.DEFAULT_RPM).perpetually()
+        )
+      );
+
       // Thrower on primary controller, Right Trigger to throw with vision
       // turn on LED, command vision processor to track RFT, spin up thrower based on RFT distance
       // once thrower is at the speed, keep it at the speed based on RFT distance and simlutanously spin Daisy one rotation
@@ -280,8 +287,8 @@ public class RobotContainer {
           new MoveHopperCommand(m_Hopper,1)
         )
       ); // .whileHeld(m_Hopper :: smartDashIndex); //m_Hopper ); // Index ?; Commented out requirements so the print command doesn't interfere with the move commands
-    m_secondaryController_DPad_Down.whenPressed(new MoveHopperCommand(m_Hopper, -1));
-    m_secondaryController_DPad_Right.whenPressed(new MoveHopperCommand(m_Hopper, 1));
+    //m_secondaryController_DPad_Down.whenPressed(new MoveHopperCommand(m_Hopper, -1));
+    //m_secondaryController_DPad_Right.whenPressed(new MoveHopperCommand(m_Hopper, 1));
     m_secondaryController_LeftTrigger.whileHeld(
       new InstantCommand( m_Hopper::moveForwardSlowly, m_Hopper)
     ).whenReleased( new InstantCommand( m_Hopper::stopMotor, m_Hopper)); // stop
@@ -291,7 +298,7 @@ public class RobotContainer {
     //
     // control winch via default command, so can read trigger %
     // m_primaryController_LeftTrigger.whileHeld(new ClimbWinchUpCommand(m_Climb)); // control
-    m_primaryController_DPad_Down.whileHeld(new ClimbWinchDownCommand(m_Climb));
+    //m_primaryController_DPad_Down.whileHeld(new ClimbWinchDownCommand(m_Climb));
     m_primaryController_B.whenPressed(
       new InstantCommand(m_Climb::raiseArm, m_Climb)
     );
