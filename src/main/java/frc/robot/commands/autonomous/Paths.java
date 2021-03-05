@@ -602,11 +602,14 @@ public class Paths { // extends CommandBase {
         //Have the meter accept 3 powerCells to the thrower
         //Turn VBelt off
         //Move Robot to re-introduction zone
+        new SetWheelAngleCommand(m_swerve, 0),
+        new WaitCommand(w),
+        new DriveForDist2910Command(m_swerve, 0, -180, Integer.toString( cmd_idx++ )), //step 2
 
         //Move to Blue Zone
         new SetWheelAngleCommand(m_swerve, 0),
         new WaitCommand(w),
-        new DriveForDist2910Command(m_swerve, 0, -180, Integer.toString( cmd_idx++ )), //step 2
+        new DriveForDist2910Command(m_swerve, 0, 120, Integer.toString( cmd_idx++ )), //step 3
 
         //Shoot with LimeLight
         //Move the VBelt to move PowerCell to thrower
@@ -617,12 +620,12 @@ public class Paths { // extends CommandBase {
         //Move Robot to re-introduction zone
         new SetWheelAngleCommand(m_swerve, 0),
         new WaitCommand(w),
-        new DriveForDist2910Command(m_swerve, 0, 120, Integer.toString( cmd_idx++ )), //step 3
+        new DriveForDist2910Command(m_swerve, 0, -120, Integer.toString( cmd_idx++ )), //step 4
 
         //Move to Red Zone
         new SetWheelAngleCommand(m_swerve, 0),
         new WaitCommand(w),
-        new DriveForDist2910Command(m_swerve, 0, -120, Integer.toString( cmd_idx++ )), //step 4
+        new DriveForDist2910Command(m_swerve, 0, 60, Integer.toString( cmd_idx++ )), //step 5
 
         //Shoot with LimeLight
         //Move the VBelt to move PowerCell to thrower
@@ -633,7 +636,20 @@ public class Paths { // extends CommandBase {
         //Move Robot to re-introduction zone  
         new SetWheelAngleCommand(m_swerve, 0),
         new WaitCommand(w),
-        new DriveForDist2910Command(m_swerve, 0, 60, Integer.toString( cmd_idx++ )) //step 5
+        new DriveForDist2910Command(m_swerve, 0, -60, Integer.toString( cmd_idx++ )) //step 5
+
+        //Move to Green Zone
+        new SetWheelAngleCommand(m_swerve, 0),
+        new WaitCommand(w),
+        new DriveForDist2910Command(m_swerve, 0, 230, Integer.toString( cmd_idx++ )), //step 6
+
+        //Shoot with LimeLight
+        //Move the VBelt to move PowerCell to thrower
+        //Turn VBelt on
+        //Have the meter accept 3 powerCells to the thrower
+        //Turn VBelt off
+        
+        //End Command
 
         );
     }
