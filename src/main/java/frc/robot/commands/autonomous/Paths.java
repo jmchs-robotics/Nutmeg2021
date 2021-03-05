@@ -583,18 +583,18 @@ public class Paths { // extends CommandBase {
             
           ),
           //Turn VBelt off
-          new SetVBeltCommand(m_Vbelt, 0, 0)
+          new SetVBeltCommand(m_Vbelt, 0, 0),
 
           
         //Move Robot to re-introduction zone
         new SetWheelAngleCommand(m_swerve, 0),
         new WaitCommand(w),
-        new DriveForDist2910Command(m_swerve, 0, -230, Integer.toString( cmd_idx++ ))); //step 0
+        new DriveForDist2910Command(m_swerve, 0, -230, Integer.toString( cmd_idx++ )), //step 0
 
         //Move to Yellow Zone
         new SetWheelAngleCommand(m_swerve, 0),
         new WaitCommand(w),
-        new DriveForDist2910Command(m_swerve, 0, 180, Integer.toString( cmd_idx++ ))); //step 1
+        new DriveForDist2910Command(m_swerve, 0, 180, Integer.toString( cmd_idx++ )), //step 1
 
         //Shoot with LimeLight
         //Move the VBelt to move PowerCell to thrower
@@ -606,7 +606,7 @@ public class Paths { // extends CommandBase {
         //Move to Blue Zone
         new SetWheelAngleCommand(m_swerve, 0),
         new WaitCommand(w),
-        new DriveForDist2910Command(m_swerve, 0, -180, Integer.toString( cmd_idx++ ))); //step 2
+        new DriveForDist2910Command(m_swerve, 0, -180, Integer.toString( cmd_idx++ )), //step 2
 
         //Shoot with LimeLight
         //Move the VBelt to move PowerCell to thrower
@@ -617,12 +617,12 @@ public class Paths { // extends CommandBase {
         //Move Robot to re-introduction zone
         new SetWheelAngleCommand(m_swerve, 0),
         new WaitCommand(w),
-        new DriveForDist2910Command(m_swerve, 0, 120, Integer.toString( cmd_idx++ ))); //step 3
+        new DriveForDist2910Command(m_swerve, 0, 120, Integer.toString( cmd_idx++ )), //step 3
 
         //Move to Red Zone
         new SetWheelAngleCommand(m_swerve, 0),
         new WaitCommand(w),
-        new DriveForDist2910Command(m_swerve, 0, -120, Integer.toString( cmd_idx++ ))); //step 4
+        new DriveForDist2910Command(m_swerve, 0, -120, Integer.toString( cmd_idx++ )), //step 4
 
         //Shoot with LimeLight
         //Move the VBelt to move PowerCell to thrower
@@ -633,7 +633,7 @@ public class Paths { // extends CommandBase {
         //Move Robot to re-introduction zone  
         new SetWheelAngleCommand(m_swerve, 0),
         new WaitCommand(w),
-        new DriveForDist2910Command(m_swerve, 0, 60, Integer.toString( cmd_idx++ ))); //step 5
+        new DriveForDist2910Command(m_swerve, 0, 60, Integer.toString( cmd_idx++ )) //step 5
 
         );
     }
