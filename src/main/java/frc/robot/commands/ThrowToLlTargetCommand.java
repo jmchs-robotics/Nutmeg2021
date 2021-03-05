@@ -59,6 +59,7 @@ public class ThrowToLlTargetCommand extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").getNumber(3);
     
   }
 
@@ -94,6 +95,7 @@ public class ThrowToLlTargetCommand extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").getNumber(1);
     m_subsystem.stopThrower();
   }
 
