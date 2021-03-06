@@ -34,7 +34,8 @@ public class ThrowToLlTargetCommand extends CommandBase {
   private NetworkTableEntry tx = table.getEntry("tx");
   private NetworkTableEntry ty = table.getEntry("ty");
   private NetworkTableEntry tv = table.getEntry("tv");
-  
+  private NetworkTableEntry thor = table.getEntry("thor");
+
 
   /**
    * Creates a new ThrowToTarget.
@@ -76,6 +77,7 @@ public class ThrowToLlTargetCommand extends CommandBase {
       SmartDashboard.putNumber("LimelightTX", tx.getDouble(0.000));
       SmartDashboard.putNumber("LimelightTY", ty.getDouble(0.000));
       SmartDashboard.putNumber("LimelightTV", tv.getDouble(0.000));
+      SmartDashboard.putNumber("horizontal sidelength", thor.getDouble(0.000));
     }
     // Make sure that the vision data is valid
     //if(m_vision.get().get_direction() != SocketVision.NADA){
