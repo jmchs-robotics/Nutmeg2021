@@ -57,6 +57,7 @@ public class ThrowToLlTargetCommand extends CommandBase {
     SmartDashboard.putNumber("LimelightTX", tx.getDouble(0.000));
     SmartDashboard.putNumber("LimelightTY", ty.getDouble(0.000));
     SmartDashboard.putNumber("LimelightTV", tv.getDouble(0.000));
+    SmartDashboard.putNumber("horizontal sidelength", thor.getDouble(0.000));
 
   }
 
@@ -94,6 +95,7 @@ public class ThrowToLlTargetCommand extends CommandBase {
         SmartDashboard.putNumber("LimelightTX", tx.getDouble(0.000));
         SmartDashboard.putNumber("LimelightTY", ty.getDouble(0.000));
         SmartDashboard.putNumber("LimelightTV", tv.getDouble(0.000));
+        SmartDashboard.putNumber("horizontal sidelength", thor.getDouble(0.000));
       }
   //  }
    // else {
