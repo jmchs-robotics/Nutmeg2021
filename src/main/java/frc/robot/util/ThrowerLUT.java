@@ -15,14 +15,14 @@ public class ThrowerLUT {
     private static final double[][] LUT = {
       // from testing 3/2 with 53 degrees hood angle = 37 degrees departure angle from horizontal
       //And fresh Battery :)
+      {66, 4300}, //{132, 4300},
+      {63, 4350}, //{149, 4350},
+      {58, 4600}, //{173, 4600},
+      {51, 4675}, //{197, 4675},
+      {49, 4825}, //{214, 4825},
+      {43, 5065}, //{239, 5065},
+      //{?, 5480} //{300, 5480}
       {0, DEFAULT_RPM}, // Default RPM
-      {132, 4300},
-      {149, 4350},
-      {173, 4600},
-      {197, 4675},
-      {214, 4825},
-      {239, 5065},
-      {300, 5480} // from testing 2/8. Go for it!
 
       //distance for accuracy challenge: 45, 120, 180, 240
       
