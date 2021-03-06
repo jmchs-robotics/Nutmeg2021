@@ -15,6 +15,7 @@ public class ThrowerLUT {
     private static final double[][] LUT = {
       // from testing 3/2 with 53 degrees hood angle = 37 degrees departure angle from horizontal
       //And fresh Battery :)
+      
       {66, 4300}, //{132, 4300},
       {63, 4350}, //{149, 4350},
       {58, 4600}, //{173, 4600},
