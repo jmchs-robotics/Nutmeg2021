@@ -56,6 +56,7 @@ public class RobotContainer {
   private final HopperSubsystem m_Hopper = new HopperSubsystem();
   private final PatSajakSubsystem m_PatSajak = new PatSajakSubsystem();
   private final IntakeSubsystem m_Intake = new IntakeSubsystem();
+  private final VBeltSubsystem m_VBelt = new VBeltSubsystem();
 
   // Color Sensor
   private final ColorSensorV3 m_colorSensor = new ColorSensorV3(I2C.Port.kOnboard);
@@ -93,7 +94,7 @@ public class RobotContainer {
 
   private final JoystickButton m_secondaryController_Back = new JoystickButton(m_secondaryController, XboxController.Button.kBack.value);
 
-  // private final JoystickButton m_secondaryController_StickLeft = new JoystickButton(m_secondaryController, XboxController.Button.kStickLeft.value); // runs sample color
+  //private final JoystickButton m_secondaryController_StickLeft = new JoystickButton(m_secondaryController, XboxController.Button.kStickLeft.value); // runs sample color
   // want b to start Pat Sajak rotation control
   private final JoystickButton m_secondaryController_B = new JoystickButton(m_secondaryController, 
       XboxController.Button.kB.value);
@@ -319,6 +320,8 @@ public class RobotContainer {
     m_Intake.setDefaultCommand(new DefaultIntakeCommand(m_Intake, m_secondaryController));
     // default thrower is to spin down to still
     m_Thrower.setDefaultCommand(new StartEndCommand( ()->{m_Thrower.stopThrower(); m_Thrower.turnOffLED();}, ()->{}, m_Thrower)); // Spin down thrower and turn off LED on startup, do nothing on end.
+    //defualt VBelt
+    m_VBelt.setDefaultCommand(new DefaultVBeltCommand(m_VBelt, m_secondaryController));
 
   }
 
@@ -367,31 +370,52 @@ public class RobotContainer {
     Paths p = new Paths( m_swerve,m_Thrower, m_Hopper, m_Intake, sender_, rft_);
     Command autoCommand = new SequentialCommandGroup(
       new InstantCommand( m_Hopper::setBallCountTo3, m_Hopper),
-      p.Path1Command()
+      p.PathBarrelCommand()
     );
     switch( a) {
-      case "1": 
+      case "1":
+      autoCommand = new SequentialCommandGroup( 
+        new InstantCommand( m_Hopper::setBallCountTo3, m_Hopper),
+        p.Path1Command()
+        );
         break;
       case "2":
         autoCommand = new SequentialCommandGroup(
           new InstantCommand( m_Hopper::setBallCountTo3, m_Hopper),
           p.Path2Command()
         );
-      case "barrel":
-        autoCommand = new SequentialCommandGroup( 
-          new InstantCommand( m_Hopper::setBallCountTo3, m_Hopper),
-          p.PathBarrelCommand()
+        break;
+      case "test":
+        autoCommand = new SequentialCommandGroup(
+          p.PathTestCommand()
         );
+        break;
+      case "barrel":
+        break;
       case "slalom":
         autoCommand = new SequentialCommandGroup(
           new InstantCommand( m_Hopper::setBallCountTo3, m_Hopper),
           p.PathSlalomCommand()
         );
+        break;
       case "bounce":
         autoCommand = new SequentialCommandGroup( 
-          new InstantCommand( m_Hopper::setBallCountTo3, m_Hopper),
+          new InstantCommand(m_Hopper::setBallCountTo3, m_Hopper),
           p.PathBounceCommand()
         );
+        break;
+      case "angled barrel":
+        autoCommand = new SequentialCommandGroup(
+          new InstantCommand(m_Hopper::setBallCountTo3, m_Hopper),
+          p.AngledBarrelCommand()
+        );
+        break;
+      case "angled slalom":
+        autoCommand = new SequentialCommandGroup(
+          new InstantCommand(m_Hopper::setBallCountTo3, m_Hopper),
+          p.AngledSlalomCommand()
+        );
+        break;
     }   
 
     return autoCommand;

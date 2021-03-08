@@ -11,8 +11,10 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import frc.robot.Constants.VBeltMotors;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 
 
@@ -53,15 +55,16 @@ public class VBeltSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    
+
     if (VBeltMotors.TUNE){
+      //arcadeDrive(0.1, 0.1);
       double fs, rs, rp;
       SmartDashboard.putNumber("VBelt Right Motor Output Percent", m_motor_right.getMotorOutputPercent());
       SmartDashboard.putNumber("VBelt Left Motor Output Percent", m_motor_left.getMotorOutputPercent());
       fs = SmartDashboard.getNumber("Intake Motor Forward Speed", 0);
       rs = SmartDashboard.getNumber("Intake Motor Reverse Speed", 0);
       rp = SmartDashboard.getNumber("Intake Motor Reverse Pulse Time", 0);
-
+/*
       if( fs != m_forwardSpeed) {
         m_forwardSpeed = fs;
           setMotor(fs, fs);
@@ -73,6 +76,7 @@ public class VBeltSubsystem extends SubsystemBase {
       if( rp != m_reversePulse) {
         m_reversePulse = rp;
       }
+      */
       
     } 
   }
@@ -114,13 +118,10 @@ public class VBeltSubsystem extends SubsystemBase {
     m_drive.arcadeDrive(xSpeed, zRotation);
   }
 
-  public void tankDrive(double leftSpeed, double rightSpeed) {
+  /*
+  public void tankDrive(double leftSpeed, double rightSpeed)
+  {
     m_drive.tankDrive(leftSpeed, rightSpeed);
   }
-
-  /*public void arcadeDrive() {
-		//robotDrive.arcadeDrive( Robot.oi.driverJoystick.getX(), Robot.oi.driverJoystick.getY()); feels like 90 deg off
-		robotDrive.arcadeDrive(-Robot.oi.driverJoystick.getY(), Robot.oi.driverJoystick.getX());
-	}*/
-
+  */
 }

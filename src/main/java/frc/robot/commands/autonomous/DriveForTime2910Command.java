@@ -14,6 +14,13 @@ public class DriveForTime2910Command extends CommandBase {
     private final double forward;
     private final double strafe;
 
+    /**
+     * 
+     * @param drivetrain == swerve
+     * @param time == seconds
+     * @param forward == inches
+     * @param strafe == inches
+     */
     public DriveForTime2910Command(SwerveDriveSubsystem drivetrain, double time, double forward, double strafe) {
         this.drivetrain = drivetrain;
         this.time = time;
