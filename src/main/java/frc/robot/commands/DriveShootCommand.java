@@ -75,9 +75,9 @@ public class DriveShootCommand extends CommandBase
     @Override
     public void execute()
     {
-        m_primaryController_A.whenPressed(
-            new DriveForDist2910Command(drivetrain, 0, 50)
-        );
+        //m_primaryController_A.whenPressed(
+          //  new DriveForDist2910Command(drivetrain, 0, 50)
+        //);
         m_primaryController_RightTrigger.whenHeld(
             new ThrowToLlTargetCommand(m_subsystem, drivetrain, m_vision)
         );

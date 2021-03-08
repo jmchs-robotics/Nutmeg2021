@@ -81,7 +81,7 @@ public class ThrowToLlTargetCommand extends CommandBase {
       SmartDashboard.putNumber("horizontal sidelength", thor.getDouble(0.000));
     }
     // Make sure that the vision data is valid
-    //if(m_vision.get().get_direction() != SocketVision.NADA){
+    if(m_vision.get().get_direction() != SocketVision.NADA){
       double x = 1;
       if( Constants.ThrowerVision.ADAPT_SPEED_TO_POSE_ANGLE) {
         // coprocessor computes distance as inverse of width of target
@@ -97,12 +97,12 @@ public class ThrowToLlTargetCommand extends CommandBase {
         SmartDashboard.putNumber("LimelightTV", tv.getDouble(0.000));
         SmartDashboard.putNumber("horizontal sidelength", thor.getDouble(0.000));
       }
-  //  }
-   // else {
-      //  setpoint = -ThrowerLUT.DEFAULT_RPM;
-   // }
+    }
+    else {
+        setpoint = -ThrowerLUT.DEFAULT_RPM;
+    }
     
-    m_subsystem.setThrowerSpeed(0); // setpoint);
+    m_subsystem.setThrowerSpeed(setpoint);
   }
 
   // Called once the command ends or is interrupted.
