@@ -186,6 +186,7 @@ public class RobotContainer {
           //new WaitCommand(0.5), // give the vision processor a chance to find the RFT
           
          // new VisionAimGyroCommand( m_swerve, rft_), // aim the robot
+         new VisionAimCommand(m_swerve,rft_),
           new ThrowToLlTargetCommand(m_Thrower, m_swerve, rft_)
         /*      
         new SequentialCommandGroup(
@@ -341,7 +342,7 @@ public class RobotContainer {
     m_Hopper.selectNearestSlot( moveToSlot); // set the index to match the current position of the Daisy
   }
 
-  /**
+  /**Ai
    * Call this to initialize the SocketVision objects. Must be called in periodInit() methods
    * if you want to use vision in that periodPeriodic() time (where period is autonomous or teleop).
    */
