@@ -132,7 +132,8 @@ public class VisionAimCommand extends CommandBase {
           } 
           */
           previousXCoord = tx.getDouble(0) + Vision.RFT_X_OFFSET_LL; // switching to Limelight 3/9
-        double rotation = angleController.calculate( previousXCoord * Vision.RFT_PIXELS_TO_DEGREES);
+          double rotation = -previousXCoord * Vision.RFT_PIXELS_TO_DEGREES * DrivetrainConstants.POSE_ANGLE_kP;
+        //double rotation = angleController.calculate( previousXCoord * Vision.RFT_PIXELS_TO_DEGREES);
         // rotation = Math.min( 0.5, Math.max( -0.5, rotation));  // clamp
         for (int i = 0; i < 4; i++)
             drivetrain.getSwerveModule(i).setTargetSpeed(rotation);
