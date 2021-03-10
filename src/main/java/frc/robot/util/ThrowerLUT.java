@@ -23,10 +23,17 @@ public class ThrowerLUT {
       {49, 4825}, //{214, 4825},
       {51, 4675}, //{197, 4675},
       {58, 4600}, //{173, 4600},
-      {63, 4350}, //{149, 4350},
+      {63, 4350}, //{149, 4350}, 
       {66, 4300}, //{132, 4300}, //3/8 THOR: 69
       
+    /*
+    Testing Data Collected 3/9
+        distance from bumber: 99.5  123  149  178 
+        distance from hopper: 123   151  175  206  
+        back bumper:                               180
+        thor:                 67    56   53   48   55
 
+    */
 
       //distance for accuracy challenge: 45, 120, 180, 240
       
