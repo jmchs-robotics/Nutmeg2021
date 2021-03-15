@@ -336,27 +336,39 @@ public class Paths { // extends CommandBase {
         new DriveForDist2910Command(m_swerve, 0, 46, Integer.toString( cmd_idx++ )), 
  
         //Under D5, segments 2 and 3
-        new SetWheelAngleCommand(m_swerve, Math.toDegrees(Math.atan2(-35, -100))),
+        new SetWheelAngleCommand(m_swerve, 0),
         new WaitCommand(w),
-        new DriveForDist2910Command(m_swerve, 44, -100, Integer.toString( cmd_idx++ )), // 40, -95
+        new DriveForDist2910Command(m_swerve, 0, -52, Integer.toString( cmd_idx++ )),
+        
+        new SetWheelAngleCommand(m_swerve, 90),
+        new WaitCommand(w),
+        new DriveForDist2910Command(m_swerve, 38, 0, Integer.toString( cmd_idx++ )),
+
+        new SetWheelAngleCommand(m_swerve, 0),
+        new WaitCommand(w),
+        new DriveForDist2910Command(m_swerve, 0, -56, Integer.toString( cmd_idx++ )),
+ 
+       // new SetWheelAngleCommand(m_swerve, Math.toDegrees(Math.atan2(-35, -100))),
+       // new WaitCommand(w),
+       // new DriveForDist2910Command(m_swerve, 44, -100, Integer.toString( cmd_idx++ )), // 40, -95
  
         new SetWheelAngleCommand(m_swerve, 90),
         new WaitCommand(w),
-        new DriveForDist2910Command(m_swerve, 54, 0, Integer.toString( cmd_idx++ )),
+        new DriveForDist2910Command(m_swerve, 48, 0, Integer.toString( cmd_idx++ )),
  
         //Touch A6, segments 4 and 5
         new SetWheelAngleCommand(m_swerve, 0),
         new WaitCommand(w),
-        new DriveForDist2910Command(m_swerve, 0, 113, Integer.toString( cmd_idx++ )), // 95
+        new DriveForDist2910Command(m_swerve, 0, 109, Integer.toString( cmd_idx++ )), // 95
         
         new SetWheelAngleCommand(m_swerve, 0),
         new WaitCommand(w),
-        new DriveForDist2910Command(m_swerve, 0, -105, Integer.toString( cmd_idx++ )), // 95
+        new DriveForDist2910Command(m_swerve, 0, -111, Integer.toString( cmd_idx++ )), // 95
  
         //Under D7 and D8, segment 6
         new SetWheelAngleCommand(m_swerve, 90),
         new WaitCommand(w),
-        new DriveForDist2910Command(m_swerve, 90, 0, Integer.toString( cmd_idx++ )),
+        new DriveForDist2910Command(m_swerve, 81, 0, Integer.toString( cmd_idx++ )),
  
         //Touch A9
         new SetWheelAngleCommand(m_swerve, 0),
@@ -366,7 +378,7 @@ public class Paths { // extends CommandBase {
         //To End Zone
         new SetWheelAngleCommand(m_swerve, 0),
         new WaitCommand(w),
-        new DriveForDist2910Command(m_swerve, 0, -43, Integer.toString( cmd_idx++ )),
+        new DriveForDist2910Command(m_swerve, 0, -55, Integer.toString( cmd_idx++ )),
  
         new SetWheelAngleCommand(m_swerve, 90),
         new WaitCommand(w),
