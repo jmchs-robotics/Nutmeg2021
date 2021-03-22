@@ -16,22 +16,26 @@ import frc.robot.util.ThrowerLUT;
 import edu.wpi.first.wpilibj.smartdashboard.*;
 import frc.robot.Constants;
 
+// switching to Limelight 3/9
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
+
 
 public class ThrowToLlTargetCommand extends CommandBase {
   private ThrowerSubsystem m_subsystem;
   private SocketVisionWrapper m_vision;
   private SwerveDriveSubsystem m_swerve;
 
-  // switching to Limelight 3/9
+  private double setpoint = 0;
+
+  // switching to Limelight 2/22/21
   private NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
   private NetworkTableEntry tx = table.getEntry("tx");
   private NetworkTableEntry ty = table.getEntry("ty");
   private NetworkTableEntry tv = table.getEntry("tv");
+  private NetworkTableEntry thor = table.getEntry("thor");
 
-  private double setpoint = 0;
 
   /**
    * Creates a new ThrowToTarget.
@@ -41,27 +45,62 @@ public class ThrowToLlTargetCommand extends CommandBase {
    * Assumes the green LED has already been turned on 
    *   and that the Vision Coprocessor has already been commanded to track the RFT.
    */
-  public ThrowToLlTargetCommand(ThrowerSubsystem thrower, SwerveDriveSubsystem swerve) {
+  public ThrowToLlTargetCommand(ThrowerSubsystem thrower, SwerveDriveSubsystem swerve, SocketVisionWrapper vision) {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(thrower);
 
-    m_subsystem = thrower;    
+    m_subsystem = thrower;
+    m_vision = vision;
     m_swerve = swerve;
+
+    SmartDashboard.putNumber("ThrowToLlTargetCommand distance from Limelight", -111);
+    SmartDashboard.putNumber("LimelightTX", tx.getDouble(0.000));
+    SmartDashboard.putNumber("LimelightTY", ty.getDouble(0.000));
+    SmartDashboard.putNumber("LimelightTV", tv.getDouble(0.000));
+    SmartDashboard.putNumber("horizontal sidelength", thor.getDouble(0.000));
+
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").getNumber(3);
+    
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    double ll_dist = tx.getDouble(0); // switching to Limelight 3/9
+
     if( Constants.ThrowerPIDs.TUNE) {
-      SmartDashboard.putNumber("ThrowToLlTargetCommand y", ty.getDouble(0));
+      SmartDashboard.putNumber("ThrowToLlTargetCommand distance from Limelight", ll_dist);
+      SmartDashboard.putNumber("LimelightTX", tx.getDouble(0.000));
+      SmartDashboard.putNumber("LimelightTY", ty.getDouble(0.000));
+      SmartDashboard.putNumber("LimelightTV", tv.getDouble(0.000));
+      SmartDashboard.putNumber("horizontal sidelength", thor.getDouble(0.000));
     }
-      
-    setpoint = -ThrowerLUT.llAngleToRPMs( ty.getDouble(0));
+    // Make sure that the vision data is valid
+    if(m_vision.get().get_direction() != SocketVision.NADA){
+      double x = 1;
+      if( Constants.ThrowerVision.ADAPT_SPEED_TO_POSE_ANGLE) {
+        // coprocessor computes distance as inverse of width of target
+        // if robot is at an angle (i.e. not straight on) it will think it's farther than it is
+        // by a factor of the cos(angle from straight on), i.e. the projection of the target
+        x = Math.cos( Math.toRadians(m_swerve.getGyroAngle())); 
+      }
+      setpoint = -ThrowerLUT.distanceToRPMs( ll_dist * x);
+      if( Constants.ThrowerPIDs.TUNE) {
+        SmartDashboard.putNumber("ThrowToLlTargetCommand setpoint from Limelight", setpoint);
+        SmartDashboard.putNumber("LimelightTX", tx.getDouble(0.000));
+        SmartDashboard.putNumber("LimelightTY", ty.getDouble(0.000));
+        SmartDashboard.putNumber("LimelightTV", tv.getDouble(0.000));
+        SmartDashboard.putNumber("horizontal sidelength", thor.getDouble(0.000));
+      }
+    }
+    else {
+        setpoint = -ThrowerLUT.DEFAULT_RPM;
+    }
     
     m_subsystem.setThrowerSpeed(setpoint);
   }
@@ -69,6 +108,7 @@ public class ThrowToLlTargetCommand extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").getNumber(1);
     m_subsystem.stopThrower();
   }
 

@@ -594,4 +594,24 @@ public class Paths { // extends CommandBase {
         new DriveForDist2910Command(m_swerve, 0, -285, Integer.toString( cmd_idx++ ))); //step 12
         
     }
+
+    public Command pathAccurateCommand() {
+      return new SequentialCommandGroup(
+        //start in green zone
+        //aim itself to shoot - use ThrowToLlTargetCommand to aim and shoot
+        //go back to re-introduction zone
+        new WaitCommand(10),
+        //drive to yellow zone
+        //aim itself to shoot
+        //go back to re-introduction zone
+        new WaitCommand(10),
+        //drive to blue zone
+        //aim itself to shoot
+        //go back to re-introduction zone
+        new WaitCommand(10)
+        //drive to red zone
+        //aim itself to shoot
+        //end
+      );
+    }
 }

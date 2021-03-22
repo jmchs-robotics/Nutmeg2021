@@ -15,14 +15,27 @@ public class ThrowerLUT {
     private static final double[][] LUT = {
       // from testing 3/2 with 53 degrees hood angle = 37 degrees departure angle from horizontal
       //And fresh Battery :)
+      
       {0, DEFAULT_RPM}, // Default RPM
-      {132, 4300},
-      {149, 4350},
-      {173, 4600},
-      {197, 4675},
-      {214, 4825},
-      {239, 5065},
-      {300, 5480} // from testing 2/8. Go for it!
+      //{?, 5480} //{300, 5480} 
+      //{THOR, RPMS} //{old distance it read, RPMS}
+      {43, 5065}, //{239, 5065},
+      {49, 4825}, //{214, 4825},
+      {51, 4675}, //{197, 4675},
+      {58, 4600}, //{173, 4600},
+      {63, 4350}, //{149, 4350}, 
+      {66, 4300}, //{132, 4300}, //3/8 THOR: 69
+      
+    /*
+    Testing Data Collected 3/9
+        distance from bumber: 99.5  123  149  178 
+        distance from hopper: 123   151  175  206  
+        back bumper:                               180
+        thor:                 67    56   53   48   55
+
+    */
+
+      //distance for accuracy challenge: 45, 120, 180, 240
       
       /* testing 2/29 with 53 degrees hood angle = 37 degrees departure angle from horizontal
       // from 
@@ -73,7 +86,7 @@ public class ThrowerLUT {
     public static double distanceToRPMs(double inches){
 
         int index = LUT.length - 2; // Start at the highest meaningful index for a right-handed discrete derivative
-        while(inches < LUT[index][0]){ index--; } // iterate down. Safe if the lowest index contains {0, DEFAULT_RPM}
+        while(inches < LUT[index][0] && index > 0){ index--; } // iterate down. Safe if the lowest index contains {0, DEFAULT_RPM}
         // No need to check if we're off the deep end, because the worst that could happen
         // is the motor gets set to full forward. This would replace the loop & following if-statement.
         

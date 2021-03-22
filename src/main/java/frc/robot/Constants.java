@@ -32,7 +32,7 @@ public final class Constants {
     public static final long RFT_X_OFFSET = 45; // offset in pixels of vision output vs where we want to point/move the robot
     public static final double RFT_PIXELS_TO_DEGREES = .110755; 
     public static final boolean TUNE = false;
-    public static final double RFT_X_OFFSET_LL = 0;  // limelight offset, degrees, 3/9
+    public static final double RFT_X_OFFSET_LL = 6;  // limelight offset, degrees, 3/9 = 3
   }
   
   /**
@@ -87,7 +87,7 @@ public final class Constants {
     public static final double DFD_ROTATION_kD = 0.0;
 
     // PID for controlling pose angle in SetPoseAngle2910 and VisionAim* commands.
-    public static final double POSE_ANGLE_kP = 0.03;
+    public static final double POSE_ANGLE_kP = 0.15;//0.03;
     public static final double POSE_ANGLE_kI = 0.0;
     public static final double POSE_ANGLE_kD = 0.0;
 
