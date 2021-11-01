@@ -614,4 +614,25 @@ public class Paths { // extends CommandBase {
         //end
       );
     }
+
+    public Command IanG() {
+      double w = 0.25;
+      int cmd_idx = 0;
+      return new SequentialCommandGroup(
+        new DriveForDist2910Command(m_swerve, 0, 220, Integer.toString(cmd_idx++)),
+        new WaitCommand(w),
+        //First ball pickup
+        new SetPoseAngle2910Command(m_swerve, 90), //Rotating the ball for next ball pickup
+        new WaitCommand(w),
+        new DriveForDist2910Command(m_swerve, 0, 30, Integer.toString(cmd_idx++)), //Driving to second ball
+        new WaitCommand(w),
+        //Second ball pickup
+        new DriveForDist2910Command(m_swerve, 0, 30, Integer.toString(cmd_idx++)), //Driving to third ball
+        new WaitCommand(w),
+        //Third ball pickup
+        new SetPoseAngle2910Command(m_swerve, -90), //Rotating ball to go to hoop
+        new WaitCommand(w),
+        new DriveForDist2910Command(m_swerve, 0, 180, Integer.toString(cmd_idx++)) //Driving to shooting position
+      );
+    }
 }
