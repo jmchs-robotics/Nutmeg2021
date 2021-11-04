@@ -614,4 +614,26 @@ public class Paths { // extends CommandBase {
         //end
       );
     }
+    
+    public Command pathGrabBallsToHoopRight() {
+
+      int cmd_idx = 0;
+      double w = 0.25;
+
+      return new SequentialCommandGroup(
+        new DriveForDist2910Command(m_swerve, 0, 220, Integer.toString( cmd_idx++ )), //travel forward 220 inches
+        new WaitCommand(w),
+        //grab ball
+        new SetPoseAngle2910Command(m_swerve, 90), //turn 90 degrees
+        new WaitCommand(w),
+        new DriveForDist2910Command(m_swerve, 0, 30, Integer.toString( cmd_idx++ )), //travel 30 inches to next ball
+        //grab ball
+        new DriveForDist2910Command(m_swerve, 0, 30, Integer.toString( cmd_idx++ )), //travel 30 inches to next ball
+        new WaitCommand(w),
+        //grab ball
+        new SetPoseAngle2910Command(m_swerve, -90), //turn -90 degrees
+        new WaitCommand(w),
+        new DriveForDist2910Command(m_swerve, 0, 180, Integer.toString( cmd_idx++ )) //travel forward 180 inches to shooting position
+      );
+    }
 }
