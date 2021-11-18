@@ -615,27 +615,3 @@ public class Paths { // extends CommandBase {
       );
     }
 }
-
-public Command braedentohoopcommand() {
-
-      double w = 0.25;
-      int cmd_idx = 0; 
-      return new SequentialCommandGroup(
-        
-        new DriveForDist2910Command(m_swerve, 0, 440, Integer.toString(cmd_idx++)),
-
-        new SetPoseAngle2910Command(m_swerve, 90),
-        
-        new DriveForDist2910Command(m_swerve, 0, 100, Integer.toString(cmd_idx++)),
-
-        new SetPoseAngle2910Command(m_swerve, 90)
-        // new SetWheelAngleCommand(m_swerve, 90),
-
-        // new WaitCommand(10),
-
-        // new DriveForDist2910Command(m_swerve, 9, 9, Integer.toString(cmd_idx++)),
-
-        //new SetPoseAngle2910Command(m_swerve, 90)
-      );
-    }
-}
