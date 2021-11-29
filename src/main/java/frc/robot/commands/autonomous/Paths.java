@@ -635,7 +635,9 @@ public class Paths { // extends CommandBase {
         //11-29-21 Commenting above out because currently irrelavent.
 
         /*Drive to shooting position*/ new DriveForDist2910Command(m_swerve, 0, 444, Integer.toString(cmd_idx++)),
+        new WaitCommand(w),
         /*Aim towards the hoop*/ new VisionAimCommand(m_swerve, rft_),
+        new WaitCommand(w),
         /*Throw ball into the hoop*/ new ThrowToLlTargetCommand(m_Thrower, m_swerve, rft_)
       );
     }
