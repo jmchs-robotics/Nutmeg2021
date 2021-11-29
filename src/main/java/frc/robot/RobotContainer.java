@@ -417,6 +417,11 @@ public class RobotContainer {
           p.AngledSlalomCommand()
         );
         break;
+      case "straight to":
+        autoCommand = new SequentialCommandGroup(
+          new InstantCommand(m_Hopper::setBallCountTo3, m_Hopper),
+          p.StraightTo()
+        );
     }   
 
     return autoCommand;

@@ -615,7 +615,7 @@ public class Paths { // extends CommandBase {
       );
     }
 
-    public Command IanG() {
+    public Command StraightTo() {
       double w = 0.25;
       int cmd_idx = 0;
       return new SequentialCommandGroup(
@@ -636,7 +636,7 @@ public class Paths { // extends CommandBase {
 
         /*Drive to shooting position*/ new DriveForDist2910Command(m_swerve, 0, 444, Integer.toString(cmd_idx++)),
         new WaitCommand(w),
-        /*Aim towards the hoop*/ new VisionAimCommand(m_swerve, rft_),
+        ///*Aim towards the hoop*/ new VisionAimCommand(m_swerve, rft_),
         new WaitCommand(w),
         /*Throw ball into the hoop*/ new ThrowToLlTargetCommand(m_Thrower, m_swerve, rft_)
       );
