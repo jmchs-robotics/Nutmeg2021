@@ -619,7 +619,7 @@ public class Paths { // extends CommandBase {
       double w = 0.25;
       int cmd_idx = 0;
       return new SequentialCommandGroup(
-        new DriveForDist2910Command(m_swerve, 0, 220, Integer.toString(cmd_idx++)),
+       /* new DriveForDist2910Command(m_swerve, 0, 220, Integer.toString(cmd_idx++)),
         new WaitCommand(w),
         //First ball pickup
         new SetPoseAngle2910Command(m_swerve, 90), //Rotating the ball for next ball pickup
@@ -631,8 +631,12 @@ public class Paths { // extends CommandBase {
         new WaitCommand(w),
         //Third ball pickup
         new SetPoseAngle2910Command(m_swerve, -90), //Rotating ball to go to hoop
-        new WaitCommand(w),
-        new DriveForDist2910Command(m_swerve, 0, 180, Integer.toString(cmd_idx++)) //Driving to shooting position
+        new WaitCommand(w),*/ 
+        //11-29-21 Commenting above out because currently irrelavent.
+
+        /*Drive to shooting position*/ new DriveForDist2910Command(m_swerve, 0, 444, Integer.toString(cmd_idx++)),
+        /*Aim towards the hoop*/ new VisionAimCommand(m_swerve, rft_),
+        /*Throw ball into the hoop*/ new ThrowToLlTargetCommand(m_Thrower, m_swerve, rft_)
       );
     }
 }
