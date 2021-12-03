@@ -615,7 +615,7 @@ public class Paths { // extends CommandBase {
       );
     }
 
-    public Command StraightTo() {
+    public Command HoopDash() {
       double w = 0.25;
       int cmd_idx = 0;
       return new SequentialCommandGroup(

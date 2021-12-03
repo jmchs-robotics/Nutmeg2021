@@ -417,10 +417,10 @@ public class RobotContainer {
           p.AngledSlalomCommand()
         );
         break;
-      case "straight to":
+      case "hoop dash":
         autoCommand = new SequentialCommandGroup(
           new InstantCommand(m_Hopper::setBallCountTo3, m_Hopper),
-          p.StraightTo()
+          p.HoopDash()
         );
     }   
 
