@@ -192,6 +192,11 @@ public final class Constants {
     public static final boolean TUNE = false;
   }
 
+  public static final class IntakeMotors {
+    public static final int IntakeMotorRightID = 9;
+    public static final int IntakeMotorLeftID = 25;
+  }
+
 
   public static final class HopperConstants {
     public static final int HOPPER_MOTOR_ID = 20;

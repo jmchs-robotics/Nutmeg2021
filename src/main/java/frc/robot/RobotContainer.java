@@ -57,6 +57,7 @@ public class RobotContainer {
   private final PatSajakSubsystem m_PatSajak = new PatSajakSubsystem();
   private final IntakeSubsystem m_Intake = new IntakeSubsystem();
   private final VBeltSubsystem m_VBelt = new VBeltSubsystem();
+  private final NewIntake m_NewIntake = new NewIntake();
 
   // Color Sensor
   private final ColorSensorV3 m_colorSensor = new ColorSensorV3(I2C.Port.kOnboard);
@@ -323,6 +324,8 @@ public class RobotContainer {
     m_Thrower.setDefaultCommand(new StartEndCommand( ()->{m_Thrower.stopThrower(); m_Thrower.turnOffLED();}, ()->{}, m_Thrower)); // Spin down thrower and turn off LED on startup, do nothing on end.
     //defualt VBelt
     m_VBelt.setDefaultCommand(new DefaultVBeltCommand(m_VBelt, m_secondaryController));
+
+    m_NewIntake.setDefaultCommand(new DefaultNewIntakeCommand(m_NewIntake, m_secondaryController));
 
   }
 
