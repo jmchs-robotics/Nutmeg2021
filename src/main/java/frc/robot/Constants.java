@@ -150,6 +150,10 @@ public final class Constants {
 	public static final int LED_CHANNEL = 0;
   }
 
+  public static final class ArmMotor {
+    public static final int ArmMotorID = 8;
+  }
+
   public static final class ThrowerPIDs {
     public static final double kP = 2e-4;
     public static final double kI = 1e-6;
