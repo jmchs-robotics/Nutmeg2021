@@ -7,7 +7,7 @@
  
 package frc.robot.commands;
  
-import frc.robot.subsystems.VBeltSubsystem;
+import frc.robot.subsystems.NewIntake;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -16,15 +16,15 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 /**
  * Using the VBelt Subsystem
  */
-public class DefaultVBeltCommand extends CommandBase {
+public class DefaultNewIntakeCommand extends CommandBase {
  
-  private final VBeltSubsystem m_subsystem;
+  private final NewIntake m_subsystem;
   private final XboxController m_stick;
   
   /**
    * Creates a new DefaultIntakeCommand.
    */
-  public DefaultVBeltCommand (VBeltSubsystem subsystem, XboxController stick) {
+  public DefaultNewIntakeCommand (NewIntake subsystem, XboxController stick) {
     m_subsystem = subsystem;
     m_stick = stick;
     //SmartDashboard.putString("cheeeeee", "6");
@@ -48,13 +48,15 @@ public class DefaultVBeltCommand extends CommandBase {
   public void execute() {
     
     double forward = m_stick.getY(Hand.kLeft);
+    double rotation = m_stick.getX(Hand.kLeft);
     
     //SmartDashboard.putNumber("Check",forward);
 
     forward *= deadband(forward);
+    rotation *= deadband(rotation);
     //backward *= deadband(backward);
 
-    m_subsystem.setMotor(forward);
+    m_subsystem.arcadeDrive(forward, rotation);
   }
  
   // Called once the command ends or is interrupted.

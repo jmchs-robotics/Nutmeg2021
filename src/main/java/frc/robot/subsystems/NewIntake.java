@@ -13,12 +13,14 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import frc.robot.Constants.IntakeMotors;
 import frc.robot.Constants.VBeltMotors;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 
 
-public class VBeltSubsystem extends SubsystemBase {
+public class NewIntake extends SubsystemBase {
+  private WPI_VictorSPX m_motor_right;
   private WPI_VictorSPX m_motor_left;
 
   private double m_forwardSpeed;
@@ -31,19 +33,19 @@ public class VBeltSubsystem extends SubsystemBase {
   /**
    * Creates a new VBeltSubsystem.
    */
-  public VBeltSubsystem() {
-    //m_motor_right = new WPI_VictorSPX(VBeltMotors.VBeltMotorRightID);
-    m_motor_left = new WPI_VictorSPX(VBeltMotors.VBeltMotorLeftID);
+  public NewIntake() {
+    m_motor_right = new WPI_VictorSPX(IntakeMotors.IntakeMotorRightID);
+    m_motor_left = new WPI_VictorSPX(IntakeMotors.IntakeMotorLeftID);
     m_forwardSpeed = VBeltMotors.forwardSpeed;
     m_reverseSpeed = VBeltMotors.reverseSpeed;
     m_reversePulse = VBeltMotors.reversePulse;
 
-    //m_drive = new DifferentialDrive(m_motor_left);
+    m_drive = new DifferentialDrive(m_motor_right, m_motor_left);
     
     SmartDashboard.putNumber("class created", m_int);
 
      if (VBeltMotors.TUNE){
-      //SmartDashboard.putNumber("VBelt Right Motor Output Percent", m_motor_right.getMotorOutputPercent());
+      SmartDashboard.putNumber("VBelt Right Motor Output Percent", m_motor_right.getMotorOutputPercent());
       SmartDashboard.putNumber("VBelt Left Motor Output Percent", m_motor_left.getMotorOutputPercent());
       SmartDashboard.putNumber("VBelt Motor Forward Speed", m_forwardSpeed);
       SmartDashboard.putNumber("VBelt Motor Reverse Speed", m_reverseSpeed);
@@ -58,7 +60,7 @@ public class VBeltSubsystem extends SubsystemBase {
     if (VBeltMotors.TUNE){
       //arcadeDrive(0.1, 0.1);
       double fs, rs, rp;
-      //SmartDashboard.putNumber("VBelt Right Motor Output Percent", m_motor_right.getMotorOutputPercent());
+      SmartDashboard.putNumber("VBelt Right Motor Output Percent", m_motor_right.getMotorOutputPercent());
       SmartDashboard.putNumber("VBelt Left Motor Output Percent", m_motor_left.getMotorOutputPercent());
       fs = SmartDashboard.getNumber("Intake Motor Forward Speed", 0);
       rs = SmartDashboard.getNumber("Intake Motor Reverse Speed", 0);
@@ -84,7 +86,8 @@ public class VBeltSubsystem extends SubsystemBase {
    * Set the VBelt motors to a speed between -1 and 1.
    * @param speed
    */
-  public void setMotor(double speedLeft){
+  public void setMotor(double speedRight, double speedLeft){
+    m_motor_right.set(ControlMode.PercentOutput,speedRight);
     m_motor_left.set(ControlMode.PercentOutput,speedLeft);
   }
 
@@ -92,15 +95,16 @@ public class VBeltSubsystem extends SubsystemBase {
    * Set the VBelt Motors to 0
    */
   public void stopMotor (){
+    m_motor_right.set(ControlMode.PercentOutput, 0.0);
     m_motor_left.set(ControlMode.PercentOutput, 0.0);
   }
 
   public void motorForward() {
-    setMotor(m_forwardSpeed);
+    setMotor(m_forwardSpeed, m_forwardSpeed);
   }
 
   public void motorReverse() {
-    setMotor(m_reverseSpeed);
+    setMotor( m_reverseSpeed, m_reverseSpeed);
   }
 
   public double getReversePulse() {
@@ -111,9 +115,9 @@ public class VBeltSubsystem extends SubsystemBase {
     return m_reverseSpeed;
   }
 
-  /*public void arcadeDrive(double xSpeed, double zRotation) {
+  public void arcadeDrive(double xSpeed, double zRotation) {
     m_drive.arcadeDrive(xSpeed, zRotation);
-  }*/
+  }
 
   /*
   public void tankDrive(double leftSpeed, double rightSpeed)

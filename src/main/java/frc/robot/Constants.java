@@ -184,7 +184,7 @@ public final class Constants {
 
   // Motor ID for the VBelt Subsystem
     public static final class VBeltMotors {
-    public static final int VBeltMotorRightID = 8;
+    //public static final int VBeltMotorRightID = 8;
     public static final int VBeltMotorLeftID = 10;
 
     // motor run characteristics
@@ -194,6 +194,11 @@ public final class Constants {
 
     // set to true to put motor speed and other data on the smart dashboard
     public static final boolean TUNE = false;
+  }
+
+  public static final class IntakeMotors {
+    public static final int IntakeMotorRightID = 9;
+    public static final int IntakeMotorLeftID = 25;
   }
 
 
