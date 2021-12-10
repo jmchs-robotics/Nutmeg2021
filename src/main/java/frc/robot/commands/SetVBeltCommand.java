@@ -16,19 +16,16 @@ import frc.robot.subsystems.VBeltSubsystem;
 public class SetVBeltCommand extends CommandBase {
   private VBeltSubsystem m_subsystem;
   private double m_speedL = 0;
-  private double m_speedR = 0;
   /**
    * Sets the VBelt Motors speed inbetween the scale of -1 to 1.
    * @param speedL is the speed of the left motor on the VBelt
-   * @param speedR is the speed of the right motor on the VBelt
    */
-  public SetVBeltCommand(VBeltSubsystem subsystem, double speedL, double speedR) {
+  public SetVBeltCommand(VBeltSubsystem subsystem, double speedL) {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
 
     m_subsystem = subsystem;
     m_speedL = speedL;
-    m_speedR = speedR;
   }
 
   // Called when the command is initially scheduled.
@@ -39,13 +36,13 @@ public class SetVBeltCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_subsystem.setMotor(m_speedR, m_speedL);
+    m_subsystem.setMotor(m_speedL);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_subsystem.setMotor(0, 0);
+    m_subsystem.setMotor(0);
   }
 
   // Returns true when the command should end.

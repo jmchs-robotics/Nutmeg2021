@@ -180,7 +180,7 @@ public final class Constants {
 
   // Motor ID for the VBelt Subsystem
     public static final class VBeltMotors {
-    public static final int VBeltMotorRightID = 8;
+    //public static final int VBeltMotorRightID = 8;
     public static final int VBeltMotorLeftID = 10;
 
     // motor run characteristics
