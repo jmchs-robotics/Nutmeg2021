@@ -150,6 +150,13 @@ public final class Constants {
 	public static final int LED_CHANNEL = 0;
   }
 
+  public static final class ArmMotor {
+    public static final int ArmMotorID = 8;
+
+    public static final double armLiftSpeed = 0.7;
+    public static final double armLowerSpeed = -0.7;
+  }
+
   public static final class ThrowerPIDs {
     public static final double kP = 2e-4;
     public static final double kI = 1e-6;
@@ -180,7 +187,7 @@ public final class Constants {
 
   // Motor ID for the VBelt Subsystem
     public static final class VBeltMotors {
-    public static final int VBeltMotorRightID = 8;
+    //public static final int VBeltMotorRightID = 8;
     public static final int VBeltMotorLeftID = 10;
 
     // motor run characteristics
@@ -192,9 +199,18 @@ public final class Constants {
     public static final boolean TUNE = false;
   }
 
+  public static final class IntakeMotors {
+    public static final int IntakeMotorRightID = 9;
+    public static final int IntakeMotorLeftID = 20;
+
+    public static final double forwardSpeed = 0.2;
+    public static final double reverseSpeed = -0.2;
+    public static final double reversePulse = 0.5;
+  }
+
 
   public static final class HopperConstants {
-    public static final int HOPPER_MOTOR_ID = 20;
+    public static final int HOPPER_MOTOR_ID = 25;
     public static final double ONE_ROTATION = 4096;
     public static final int ALLOWABLE_ERROR = 0;
 

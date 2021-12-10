@@ -4,50 +4,72 @@
 /* must be accompanied by the FIRST BSD license file in the root directory of */
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
-
+ 
 package frc.robot.commands;
-
-//import com.revrobotics.CANPIDController;
-
+ 
+import frc.robot.subsystems.NewIntake;
+import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.GenericHID.Hand;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.VBeltSubsystem;
-
-
-public class SetVBeltCommand extends CommandBase {
-  private VBeltSubsystem m_subsystem;
-  private double m_speedL = 0;
+ 
+/**
+ * Using the VBelt Subsystem
+ */
+public class DefaultNewIntakeCommand extends CommandBase {
+ 
+  private final NewIntake m_subsystem;
+  private XboxController m_stick = new XboxController(1);
+  
   /**
-   * Sets the VBelt Motors speed inbetween the scale of -1 to 1.
-   * @param speedL is the speed of the left motor on the VBelt
+   * Creates a new DefaultIntakeCommand.
    */
-  public SetVBeltCommand(VBeltSubsystem subsystem, double speedL) {
+  public DefaultNewIntakeCommand (NewIntake subsystem, XboxController stick) {
+    m_subsystem = subsystem;
+    m_stick = stick;
+    //SmartDashboard.putString("cheeeeee", "6");
+ 
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
-
-    m_subsystem = subsystem;
-    m_speedL = speedL;
   }
 
+  private double deadband (double input){
+    if(Math.abs(input) < 0.05) return 0;
+    return input;
+  }
+ 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
   }
-
+ 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_subsystem.setMotor(m_speedL);
-  }
+    
+    double speed = m_stick.getY(Hand.kRight);
+    
+    //SmartDashboard.putNumber("Check",forward);
 
+    speed *= deadband(speed);
+    //backward *= deadband(backward);
+
+    m_subsystem.tankDrive(speed, -speed);
+  }
+ 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_subsystem.setMotor(0);
+    // Try to bring the robot to a dead stop before starting the next command
+    m_subsystem.stopMotor();
   }
-
+ 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
     return false;
   }
 }
+ 
+ 
+

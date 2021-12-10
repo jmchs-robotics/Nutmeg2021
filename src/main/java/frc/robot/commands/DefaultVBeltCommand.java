@@ -48,15 +48,13 @@ public class DefaultVBeltCommand extends CommandBase {
   public void execute() {
     
     double forward = m_stick.getY(Hand.kLeft);
-    double rotation = m_stick.getX(Hand.kLeft);
     
     //SmartDashboard.putNumber("Check",forward);
 
     forward *= deadband(forward);
-    rotation *= deadband(rotation);
     //backward *= deadband(backward);
 
-    m_subsystem.arcadeDrive(forward, rotation);
+    m_subsystem.setMotor(forward);
   }
  
   // Called once the command ends or is interrupted.
