@@ -8,20 +8,20 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import frc.robot.Constants.IntakeMotors;
-import frc.robot.Constants.VBeltMotors;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 
 
 public class NewIntake extends SubsystemBase {
   private WPI_VictorSPX m_motor_right;
-  private WPI_VictorSPX m_motor_left;
+  private WPI_TalonSRX m_motor_left;
 
   private double m_forwardSpeed;
   private double m_reverseSpeed;
@@ -30,56 +30,22 @@ public class NewIntake extends SubsystemBase {
 
   private DifferentialDrive m_drive;
 
-  /**
-   * Creates a new VBeltSubsystem.
-   */
   public NewIntake() {
     m_motor_right = new WPI_VictorSPX(IntakeMotors.IntakeMotorRightID);
-    m_motor_left = new WPI_VictorSPX(IntakeMotors.IntakeMotorLeftID);
-    m_forwardSpeed = VBeltMotors.forwardSpeed;
-    m_reverseSpeed = VBeltMotors.reverseSpeed;
-    m_reversePulse = VBeltMotors.reversePulse;
+    m_motor_left = new WPI_TalonSRX(IntakeMotors.IntakeMotorLeftID);
+    m_forwardSpeed = IntakeMotors.forwardSpeed;
+    m_reverseSpeed = IntakeMotors.reverseSpeed;
+    m_reversePulse = IntakeMotors.reversePulse;
 
     m_drive = new DifferentialDrive(m_motor_right, m_motor_left);
     
-    SmartDashboard.putNumber("class created", m_int);
-
-     if (VBeltMotors.TUNE){
-      SmartDashboard.putNumber("VBelt Right Motor Output Percent", m_motor_right.getMotorOutputPercent());
-      SmartDashboard.putNumber("VBelt Left Motor Output Percent", m_motor_left.getMotorOutputPercent());
-      SmartDashboard.putNumber("VBelt Motor Forward Speed", m_forwardSpeed);
-      SmartDashboard.putNumber("VBelt Motor Reverse Speed", m_reverseSpeed);
-      SmartDashboard.putNumber("VBelt Motor Reverse Pulse Time", m_reversePulse);
-    } 
   }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
 
-    if (VBeltMotors.TUNE){
-      //arcadeDrive(0.1, 0.1);
-      double fs, rs, rp;
-      SmartDashboard.putNumber("VBelt Right Motor Output Percent", m_motor_right.getMotorOutputPercent());
-      SmartDashboard.putNumber("VBelt Left Motor Output Percent", m_motor_left.getMotorOutputPercent());
-      fs = SmartDashboard.getNumber("Intake Motor Forward Speed", 0);
-      rs = SmartDashboard.getNumber("Intake Motor Reverse Speed", 0);
-      rp = SmartDashboard.getNumber("Intake Motor Reverse Pulse Time", 0);
-/*
-      if( fs != m_forwardSpeed) {
-        m_forwardSpeed = fs;
-          setMotor(fs, fs);
-      }
-      if( rs != m_reverseSpeed) {
-        m_reverseSpeed = rs;
-          setMotor(rs,rs);
-      }
-      if( rp != m_reversePulse) {
-        m_reversePulse = rp;
-      }
-      */
-      
-    } 
+    
   }
 
   /**
@@ -119,10 +85,9 @@ public class NewIntake extends SubsystemBase {
     m_drive.arcadeDrive(xSpeed, zRotation);
   }
 
-  /*
+  
   public void tankDrive(double leftSpeed, double rightSpeed)
   {
     m_drive.tankDrive(leftSpeed, rightSpeed);
   }
-  */
 }

@@ -23,9 +23,8 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 public class ArmSubsystem extends SubsystemBase {
   private WPI_VictorSPX m_motor_right;
 
-  private double m_forwardSpeed;
-  private double m_reverseSpeed;
-  private double m_reversePulse;
+  private double m_liftSpeed;
+  private double m_lowerSpeed;
   public static int m_int = 0;
 
   /**
@@ -33,9 +32,8 @@ public class ArmSubsystem extends SubsystemBase {
    */
   public ArmSubsystem() {
     m_motor_right = new WPI_VictorSPX(ArmMotor.ArmMotorID);
-    m_forwardSpeed = IntakeActuators.forwardSpeed;
-    m_reverseSpeed = IntakeActuators.reverseSpeed;
-    m_reversePulse = IntakeActuators.reversePulse;
+    m_liftSpeed = ArmMotor.armLiftSpeed;
+    m_lowerSpeed = ArmMotor.armLowerSpeed;
     
     SmartDashboard.putNumber("class created", m_int);
 
@@ -51,8 +49,8 @@ public class ArmSubsystem extends SubsystemBase {
    * Set the VBelt motors to a speed between -1 and 1.
    * @param speed
    */
-  public void setMotor(double speedRight){
-    m_motor_right.set(ControlMode.PercentOutput,speedRight);
+  public void setMotor(double motorSpeed){
+    m_motor_right.set(ControlMode.PercentOutput,motorSpeed);
   }
 
   /**
@@ -62,20 +60,12 @@ public class ArmSubsystem extends SubsystemBase {
     m_motor_right.set(ControlMode.PercentOutput, 0.0);
   }
 
-  public void motorForward() {
-    setMotor(m_forwardSpeed);
+  public void raiseArm() {
+    setMotor(m_liftSpeed);
   }
 
-  public void motorReverse() {
-    setMotor( m_reverseSpeed);
-  }
-
-  public double getReversePulse() {
-    return m_reversePulse;
-  }
-
-  public double getReverseSpeed() {
-    return m_reverseSpeed;
+  public void lowerArm() {
+    setMotor(m_lowerSpeed);
   }
 
   /*

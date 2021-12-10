@@ -19,7 +19,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 public class DefaultNewIntakeCommand extends CommandBase {
  
   private final NewIntake m_subsystem;
-  private final XboxController m_stick;
+  private XboxController m_stick = new XboxController(1);
   
   /**
    * Creates a new DefaultIntakeCommand.
@@ -47,16 +47,14 @@ public class DefaultNewIntakeCommand extends CommandBase {
   @Override
   public void execute() {
     
-    double forward = m_stick.getY(Hand.kLeft);
-    double rotation = m_stick.getX(Hand.kLeft);
+    double speed = m_stick.getY(Hand.kRight);
     
     //SmartDashboard.putNumber("Check",forward);
 
-    forward *= deadband(forward);
-    rotation *= deadband(rotation);
+    speed *= deadband(speed);
     //backward *= deadband(backward);
 
-    m_subsystem.arcadeDrive(forward, rotation);
+    m_subsystem.tankDrive(speed, -speed);
   }
  
   // Called once the command ends or is interrupted.

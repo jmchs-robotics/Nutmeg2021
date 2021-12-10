@@ -152,6 +152,9 @@ public final class Constants {
 
   public static final class ArmMotor {
     public static final int ArmMotorID = 8;
+
+    public static final double armLiftSpeed = 0.7;
+    public static final double armLowerSpeed = -0.7;
   }
 
   public static final class ThrowerPIDs {
@@ -198,12 +201,16 @@ public final class Constants {
 
   public static final class IntakeMotors {
     public static final int IntakeMotorRightID = 9;
-    public static final int IntakeMotorLeftID = 25;
+    public static final int IntakeMotorLeftID = 20;
+
+    public static final double forwardSpeed = 0.2;
+    public static final double reverseSpeed = -0.2;
+    public static final double reversePulse = 0.5;
   }
 
 
   public static final class HopperConstants {
-    public static final int HOPPER_MOTOR_ID = 20;
+    public static final int HOPPER_MOTOR_ID = 25;
     public static final double ONE_ROTATION = 4096;
     public static final int ALLOWABLE_ERROR = 0;
 
