@@ -46,15 +46,16 @@ public class DefaultNewIntakeCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    
-    double speed = m_stick.getY(Hand.kRight);
+    double forward = m_stick.getY(Hand.kRight);
+    double rotation = m_stick.getX(Hand.kRight);
     
     //SmartDashboard.putNumber("Check",forward);
 
-    speed *= deadband(speed);
+    forward *= deadband(forward);
+    rotation *= deadband(rotation);
     //backward *= deadband(backward);
 
-    m_subsystem.tankDrive(speed, -speed);
+    m_subsystem.arcadeDrive(forward, rotation);
   }
  
   // Called once the command ends or is interrupted.
