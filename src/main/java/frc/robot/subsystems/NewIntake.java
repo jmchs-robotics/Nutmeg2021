@@ -37,7 +37,7 @@ public class NewIntake extends SubsystemBase {
     m_reverseSpeed = IntakeMotors.reverseSpeed;
     m_reversePulse = IntakeMotors.reversePulse;
 
-    m_drive = new DifferentialDrive(m_motor_right, m_motor_left);
+    m_drive = new DifferentialDrive(m_motor_left, m_motor_right);
     
   }
 
