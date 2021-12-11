@@ -614,4 +614,21 @@ public class Paths { // extends CommandBase {
         //end
       );
     }
+
+    public Command HoopDash() {
+      double w = 0.25;
+      int cmd_idx = 0;
+      return new SequentialCommandGroup(
+        new InstantCommand(m_swerve::setBrakeOn, m_swerve), // Brake mode on!
+
+        new SetWheelAngleCommand(m_swerve, 0),
+
+        new WaitCommand(w),
+        /*Drive to shooting position*/ 
+        new DriveForDist2910Command(m_swerve, 0, 444, Integer.toString(cmd_idx++)),
+        ///*Aim towards the hoop*/ new VisionAimCommand(m_swerve, rft_),
+        new WaitCommand(w),
+        /*Throw ball into the hoop*/ new ThrowToLlTargetCommand(m_Thrower, m_swerve, rft_)
+      );
+    }
 }

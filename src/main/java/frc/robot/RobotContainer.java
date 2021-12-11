@@ -427,6 +427,11 @@ public class RobotContainer {
           p.AngledSlalomCommand()
         );
         break;
+      case "hoop dash":
+        autoCommand = new SequentialCommandGroup(
+          new InstantCommand(m_Hopper::setBallCountTo3, m_Hopper),
+          p.HoopDash()
+        );
     }   
 
     return autoCommand;

@@ -153,8 +153,8 @@ public final class Constants {
   public static final class ArmMotor {
     public static final int ArmMotorID = 8;
 
-    public static final double armLiftSpeed = 0.7;
-    public static final double armLowerSpeed = -0.7;
+    public static final double armLiftSpeed = 0.6;
+    public static final double armLowerSpeed = -0.3;
   }
 
   public static final class ThrowerPIDs {
