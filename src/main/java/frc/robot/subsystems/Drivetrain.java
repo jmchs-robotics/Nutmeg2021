@@ -5,7 +5,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public abstract class Drivetrain extends SubsystemBase {
 	private final double width;
 	private final double length;
-	private double speedMultiplier = 1;
+	private double speedMultiplier = 0.75;
 
 	public Drivetrain(double width, double length) {
 		this.width = width;
