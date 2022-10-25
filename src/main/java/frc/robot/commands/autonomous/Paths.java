@@ -631,4 +631,24 @@ public class Paths { // extends CommandBase {
         /*Throw ball into the hoop*/ new ThrowToLlTargetCommand(m_Thrower, m_swerve, rft_)
       );
     }
+
+    public Command topBucket() {
+      double w = 0.25;
+      int cmd_idx = 0;
+      return new SequentialCommandGroup(
+        new InstantCommand(m_swerve::setBrakeOn, m_swerve), // Brade mode on!
+
+        //new SetPoseAngle2910Command(m_swerve, 28.25),
+        
+        new DriveForDist2910Command(m_swerve, 0, 152.12, 28.25, Integer.toString(cmd_idx++)),
+
+        //new SetPoseAngle2910Command(m_swerve, 0),
+
+        new DriveForDist2910Command(m_swerve, 0, 6, 0, Integer.toString(cmd_idx++)), 
+
+        //new SetPoseAngle2910Command(m_swerve, 90),
+
+        new DriveForDist2910Command(m_swerve, 0, 28, 90, Integer.toString(cmd_idx++))
+      );
+    }
 }

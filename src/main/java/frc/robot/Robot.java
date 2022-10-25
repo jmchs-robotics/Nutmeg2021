@@ -48,6 +48,7 @@ public class Robot extends TimedRobot {
     startPosChooser.addOption("Angled Barrel", "angled barrel"); 
     startPosChooser.addOption("Angled Slalom", "angled slalom");
     startPosChooser.addOption("Hoop Dash", "hoop dash");
+    startPosChooser.addOption("Top Bucket", "top bucket");
 		
 		// 'print' the Chooser to the dashboard
 		SmartDashboard.putData("Path Chosen", startPosChooser);

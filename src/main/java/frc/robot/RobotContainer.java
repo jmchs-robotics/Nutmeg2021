@@ -432,6 +432,10 @@ public class RobotContainer {
           new InstantCommand(m_Hopper::setBallCountTo3, m_Hopper),
           p.HoopDash()
         );
+      case "top bucket":
+        autoCommand = new SequentialCommandGroup(
+          p.topBucket()
+        );
     }   
 
     return autoCommand;
