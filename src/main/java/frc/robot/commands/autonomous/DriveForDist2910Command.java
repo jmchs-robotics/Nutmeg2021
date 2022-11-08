@@ -22,6 +22,7 @@ public class DriveForDist2910Command extends CommandBase {
     private static final double DISTANCE_CHECK_TIME = 0.25;
 
     private final SwerveDriveSubsystem drivetrain;
+    private final SwerveDriveModule m_swerveM;
     private final double angle;
     private final double distance;
     private final double distRight, distForward;
@@ -51,9 +52,10 @@ public class DriveForDist2910Command extends CommandBase {
      * @param drivetrain 
      * @param distance inches; positive if forwards, negative is backwards.
      */
-    public DriveForDist2910Command(SwerveDriveSubsystem drivetrain, double distance) {
+
+    /*public DriveForDist2910Command(SwerveDriveSubsystem drivetrain, SwerveDriveModule m_swerveM, double distance) {
         this(drivetrain, 0, distance, "0");
-    }
+    }*/
 
     /**
      * Move the robot this many inches.  Robot maintains its same pose angle.
@@ -62,8 +64,9 @@ public class DriveForDist2910Command extends CommandBase {
      * @param distRight inches positive is to the right; negative is to the left.
      * @param distForward inches positive is forward; negaitve is backwards.
      */
-    public DriveForDist2910Command(SwerveDriveSubsystem drivetrain, double distRight, double distForward, String fileID) {
+    public DriveForDist2910Command(SwerveDriveSubsystem drivetrain, SwerveDriveModule m_swerveM, double distRight, double distForward, String fileID) {
         this.drivetrain = drivetrain;
+        this.m_swerveM = m_swerveM;
         this.angle = Math.toDegrees(Math.atan2(distRight, distForward));
         
         this.distRight = distRight; // -distRight;  // 191206 seems like this should not get inverted
@@ -102,8 +105,9 @@ public class DriveForDist2910Command extends CommandBase {
         addRequirements(drivetrain);
     }
 
-    public DriveForDist2910Command(SwerveDriveSubsystem drivetrain, double distRight, double distForward, double poseAngle, String fileID) {
+    public DriveForDist2910Command(SwerveDriveSubsystem drivetrain, SwerveDriveModule m_swerveM, double distRight, double distForward, double poseAngle, String fileID) {
         this.drivetrain = drivetrain;
+        this.m_swerveM = m_swerveM;
         this.angle = poseAngle;
         
         this.distRight = distRight; // -distRight;  // 191206 seems like this should not get inverted
@@ -115,6 +119,7 @@ public class DriveForDist2910Command extends CommandBase {
         angleErrorController = new PIDController(DrivetrainConstants.DFD_ROTATION_kP, DrivetrainConstants.DFD_ROTATION_kI, DrivetrainConstants.DFD_ROTATION_kD);
         angleErrorController.enableContinuousInput(0, 360);
         angleErrorController.reset();
+        //m_swerveM.setMotionConstraints(5.5, 10);
 
         isGyroSet = true;
 
