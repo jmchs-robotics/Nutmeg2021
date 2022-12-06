@@ -403,4 +403,14 @@ public class SwerveDriveSubsystem extends HolonomicDrivetrain {
     public void holonomicDriveToZero() {
       holonomicDrive(0,0,0);
     }
+
+    /**
+     * @param maxAccel Max acceleration of the robot during autonomous
+     * @param maxVel Max speed of the robot during autonomous
+     */
+    public void setSpeedLimit(double maxAccel, double maxVel) {
+      for(int i=0; i<4; i++) {
+        mSwerveModules[i].setMotionConstraints(maxAccel, maxVel);
+      }
+    }
 }
