@@ -18,7 +18,7 @@ public class ExpelBall extends CommandBase{
 
     @Override
     public void execute() {
-        m_subsystem.setIntake(-0.2);
+        m_subsystem.setIntake(-0.5);
     }
 
     @Override

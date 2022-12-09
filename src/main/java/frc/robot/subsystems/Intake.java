@@ -27,11 +27,11 @@ public class Intake extends SubsystemBase{
     }
 
     public void intakeOut() {
-        m_intakeSolenoid.set(Value.kForward);
+        m_intakeSolenoid.set(Value.kReverse);
     }
 
     public void intakeIn() {
-        m_intakeSolenoid.set(Value.kReverse);
+        m_intakeSolenoid.set(Value.kForward);
     }
 
     public void intakeOff() {
