@@ -21,17 +21,15 @@ public class Paths { // extends CommandBase {
     SwerveDriveSubsystem m_swerve;
     ThrowerSubsystem m_Thrower;
     HopperSubsystem m_Hopper;
-    IntakeSubsystem m_Intake;
     SocketVisionSendWrapper sender_;
     SocketVisionWrapper rft_;
  
-    public Paths( SwerveDriveSubsystem swerve, ThrowerSubsystem thrower, HopperSubsystem hopper, IntakeSubsystem intake, SocketVisionSendWrapper sender, SocketVisionWrapper rft) {
+    public Paths( SwerveDriveSubsystem swerve, ThrowerSubsystem thrower, HopperSubsystem hopper, SocketVisionSendWrapper sender, SocketVisionWrapper rft) {
         m_swerve = swerve;
         m_Thrower = thrower;
         sender_ = sender;   
         rft_ = rft;     
-        m_Hopper = hopper;   
-        m_Intake = intake;
+        m_Hopper = hopper;
     }
  
  
@@ -182,7 +180,7 @@ public class Paths { // extends CommandBase {
      * -- need to drive to a field position, probably only one move (i.e. direct angle) or maybe 2, then rotate to straight at target, then setPoseAngleToVisionRFT
      * @return
      */
-    public Command PathCCommand() {
+    /*public Command PathCCommand() {
       return new SequentialCommandGroup(
         new InstantCommand(m_swerve::setBrakeOn, m_swerve), // Brake mode on!
         new SetWheelAngleCommand( m_swerve, Math.atan2( 57-28, -(86-12-(34+6.5)/2))),  // point the wheels in the direction we want to go
@@ -221,8 +219,8 @@ public class Paths { // extends CommandBase {
         new InstantCommand(m_Thrower::turnOffLED, m_Thrower), // Turn off green LED
         new InstantCommand(m_swerve::setBrakeOff, m_swerve)
  
-      );
-    }
+      );z
+    }*/
     
     /**
      * PathG

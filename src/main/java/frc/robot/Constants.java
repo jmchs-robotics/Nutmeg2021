@@ -7,8 +7,11 @@
 
 package frc.robot;
 
+import com.revrobotics.CANSparkMax;
 import com.revrobotics.ColorMatch;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.I2C.Port;
 import edu.wpi.first.wpilibj.util.Color;
@@ -267,11 +270,11 @@ public final class Constants {
 
   /** 
    * which DIO ports control which LEDs
-   */
+   
   public static final class LED {
     public static final int GREEN = 0;
     public static final int SPOTLIGHT = 1;
-  }
+  }*/
 
   /** 
    * autonomous 
@@ -282,4 +285,12 @@ public final class Constants {
     public static final boolean LOG = true;
   }
 
+  //Intake 2022 Objects
+  public static final class IntakeObjects {
+    public static final int intakeMotorID = 2;
+
+    public static final int intakeDSID = 0; //id of the double solenoid
+    public static final int intakeDSForward = 0;
+    public static final int intakeDSReverse = 1;
+  }
 }

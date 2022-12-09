@@ -62,7 +62,8 @@ public class SwerveDriveModule extends SubsystemBase {
     private double ANGLE_SENSOR_RANGE = ANGLE_SENSOR_MAX_VOLTAGE - ANGLE_SENSOR_MIN_VOLTAGE;
     public long bfc = 0;
 
-     public SwerveDriveModule(int moduleNumber, CANSparkMax angleMotor, CANSparkMax driveMotor, double zeroOffset) {        this.moduleNumber = moduleNumber;
+     public SwerveDriveModule(int moduleNumber, CANSparkMax angleMotor, CANSparkMax driveMotor, double zeroOffset) {        
+        this.moduleNumber = moduleNumber;
         
         mAngleMotor = angleMotor;
         mDriveMotor = driveMotor;
@@ -87,7 +88,6 @@ public class SwerveDriveModule extends SubsystemBase {
 
         m_pidControllerAngle = angleMotor.getPIDController();
         m_pidControllerAngle.setFeedbackDevice(m_analogSensorAngle);
-        angleMotor.setMotorType(MotorType.kBrushless);
         m_pidControllerAngle.setP( angle_kP); // 0.5);
         m_pidControllerAngle.setI( angle_kI); // 0.0); 
         m_pidControllerAngle.setD( angle_kD); // 0.0001);  
@@ -98,7 +98,6 @@ public class SwerveDriveModule extends SubsystemBase {
         angleMotor.setSmartCurrentLimit(60); 
 
         // new driveMotor controller = Spark Max
-        driveMotor.setMotorType(MotorType.kBrushless);
 
         // new drive controller PID settings, from Rev Robotics example code
         m_encoderDrive = driveMotor.getEncoder(); // EncoderType.kQuadrature, 4096);

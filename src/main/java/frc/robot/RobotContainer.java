@@ -51,14 +51,13 @@ public class RobotContainer {
 
   // Define subsystems here
   private final SwerveDriveSubsystem m_swerve = new SwerveDriveSubsystem();
-  private final ClimbSubsystem m_Climb = new ClimbSubsystem();
-  private final ThrowerSubsystem m_Thrower = new ThrowerSubsystem();
-  private final HopperSubsystem m_Hopper = new HopperSubsystem();
-  private final PatSajakSubsystem m_PatSajak = new PatSajakSubsystem();
-  private final IntakeSubsystem m_Intake = new IntakeSubsystem();
-  private final VBeltSubsystem m_VBelt = new VBeltSubsystem();
-  private final NewIntake m_NewIntake = new NewIntake();
-  private final ArmSubsystem m_Arm = new ArmSubsystem();
+  //private final ClimbSubsystem m_Climb = new ClimbSubsystem();
+  //private final ThrowerSubsystem m_Thrower = new ThrowerSubsystem();
+  //private final HopperSubsystem m_Hopper = new HopperSubsystem();
+  //private final PatSajakSubsystem m_PatSajak = new PatSajakSubsystem();
+  //private final VBeltSubsystem m_VBelt = new VBeltSubsystem();
+  //private final ArmSubsystem m_Arm = new ArmSubsystem();
+  private final Intake m_Intake = new Intake();
 
   // Color Sensor
   private final ColorSensorV3 m_colorSensor = new ColorSensorV3(I2C.Port.kOnboard);
@@ -165,7 +164,7 @@ public class RobotContainer {
     // Left Trigger: spin up the thrower to the right speed //, then hold it there while simultaneously spinning the Daisy one full rotation
       m_primaryController_DPad_Up.whenHeld(
         new SequentialCommandGroup(
-          new SetThrowerSpeedCommand(m_Thrower, -ThrowerLUT.DEFAULT_RPM).perpetually()
+          //new SetThrowerSpeedCommand(m_Thrower, -ThrowerLUT.DEFAULT_RPM).perpetually()
           /*new ParallelCommandGroup( 
             new SetThrowerSpeedCommand( m_Thrower, -ThrowerLUT.DEFAULT_RPM),
             new MoveHopperCommand(m_Hopper, 6)
@@ -188,8 +187,8 @@ public class RobotContainer {
           //new WaitCommand(0.5), // give the vision processor a chance to find the RFT
           
          // new VisionAimGyroCommand( m_swerve, rft_), // aim the robot
-         new VisionAimCommand(m_swerve,rft_),
-          new ThrowToLlTargetCommand(m_Thrower, m_swerve, rft_)
+         new VisionAimCommand(m_swerve,rft_)
+          //new ThrowToLlTargetCommand(m_Thrower, m_swerve, rft_)
         /*      
         new SequentialCommandGroup(
         //new InstantCommand(m_Thrower::turnOnLED, m_Thrower),
@@ -221,42 +220,25 @@ public class RobotContainer {
         );  
         
     
-    // Pat Sajak commands.
-    m_secondaryController_A.whenPressed(
-      new InstantCommand(m_Arm::raiseArm, m_PatSajak)
+    // Intake 2022 Commands
+    m_secondaryController_A.whileHeld(
+      new IntakeBall(m_Intake)
     );
-    m_secondaryController_B.whenPressed(
-      new InstantCommand(m_Arm::lowerArm, m_PatSajak)
-    );
-    m_secondaryController_A.whenReleased(
-      new InstantCommand(m_Arm::stopMotor, m_PatSajak)
-    );
-    m_secondaryController_B.whenReleased(
-      new InstantCommand(m_Arm::stopMotor, m_PatSajak)
+    m_secondaryController_B.whileHeld(
+      new ExpelBall(m_Intake)
     );
     m_secondaryController_Y.whenPressed(
-      new ControlPanelRotation(m_PatSajak, m_colorSensor)
+      new ExtendIntakeArm(m_Intake)
     );
     m_secondaryController_X.whenPressed(
-      new ControlPanelSpinSimple(m_PatSajak) // simple for testing
-      // new ControlPanelPosition(m_PatSajak, m_colorSensor)
-    );
-    m_secondaryController_X.whenReleased(
-      new InstantCommand(m_PatSajak :: turnSpinnerMotorOff, m_PatSajak)
+      new RetractIntakeArm(m_Intake)
     );
 
-    m_secondaryController_Back.whenPressed(
-      new InstantCommand(m_Thrower::turnOffLED, m_Thrower)
-    );
+    //m_secondaryController_Back.whenPressed(
+      //new InstantCommand(m_Thrower::turnOffLED, m_Thrower)
+    //);
     //
     // Intake
-    // Intake forward/reverse are on 2nd game controller, left joystick, Y axis
-    m_secondaryController_RightBumper.whenPressed(
-      new InstantCommand(m_Intake :: lowerIntake, m_Intake)
-    );
-    m_secondaryController_LeftBumper.whenPressed(
-      new InstantCommand(m_Intake :: raiseIntake, m_Intake)
-    );
 
     //
     // m_secondaryController_RightTrigger  Intake w/ Daisy Advanced sequence
@@ -268,40 +250,32 @@ public class RobotContainer {
     //     otherwise reverse the beater bar
     // if Daisy is full, run intake beater bar in reverse
     //
-    m_secondaryController_RightTrigger.whileHeld( 
-      new IntakeAdvDaisyCommand( m_Intake, m_Hopper)
-    ).whenReleased( // On release lift the intake, then outtake at 0.7 power for 1.5 seconds. Note that beforeStarting is a decorator that is written after the command body...
-      new ParallelRaceGroup(
-        new RunCommand(()->{m_Intake.setMotor(-0.7);}, m_Intake),
-        new WaitCommand(1.5)
-      ).beforeStarting(m_Intake::raiseIntake, m_Intake)
-    ) ;
 
 
     //
     // Hopper (Daisy)
     //
-    m_secondaryController_Start.whenPressed(new MoveHopperCommand(m_Hopper, 6));
+    //m_secondaryController_Start.whenPressed(new MoveHopperCommand(m_Hopper, 6));
     m_secondaryController_DPad_Up.whenPressed( 
         new SequentialCommandGroup( 
-          new BumpHopperCommand( m_Hopper),
-          new WaitCommand(.2),
-          new MoveHopperCommand(m_Hopper,1)
+          //new BumpHopperCommand( m_Hopper),
+          new WaitCommand(.2)
+          //new MoveHopperCommand(m_Hopper,1)
         )
       ); // .whileHeld(m_Hopper :: smartDashIndex); //m_Hopper ); // Index ?; Commented out requirements so the print command doesn't interfere with the move commands
-    m_secondaryController_DPad_Down.whenPressed(new MoveHopperCommand(m_Hopper, -1));
-    m_secondaryController_DPad_Right.whenPressed(new MoveHopperCommand(m_Hopper, 1));
-    m_secondaryController_LeftTrigger.whileHeld(
-      new InstantCommand( m_Hopper::moveForwardSlowly, m_Hopper)
-    ).whenReleased( new InstantCommand( m_Hopper::stopMotor, m_Hopper)); // stop
+    //m_secondaryController_DPad_Down.whenPressed(new MoveHopperCommand(m_Hopper, -1));
+    //m_secondaryController_DPad_Right.whenPressed(new MoveHopperCommand(m_Hopper, 1));
+    //m_secondaryController_LeftTrigger.whileHeld(
+      //new InstantCommand( m_Hopper::moveForwardSlowly, m_Hopper)
+    //).whenReleased( new InstantCommand( m_Hopper::stopMotor, m_Hopper)); // stop
 
     //
     //Climb
     //
     // control winch via default command, so can read trigger %
     // m_primaryController_LeftTrigger.whileHeld(new ClimbWinchUpCommand(m_Climb)); // control
-    m_primaryController_DPad_Down.whileHeld(new ClimbWinchDownCommand(m_Climb));
-    m_primaryController_B.whenPressed(
+    //m_primaryController_DPad_Down.whileHeld(new ClimbWinchDownCommand(m_Climb));
+    /*m_primaryController_B.whenPressed(
       new InstantCommand(m_Climb::raiseArm, m_Climb)
     );
     m_primaryController_A.whenPressed(
@@ -312,7 +286,7 @@ public class RobotContainer {
     );
     m_primaryController_Y.whenPressed(
       new InstantCommand(m_Climb::retractArm, m_Climb)
-    );
+    );*/
 
     //Tells the output of the light sensor used for telling if powercell is in daisy
     //m_secondaryController_Y.whileHeld(new InstantCommand(()->{SmartDashboard.putNumber("LightSensor output voltage", m_lightSensor.getVoltage());}));
@@ -323,16 +297,13 @@ public class RobotContainer {
     // default swerve drive is to read from joysticks
     m_swerve.setDefaultCommand(new DefaultSwerveCommand(m_swerve, m_primaryController));
     // winch on primary controller, left trigger
-    m_Climb.setDefaultCommand(new DefaultWinchCommand(m_Climb, m_primaryController));
+    //m_Climb.setDefaultCommand(new DefaultWinchCommand(m_Climb, m_primaryController));
     
     // intake on secondary controller, Y axis of Left joystick
-    m_Intake.setDefaultCommand(new DefaultIntakeCommand(m_Intake, m_secondaryController));
     // default thrower is to spin down to still
-    m_Thrower.setDefaultCommand(new StartEndCommand( ()->{m_Thrower.stopThrower(); m_Thrower.turnOffLED();}, ()->{}, m_Thrower)); // Spin down thrower and turn off LED on startup, do nothing on end.
+    //m_Thrower.setDefaultCommand(new StartEndCommand( ()->{m_Thrower.stopThrower(); m_Thrower.turnOffLED();}, ()->{}, m_Thrower)); // Spin down thrower and turn off LED on startup, do nothing on end.
     //defualt VBelt
-    m_VBelt.setDefaultCommand(new DefaultVBeltCommand(m_VBelt, m_secondaryController));
-
-    m_NewIntake.setDefaultCommand(new DefaultNewIntakeCommand(m_NewIntake, m_secondaryController));
+    //m_VBelt.setDefaultCommand(new DefaultVBeltCommand(m_VBelt, m_secondaryController));
 
   }
 
@@ -348,8 +319,8 @@ public class RobotContainer {
    * reset the hopper reference point, called from Robot.autoInit() and .teleopInit()
    */
   public void resetHopperReference( boolean moveToSlot) {
-    m_Hopper.resetReference(); // set encoder back to range [0, ONE_ROTATION), i.e. (0,360)
-    m_Hopper.selectNearestSlot( moveToSlot); // set the index to match the current position of the Daisy
+    //m_Hopper.resetReference(); // set encoder back to range [0, ONE_ROTATION), i.e. (0,360)
+    //m_Hopper.selectNearestSlot( moveToSlot); // set the index to match the current position of the Daisy
   }
 
   /**Ai
@@ -378,7 +349,7 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand( String a) {
     
-    Paths p = new Paths( m_swerve,m_Thrower, m_Hopper, m_Intake, sender_, rft_);
+    /*Paths p = new Paths( m_swerve,m_Thrower, m_Hopper, sender_, rft_);
     Command autoCommand = new SequentialCommandGroup(
       new InstantCommand( m_Hopper::setBallCountTo3, m_Hopper),
       p.PathBarrelCommand()
@@ -435,10 +406,11 @@ public class RobotContainer {
       case "top bucket":
         autoCommand = new SequentialCommandGroup(
           p.topBucket()
-        );
-    }   
+        );*/
+        return null;
+    }
 
-    return autoCommand;
+    
     /*
     Command autoCommand = new SequentialCommandGroup(
       new InstantCommand(m_swerve::setBrakeOn, m_swerve), // Brake mode on!
@@ -469,4 +441,4 @@ public class RobotContainer {
     return autoCommand;
     */
   }
-}
+
