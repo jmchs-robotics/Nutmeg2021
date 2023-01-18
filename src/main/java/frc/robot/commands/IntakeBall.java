@@ -18,7 +18,7 @@ public class IntakeBall extends CommandBase{
 
     @Override
     public void execute() {
-        m_subsystem.setIntake(0.5);
+        m_subsystem.setIntake(1);
     }
 
     @Override
